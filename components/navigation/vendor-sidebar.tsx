@@ -19,9 +19,9 @@ import {
 import { Button } from "@/components/ui/button"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { useState } from "react"
-import { useAppDispatch } from "@/lib/hooks"
-import { logout } from "@/lib/features/auth/authSlice"
-import { ThemeToggle } from "@/components/theme-toggle"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { useLogoutMutation } from "@/redux/features/authApiSlice"
+import { setIsSidebarCollapsed } from "@/redux/state"
 
 const vendorLinks = [
   {
@@ -90,10 +90,15 @@ export function VendorSidebar() {
   const router = useRouter()
   const dispatch = useAppDispatch()
   const [openCollapsible, setOpenCollapsible] = useState<string | null>(null)
+  const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed)
 
   const handleLogout = () => {
-    dispatch(logout())
+    // dispatch(logout())
     router.push("/")
+  }
+
+  const toggleSidebar = () => {
+    dispatch(setIsSidebarCollapsed(!isSidebarCollapsed))
   }
 
   return (
@@ -170,10 +175,7 @@ export function VendorSidebar() {
         </nav>
       </div>
       <div className="mt-auto p-4">
-        <div className="mb-4 flex items-center justify-between">
-          <span className="text-sm font-medium">Theme</span>
-          <ThemeToggle />
-        </div>
+        
         <Button variant="outline" className="w-full justify-start gap-2" onClick={handleLogout}>
           <LogOut className="h-4 w-4" />
           Logout

@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Link from "next/link"
 
 interface BannerSlide {
   id: string
@@ -81,7 +82,7 @@ export function HomeBanner() {
               <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{slide.title}</h1>
               <p className="mb-6 max-w-lg text-lg md:text-xl">{slide.description}</p>
               <Button size="lg" asChild>
-                <a href={slide.ctaLink}>{slide.ctaText}</a>
+                <Link href={slide.ctaLink}>{slide.ctaText}</Link>
               </Button>
             </div>
           </div>

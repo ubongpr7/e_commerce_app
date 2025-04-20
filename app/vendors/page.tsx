@@ -50,8 +50,8 @@ const allVendors = [
       logo: "/placeholder.svg?height=80&width=80",
       coverImage: "/placeholder.svg?height=200&width=300",
       description: "A quality vendor providing excellent products and service.",
-      productCount: Math.floor(Math.random() * 100) + 20,
-      rating: (Math.random() * 1.5 + 3.5).toFixed(1),
+      productCount: Math.floor(50 * 100) + 20,
+      rating: parseFloat((0.4 * 1.5 + 3.5).toFixed(1)),
       slug: `vendor-${i + 4}`,
     })),
 ]
@@ -81,7 +81,7 @@ export default function VendorsPage() {
   const sortedVendors = [...filteredVendors].sort((a, b) => {
     switch (sortBy) {
       case "rating":
-        return Number.parseFloat(b.rating.toString()) - Number.parseFloat(a.rating.toString())
+        return b.rating - a.rating
       case "products":
         return b.productCount - a.productCount
       case "name-asc":

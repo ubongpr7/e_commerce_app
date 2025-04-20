@@ -10,8 +10,8 @@ import { Slider } from "@/components/ui/slider"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { fetchProducts } from "@/lib/features/products/productsSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { fetchProducts } from "@/redux/features/product/productsSlice"
 import { Filter, Search, SlidersHorizontal, X } from "lucide-react"
 
 export default function ProductsPage() {

@@ -2,12 +2,10 @@
 
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { cn } from "@/lib/utils"
 import { User, CreditCard, Settings, LinkIcon, Mail, HelpCircle } from "lucide-react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { useSelector } from "react-redux"
-import type { RootState } from "@/lib/store"
-
+import { useAppSelector } from "@/redux/hooks"
+import { cn } from "@/lib/utils"
 const accountLinks = [
   {
     title: "Profile",
@@ -38,7 +36,7 @@ const accountLinks = [
 
 export function AccountSidebar() {
   const pathname = usePathname()
-  const user = useSelector((state: RootState) => state.auth.user)
+  const user = useAppSelector((state) => state.auth)
 
   return (
     <div className="flex h-screen flex-col border-l">
@@ -47,12 +45,12 @@ export function AccountSidebar() {
       </div>
       <div className="flex flex-col items-center gap-2 p-6">
         <Avatar className="h-20 w-20">
-          <AvatarImage src={user?.avatar || ""} alt={user?.name || "User"} />
-          <AvatarFallback>{user?.name?.[0] || "U"}</AvatarFallback>
+          <AvatarImage src={""} alt={"User"} />
+          <AvatarFallback>{  "U"}</AvatarFallback>
         </Avatar>
         <div className="text-center">
-          <h3 className="font-medium">{user?.name || "User Name"}</h3>
-          <p className="text-sm text-muted-foreground">{user?.email || "user@example.com"}</p>
+          <h3 className="font-medium">{ "User Name"}</h3>
+          <p className="text-sm text-muted-foreground">{"user@example.com"}</p>
         </div>
       </div>
       <div className="flex-1 overflow-auto py-2">

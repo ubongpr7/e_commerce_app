@@ -8,7 +8,7 @@ import { MainLayout } from "@/components/layouts/main-layout"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ProductCard } from "@/components/products/product-card"
-import { useAppSelector } from "@/lib/hooks"
+import { useAppSelector } from "@/redux/hooks"
 import { MapPin, Mail, Phone, Globe, Star, Package, Calendar, ChevronRight } from "lucide-react"
 
 export default function VendorPage() {
@@ -241,14 +241,14 @@ export default function VendorPage() {
                     </div>
                     <div className="flex items-center gap-3">
                       <Globe className="h-5 w-5 flex-shrink-0 text-primary" />
-                      <a
+                      <Link
                         href={vendor.website}
                         className="text-primary hover:underline"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
                         {vendor.website.replace(/^https?:\/\//, "")}
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -303,7 +303,7 @@ export default function VendorPage() {
                           <span>{rating} stars</span>
                         </div>
                         <div className="h-2 flex-1 rounded-full bg-muted">
-                          <div className="h-2 rounded-full bg-primary" style={{ width: `${Math.random() * 100}%` }} />
+                          <div className="h-2 rounded-full bg-primary" style={{ width: `${0.6 * 100}%` }} />
                         </div>
                       </div>
                     ))}

@@ -1,5 +1,5 @@
 "use client"
-
+import Link from "next/link"
 import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { DashboardLayout } from "@/components/layouts/dashboard-layout"
@@ -26,8 +26,8 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 import { Plus, Search, MoreHorizontal, Edit, Trash, ExternalLink } from "lucide-react"
 import type { Product } from "@/types/product"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { fetchProducts } from "@/lib/features/products/productsSlice"
+import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { fetchProducts } from "@/redux/features/product/productsSlice"
 import { AddProductForm } from "@/components/forms/add-product-form"
 import { EditProductForm } from "@/components/forms/edit-product-form"
 import Image from "next/image"
@@ -207,10 +207,10 @@ export default function ProductsPage() {
                             Delete
                           </DropdownMenuItem>
                           <DropdownMenuItem asChild>
-                            <a href={`/product/${product.slug}`} target="_blank" rel="noreferrer">
+                            <Link href={`/product/${product.slug}`} target="_blank" rel="noreferrer">
                               <ExternalLink className="mr-2 h-4 w-4" />
                               View
-                            </a>
+                            </Link>
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>

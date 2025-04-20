@@ -2,7 +2,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { VendorCard } from "@/components/vendors/vendor-card"
 
-// Sample vendor data (would come from your API)
 const featuredVendors = [
   {
     id: "1",

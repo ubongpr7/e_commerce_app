@@ -30,7 +30,6 @@ export default function DashboardPage() {
               <p className="text-xs text-muted-foreground">+201 from last month</p>
             </CardContent>
           </Card>
-
           <Card>
             <CardHeader className="flex flex-row items-center justify-between pb-2">
               <CardTitle className="text-sm font-medium">Products</CardTitle>

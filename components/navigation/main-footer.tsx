@@ -18,24 +18,24 @@ export function MainFooter() {
             </p>
             <div className="mt-6 flex space-x-4">
               <Button variant="ghost" size="icon" asChild>
-                <a href="#" aria-label="Facebook">
+                <Link href="#" aria-label="Facebook">
                   <Facebook className="h-5 w-5" />
-                </a>
+                </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <a href="#" aria-label="Twitter">
+                <Link href="#" aria-label="Twitter">
                   <Twitter className="h-5 w-5" />
-                </a>
+                </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <a href="#" aria-label="Instagram">
+                <Link href="#" aria-label="Instagram">
                   <Instagram className="h-5 w-5" />
-                </a>
+                </Link>
               </Button>
               <Button variant="ghost" size="icon" asChild>
-                <a href="#" aria-label="LinkedIn">
+                <Link href="#" aria-label="LinkedIn">
                   <Linkedin className="h-5 w-5" />
-                </a>
+                </Link>
               </Button>
             </div>
           </div>
