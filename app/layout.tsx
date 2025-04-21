@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next/dist/lib/metadata/types/metadata-interface"
-// import { Inter } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/toaster"
 import StoreProvider from "@/redux/provider"

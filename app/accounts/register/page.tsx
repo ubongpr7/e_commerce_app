@@ -14,6 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useToast } from "@/components/ui/use-toast"
 import { useAppDispatch } from "@/redux/hooks"
 import { useRegisterMutation } from "@/redux/features/authApiSlice"
+
 const registerSchema = z
   .object({
     name: z.string().min(2, "Name must be at least 2 characters"),
@@ -37,7 +38,7 @@ export default function RegisterPage() {
   const dispatch = useAppDispatch()
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [register,{isLoading}]=useRegisterMutation()
+  const [register, { isLoading }] = useRegisterMutation()
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -83,11 +84,11 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="container flex min-h-screen flex-col items-center justify-center py-8">
-      <div className="mx-auto w-full max-w-md space-y-6">
+    <div className="container flex min-h-screen flex-col items-center justify-center py-8 bg-gray-100  text-gray-900 ">
+      <div className="mx-auto w-full max-w-md space-y-6 bg-white  rounded-lg shadow-md p-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold">Create an Account</h1>
-          <p className="mt-2 text-muted-foreground">Sign up to get started with our platform</p>
+          <h1 className="text-3xl font-bold text-gray-900 ">Create an Account</h1>
+          <p className="mt-2 text-gray-500 ">Sign up to get started with our platform</p>
         </div>
 
         <Form {...form}>
@@ -97,9 +98,9 @@ export default function RegisterPage() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+                  <FormLabel className="text-gray-900 ">Full Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} />
+                    <Input placeholder="John Doe" {...field} className="bg-gray-100  text-gray-900  border-gray-200 " />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -111,9 +112,9 @@ export default function RegisterPage() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel className="text-gray-900 ">Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="email@example.com" {...field} />
+                    <Input placeholder="email@example.com" {...field} className="bg-gray-100  text-gray-900  border-gray-200 " />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -125,9 +126,9 @@ export default function RegisterPage() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel className="text-gray-900 ">Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <Input type="password" placeholder="••••••••" {...field} className="bg-gray-100  text-gray-900  border-gray-200 " />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -139,9 +140,9 @@ export default function RegisterPage() {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
+                  <FormLabel className="text-gray-900 ">Confirm Password</FormLabel>
                   <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
+                    <Input type="password" placeholder="••••••••" {...field} className="bg-gray-100  text-gray-900  border-gray-200 " />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -153,7 +154,7 @@ export default function RegisterPage() {
               name="role"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>I want to</FormLabel>
+                  <FormLabel className="text-gray-900 ">I want to</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
@@ -162,15 +163,15 @@ export default function RegisterPage() {
                     >
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value="customer" />
+                          <RadioGroupItem value="customer" className="ring-offset-gray-100  ring-blue-500 focus:ring-2 focus:ring-offset-0" />
                         </FormControl>
-                        <FormLabel className="font-normal">Shop as a customer</FormLabel>
+                        <FormLabel className="font-normal text-gray-900 ">Shop as a customer</FormLabel>
                       </FormItem>
                       <FormItem className="flex items-center space-x-3 space-y-0">
                         <FormControl>
-                          <RadioGroupItem value="vendor" />
+                          <RadioGroupItem value="vendor" className="ring-offset-gray-100  ring-blue-500 focus:ring-2 focus:ring-offset-0" />
                         </FormControl>
-                        <FormLabel className="font-normal">Sell as a vendor</FormLabel>
+                        <FormLabel className="font-normal text-gray-900 ">Sell as a vendor</FormLabel>
                       </FormItem>
                     </RadioGroup>
                   </FormControl>
@@ -185,16 +186,16 @@ export default function RegisterPage() {
               render={({ field }) => (
                 <FormItem className="flex flex-row items-start space-x-3 space-y-0">
                   <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} className="border-gray-200  focus:ring-blue-500" />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel className="text-sm font-normal">
+                    <FormLabel className="text-sm font-normal text-gray-900 ">
                       I agree to the{" "}
-                      <Link href="/terms" className="text-primary hover:underline">
+                      <Link href="/terms" className="text-blue-500 hover:underline">
                         terms of service
                       </Link>{" "}
                       and{" "}
-                      <Link href="/privacy" className="text-primary hover:underline">
+                      <Link href="/privacy" className="text-blue-500 hover:underline">
                         privacy policy
                       </Link>
                     </FormLabel>
@@ -204,15 +205,15 @@ export default function RegisterPage() {
               )}
             />
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
-              {isSubmitting ? "Creating account..." : "Create Account"}
+            <Button type="submit" className="w-full" disabled={isLoading || isSubmitting}>
+              {isLoading || isSubmitting ? "Creating account..." : "Create Account"}
             </Button>
           </form>
         </Form>
 
-        <div className="text-center text-sm">
+        <div className="text-center text-sm text-gray-500 ">
           Already have an account?{" "}
-          <Link href="/login" className="text-primary hover:underline">
+          <Link href="/login" className="text-blue-500 hover:underline">
             Sign in
           </Link>
         </div>

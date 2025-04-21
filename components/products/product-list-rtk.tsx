@@ -11,7 +11,7 @@ export function ProductListRTK() {
     return (
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {[...Array(8)].map((_, i) => (
-          <div key={i} className="h-[340px] animate-pulse rounded-lg bg-muted" />
+          <div key={i} className="h-[340px] animate-pulse rounded-lg bg-gray-100" />
         ))}
       </div>
     )
@@ -19,21 +19,26 @@ export function ProductListRTK() {
 
   if (error) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-8">
+      <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-gray-200 p-8">
         <h3 className="mb-2 text-xl font-semibold">Error loading products</h3>
-        <p className="mb-4 text-center text-muted-foreground">
+        <p className="mb-4 text-center text-gray-500">
           {error instanceof Error ? error.message : "An unknown error occurred"}
         </p>
-        <Button onClick={() => refetch()}>Try Again</Button>
+        <Button 
+          onClick={() => refetch()}
+          className="bg-gray-900 text-white hover:bg-gray-800"
+        >
+          Try Again
+        </Button>
       </div>
     )
   }
 
   if (!products || products.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-8">
+      <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-gray-200 p-8">
         <h3 className="mb-2 text-xl font-semibold">No Products Found</h3>
-        <p className="text-center text-muted-foreground">There are no products available at the moment.</p>
+        <p className="text-center text-gray-500">There are no products available at the moment.</p>
       </div>
     )
   }

@@ -28,10 +28,10 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="relative flex min-h-screen">
+    <div className="relative flex min-h-screen bg-gray-100  text-gray-900 ">
       {/* Left Sidebar - Vendor Dashboard Navigation */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-background transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 transform bg-gray-100  transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
           !isSidebarCollapsed ? "translate-x-0" : "-translate-x-full"
         }`}
       >
@@ -40,7 +40,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
       {/* Main Content */}
       <div className="flex-1 overflow-auto">
-        <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b bg-background px-4 lg:px-6">
+        <header className="sticky top-0 z-40 flex h-16 items-center justify-between border-b bg-white  px-4 lg:px-6 border-gray-200 ">
           <Button variant="ghost" className="lg:hidden" onClick={toggleSidebar}>
             {!isSidebarCollapsed ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             <span className="sr-only">Toggle menu</span>
@@ -56,7 +56,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
       {/* Right Sidebar - Account Navigation */}
       <div
-        className={`fixed inset-y-0 right-0 z-50 w-64 transform bg-background transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 right-0 z-50 w-64 transform bg-white  transition-transform duration-300 ease-in-out lg:static lg:translate-x-0 ${
           rightSidebarOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

@@ -17,14 +17,19 @@ export function FeaturedProducts() {
   return (
     <section className="container py-12 md:py-16">
       <div className="flex flex-col items-center justify-center">
-        <h2 className="mb-2 text-3xl font-bold md:text-4xl">Featured Products</h2>
-        <p className="mb-8 max-w-3xl text-center text-muted-foreground">
+        <h2 className="mb-2 text-3xl font-bold text-gray-900 md:text-4xl">
+          Featured Products
+        </h2>
+        <p className="mb-8 max-w-3xl text-center text-gray-500 ">
           Discover our handpicked selection of top products from our trusted vendors
         </p>
         {loading ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="h-[340px] w-[250px] animate-pulse rounded-lg bg-muted" />
+              <div 
+                key={i} 
+                className="h-[340px] w-[250px] animate-pulse rounded-lg bg-gray-100 " 
+              />
             ))}
           </div>
         ) : (
@@ -37,7 +42,12 @@ export function FeaturedProducts() {
      
         <div className="mt-10">
           <Link href="/products">
-            <Button variant="outline" size="lg">
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-gray-900 
+                        "
+            >
               View All Products
             </Button>
           </Link>

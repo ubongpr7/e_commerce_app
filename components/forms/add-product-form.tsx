@@ -71,7 +71,7 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <Tabs defaultValue="general" className="mb-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-3 bg-gray-100  rounded-md p-1">
             <TabsTrigger value="general">General</TabsTrigger>
             <TabsTrigger value="pricing">Pricing</TabsTrigger>
             <TabsTrigger value="inventory">Inventory</TabsTrigger>
@@ -84,7 +84,7 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
                 <FormItem>
                   <FormLabel>Product Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter product name" {...field} />
+                    <Input placeholder="Enter product name" {...field} className="bg-white  text-gray-900  border-gray-200 " />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -98,7 +98,7 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea placeholder="Enter product description" rows={5} {...field} />
+                    <Textarea placeholder="Enter product description" rows={5} {...field} className="bg-white  text-gray-900  border-gray-200 " />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -113,11 +113,11 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
                   <FormLabel>Category</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger>
+                      <SelectTrigger className="bg-white  text-gray-900  border-gray-200 ">
                         <SelectValue placeholder="Select a category" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
+                    <SelectContent className="bg-white  text-gray-900  border-gray-200 ">
                       <SelectItem value="electronics">Electronics</SelectItem>
                       <SelectItem value="fashion">Fashion</SelectItem>
                       <SelectItem value="home">Home & Kitchen</SelectItem>
@@ -131,19 +131,19 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
             />
 
             <div className="my-4">
-              <h3 className="mb-2 text-sm font-medium">Product Images</h3>
+              <h3 className="mb-2 text-sm font-medium text-gray-900 ">Product Images</h3>
               <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-                <div className="flex h-32 flex-col items-center justify-center rounded-md border-2 border-dashed border-muted-foreground/25 p-4 text-center hover:bg-muted/50">
-                  <Upload className="mb-2 h-8 w-8 text-muted-foreground" />
-                  <p className="text-xs text-muted-foreground">Upload image</p>
+                <div className="flex h-32 flex-col items-center justify-center rounded-md border-2 border-dashed border-gray-500  p-4 text-center hover:bg-gray-100 ">
+                  <Upload className="mb-2 h-8 w-8 text-gray-500 " />
+                  <p className="text-xs text-gray-500 ">Upload image</p>
                 </div>
                 {[1, 2, 3].map((i) => (
                   <div
                     key={i}
-                    className="flex h-32 flex-col items-center justify-center rounded-md border border-dashed border-muted-foreground/25 p-4 text-center hover:bg-muted/50"
+                    className="flex h-32 flex-col items-center justify-center rounded-md border border-dashed border-gray-500  p-4 text-center hover:bg-gray-100 "
                   >
-                    <Upload className="mb-2 h-8 w-8 text-muted-foreground/40" />
-                    <p className="text-xs text-muted-foreground/40">Upload image</p>
+                    <Upload className="mb-2 h-8 w-8 text-gray-400 0" />
+                    <p className="text-xs text-gray-400 0">Upload image</p>
                   </div>
                 ))}
               </div>
@@ -160,8 +160,8 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
                     <FormLabel>Price</FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                        <Input type="number" step="0.01" min="0" placeholder="0.00" {...field} className="pl-7" />
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 ">$</span>
+                        <Input type="number" step="0.01" min="0" placeholder="0.00" {...field} className="pl-7 bg-white  text-gray-900  border-gray-200 " />
                       </div>
                     </FormControl>
                     <FormMessage />
@@ -177,8 +177,8 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
                     <FormLabel>Compare at Price</FormLabel>
                     <FormControl>
                       <div className="relative">
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground">$</span>
-                        <Input type="number" step="0.01" min="0" placeholder="0.00" {...field} className="pl-7" />
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 ">$</span>
+                        <Input type="number" step="0.01" min="0" placeholder="0.00" {...field} className="pl-7 bg-white  text-gray-900  border-gray-200 " />
                       </div>
                     </FormControl>
                     <FormDescription>Original price for showing discounts</FormDescription>
@@ -192,13 +192,13 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
               control={form.control}
               name="onSale"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 border-gray-200  bg-white ">
                   <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} className="border-gray-200  focus:ring-blue-500" />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>On Sale</FormLabel>
-                    <FormDescription>Mark this product as being on sale</FormDescription>
+                    <FormLabel className="text-gray-900 ">On Sale</FormLabel>
+                    <FormDescription className="text-gray-500 ">Mark this product as being on sale</FormDescription>
                   </div>
                 </FormItem>
               )}
@@ -211,11 +211,11 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
               name="sku"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>SKU</FormLabel>
+                  <FormLabel className="text-gray-900 ">SKU</FormLabel>
                   <FormControl>
-                    <Input placeholder="SKU123" {...field} />
+                    <Input placeholder="SKU123" {...field} className="bg-white  text-gray-900  border-gray-200 " />
                   </FormControl>
-                  <FormDescription>Stock Keeping Unit (unique identifier)</FormDescription>
+                  <FormDescription className="text-gray-500 ">Stock Keeping Unit (unique identifier)</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -225,13 +225,13 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
               control={form.control}
               name="inStock"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 border-gray-200  bg-white ">
                   <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} className="border-gray-200  focus:ring-blue-500" />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>In Stock</FormLabel>
-                    <FormDescription>Is this product currently in stock?</FormDescription>
+                    <FormLabel className="text-gray-900 ">In Stock</FormLabel>
+                    <FormDescription className="text-gray-500 ">Is this product currently in stock?</FormDescription>
                   </div>
                 </FormItem>
               )}
@@ -241,13 +241,13 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
               control={form.control}
               name="isNew"
               render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
+                <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4 border-gray-200  bg-white ">
                   <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} />
+                    <Checkbox checked={field.value} onCheckedChange={field.onChange} className="border-gray-200  focus:ring-blue-500" />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>New Arrival</FormLabel>
-                    <FormDescription>Mark this product as a new arrival</FormDescription>
+                    <FormLabel className="text-gray-900 ">New Arrival</FormLabel>
+                    <FormDescription className="text-gray-500 ">Mark this product as a new arrival</FormDescription>
                   </div>
                 </FormItem>
               )}
@@ -256,7 +256,7 @@ export function AddProductForm({ onSuccess }: AddProductFormProps) {
         </Tabs>
 
         <DialogFooter>
-          <Button type="button" variant="outline" onClick={onSuccess}>
+          <Button type="button" variant="outline">
             Cancel
           </Button>
           <Button type="submit" disabled={isSubmitting}>

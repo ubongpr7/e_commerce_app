@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { VendorCard } from "@/components/vendors/vendor-card"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { VendorCard } from "@/components/vendors/vendor-card";
 
 const featuredVendors = [
   {
@@ -33,25 +33,29 @@ const featuredVendors = [
     rating: 4.8,
     slug: "home-essentials",
   },
-]
+];
 
 export function FeaturedVendors() {
   return (
-    <section className="bg-muted">
+    <section className="bg-gray-100 ">
       <div className="container py-12 md:py-16">
-        <div className="flex flex-col items-center">
-          <h2 className="mb-2 text-3xl font-bold md:text-4xl">Our Top Vendors</h2>
-          <p className="mb-8 max-w-3xl text-center text-muted-foreground">
-            Meet our most trusted vendors who consistently deliver quality products
+        <div className="flex flex-col items-center text-center">
+          <h2 className="mb-2 text-3xl font-bold md:text-4xl text-gray-800 ">
+            Our Top Vendors
+          </h2>
+          <p className="mb-8 max-w-3xl text-gray-600 ">
+            Meet our most trusted vendors who consistently deliver quality products.
           </p>
+
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {featuredVendors.map((vendor) => (
               <VendorCard key={vendor.id} vendor={vendor} />
             ))}
           </div>
+
           <div className="mt-10">
             <Link href="/vendors">
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size="lg" className="text-gray-800  border-gray-300 ">
                 Explore All Vendors
               </Button>
             </Link>
@@ -59,5 +63,5 @@ export function FeaturedVendors() {
         </div>
       </div>
     </section>
-  )
+  );
 }

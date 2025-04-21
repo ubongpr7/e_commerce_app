@@ -16,7 +16,6 @@ interface BannerSlide {
   ctaLink: string
 }
 
-// This would normally come from Sanity.io
 const bannerSlides: BannerSlide[] = [
   {
     id: "1",
@@ -77,40 +76,54 @@ export function HomeBanner() {
               className="object-cover"
               priority
             />
-            <div className="absolute inset-0 bg-black/40" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white md:p-12">
-              <h1 className="mb-2 text-3xl font-bold md:text-4xl lg:text-5xl">{slide.title}</h1>
-              <p className="mb-6 max-w-lg text-lg md:text-xl">{slide.description}</p>
-              <Button size="lg" asChild>
+            <div className="absolute inset-0 bg-gray-900/40 " />
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center md:p-12">
+              <h1 className="mb-2 text-3xl font-bold text-gray-50  md:text-4xl lg:text-5xl">
+                {slide.title}
+              </h1>
+              <p className="mb-6 max-w-lg text-lg text-gray-200  md:text-xl">
+                {slide.description}
+              </p>
+              <Button 
+                size="lg" 
+                asChild
+                className="bg-blue-600 text-white hover:bg-blue-700 "
+              >
                 <Link href={slide.ctaLink}>{slide.ctaText}</Link>
               </Button>
             </div>
           </div>
         ))}
       </div>
+
       <Button
         variant="ghost"
         size="icon"
-        className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/30 text-white hover:bg-black/50"
+        className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-gray-800/30 text-gray-50 hover:bg-gray-800/50 "
         onClick={prevSlide}
       >
         <ChevronLeft className="h-6 w-6" />
         <span className="sr-only">Previous slide</span>
       </Button>
+
       <Button
         variant="ghost"
         size="icon"
-        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-black/30 text-white hover:bg-black/50"
+        className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-gray-800/30 text-gray-50 hover:bg-gray-800/50 "
         onClick={nextSlide}
       >
         <ChevronRight className="h-6 w-6" />
         <span className="sr-only">Next slide</span>
       </Button>
+
       <div className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2">
         {bannerSlides.map((_, index) => (
           <button
             key={index}
-            className={cn("h-2 w-2 rounded-full bg-white/50 transition-all", currentSlide === index && "w-4 bg-white")}
+            className={cn(
+              "h-2 rounded-full bg-gray-300/50 transition-all duration-300 ",
+              currentSlide === index && "w-4 bg-gray-50 "
+            )}
             onClick={() => setCurrentSlide(index)}
           >
             <span className="sr-only">Go to slide {index + 1}</span>

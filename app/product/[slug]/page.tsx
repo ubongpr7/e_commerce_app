@@ -59,7 +59,7 @@ export default function ProductPage() {
       <MainLayout>
         <div className="container py-8">
           <div className="flex h-96 items-center justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+            <div className="h-8 w-8 animate-spin rounded-full border-4 border-gray-900 border-t-transparent"></div>
           </div>
         </div>
       </MainLayout>
@@ -72,7 +72,7 @@ export default function ProductPage() {
         <div className="container py-8">
           <div className="flex h-96 flex-col items-center justify-center">
             <h1 className="mb-4 text-2xl font-bold">Product Not Found</h1>
-            <p className="mb-6 text-muted-foreground">
+            <p className="mb-6 text-gray-500">
               The product you are looking for does not exist or has been removed.
             </p>
             <Link href="/products">
@@ -114,20 +114,20 @@ export default function ProductPage() {
     <MainLayout>
       <div className="container py-8">
         {/* Breadcrumbs */}
-        <div className="mb-6 flex items-center text-sm text-muted-foreground">
-          <Link href="/" className="hover:text-primary">
+        <div className="mb-6 flex items-center text-sm text-gray-500">
+          <Link href="/" className="hover:text-gray-900">
             Home
           </Link>
           <ChevronRight className="mx-1 h-4 w-4" />
-          <Link href="/products" className="hover:text-primary">
+          <Link href="/products" className="hover:text-gray-900">
             Products
           </Link>
           <ChevronRight className="mx-1 h-4 w-4" />
-          <Link href={`/products?category=${product.category}`} className="capitalize hover:text-primary">
+          <Link href={`/products?category=${product.category}`} className="capitalize hover:text-gray-900">
             {product.category}
           </Link>
           <ChevronRight className="mx-1 h-4 w-4" />
-          <span className="truncate text-foreground">{product.name}</span>
+          <span className="truncate text-gray-900">{product.name}</span>
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
@@ -155,7 +155,7 @@ export default function ProductPage() {
                 <button
                   key={index}
                   className={`relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border ${
-                    activeImage === index ? "ring-2 ring-primary" : ""
+                    activeImage === index ? "ring-2 ring-gray-900" : ""
                   }`}
                   onClick={() => setActiveImage(index)}
                 >
@@ -173,7 +173,7 @@ export default function ProductPage() {
                 .map((_, index) => (
                   <div
                     key={`placeholder-${index}`}
-                    className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border bg-muted"
+                    className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border bg-gray-100"
                   />
                 ))}
             </div>
@@ -184,7 +184,7 @@ export default function ProductPage() {
             <div>
               <Link
                 href={`/vendor/${product.vendor.slug}`}
-                className="text-sm text-muted-foreground hover:text-primary"
+                className="text-sm text-gray-500 hover:text-gray-900"
               >
                 {product.vendor.name}
               </Link>
@@ -196,30 +196,30 @@ export default function ProductPage() {
                     .map((_, i) => (
                       <Star
                         key={i}
-                        className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-primary text-primary" : "fill-muted text-muted"}`}
+                        className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-gray-900 text-gray-900" : "fill-gray-200 text-gray-200"}`}
                       />
                     ))}
                 </div>
                 <span className="text-sm font-medium">{product.rating}</span>
-                <span className="text-sm text-muted-foreground">(124 reviews)</span>
+                <span className="text-sm text-gray-500">(124 reviews)</span>
               </div>
             </div>
 
             <div className="space-y-1">
               <div className="flex items-center gap-2">
                 {isOnSale && (
-                  <span className="text-lg text-muted-foreground line-through">
+                  <span className="text-lg text-gray-500 line-through">
                     ${product.compareAtPrice.toFixed(2)}
                   </span>
                 )}
-                <span className="text-2xl font-bold text-primary">${currentPrice.toFixed(2)}</span>
+                <span className="text-2xl font-bold text-gray-900">${currentPrice.toFixed(2)}</span>
                 {isOnSale && (
                   <Badge variant="outline" className="text-red-500 border-red-200">
                     Save ${(product.compareAtPrice - currentPrice).toFixed(2)}
                   </Badge>
                 )}
               </div>
-              <p className="text-sm text-muted-foreground">{product.inStock ? "In Stock" : "Out of Stock"}</p>
+              <p className="text-sm text-gray-500">{product.inStock ? "In Stock" : "Out of Stock"}</p>
             </div>
 
             <Separator />
@@ -227,7 +227,7 @@ export default function ProductPage() {
             <div className="space-y-4">
               <div>
                 <h3 className="mb-2 font-medium">Description</h3>
-                <p className="text-muted-foreground">{product.description}</p>
+                <p className="text-gray-500">{product.description}</p>
               </div>
 
               {product.variants && product.variants.length > 0 && (
@@ -290,15 +290,15 @@ export default function ProductPage() {
 
             <div className="grid gap-2 pt-4 text-sm">
               <div className="flex items-center gap-2">
-                <Truck className="h-4 w-4 text-muted-foreground" />
+                <Truck className="h-4 w-4 text-gray-500" />
                 <span>Free shipping on orders over $50</span>
               </div>
               <div className="flex items-center gap-2">
-                <Shield className="h-4 w-4 text-muted-foreground" />
+                <Shield className="h-4 w-4 text-gray-500" />
                 <span>2 year warranty on all products</span>
               </div>
               <div className="flex items-center gap-2">
-                <RotateCcw className="h-4 w-4 text-muted-foreground" />
+                <RotateCcw className="h-4 w-4 text-gray-500" />
                 <span>30 day money back guarantee</span>
               </div>
             </div>
@@ -335,19 +335,19 @@ export default function ProductPage() {
                   <h3 className="mb-2 font-semibold">Dimensions</h3>
                   <ul className="space-y-1 text-sm">
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Height</span>
+                      <span className="text-gray-500">Height</span>
                       <span>10 inches</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Width</span>
+                      <span className="text-gray-500">Width</span>
                       <span>6 inches</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Depth</span>
+                      <span className="text-gray-500">Depth</span>
                       <span>4 inches</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Weight</span>
+                      <span className="text-gray-500">Weight</span>
                       <span>2 lbs</span>
                     </li>
                   </ul>
@@ -356,15 +356,15 @@ export default function ProductPage() {
                   <h3 className="mb-2 font-semibold">Materials</h3>
                   <ul className="space-y-1 text-sm">
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Main Body</span>
+                      <span className="text-gray-500">Main Body</span>
                       <span>Aluminum</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Finish</span>
+                      <span className="text-gray-500">Finish</span>
                       <span>Matte Black</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Interior</span>
+                      <span className="text-gray-500">Interior</span>
                       <span>Polyester</span>
                     </li>
                   </ul>
@@ -373,15 +373,15 @@ export default function ProductPage() {
                   <h3 className="mb-2 font-semibold">Technical Specifications</h3>
                   <ul className="space-y-1 text-sm">
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Battery Life</span>
+                      <span className="text-gray-500">Battery Life</span>
                       <span>10 hours</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Connectivity</span>
+                      <span className="text-gray-500">Connectivity</span>
                       <span>Bluetooth 5.0</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Water Resistance</span>
+                      <span className="text-gray-500">Water Resistance</span>
                       <span>IPX4</span>
                     </li>
                   </ul>
@@ -390,19 +390,19 @@ export default function ProductPage() {
                   <h3 className="mb-2 font-semibold">Package Contents</h3>
                   <ul className="space-y-1 text-sm">
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Main Product</span>
+                      <span className="text-gray-500">Main Product</span>
                       <span>1x</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">User Manual</span>
+                      <span className="text-gray-500">User Manual</span>
                       <span>1x</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Charging Cable</span>
+                      <span className="text-gray-500">Charging Cable</span>
                       <span>1x</span>
                     </li>
                     <li className="flex justify-between">
-                      <span className="text-muted-foreground">Warranty Card</span>
+                      <span className="text-gray-500">Warranty Card</span>
                       <span>1x</span>
                     </li>
                   </ul>
@@ -421,7 +421,7 @@ export default function ProductPage() {
                           .map((_, i) => (
                             <Star
                               key={i}
-                              className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-primary text-primary" : "fill-muted text-muted"}`}
+                              className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-gray-900 text-gray-900" : "fill-gray-200 text-gray-200"}`}
                             />
                           ))}
                       </div>
@@ -447,11 +447,11 @@ export default function ProductPage() {
                                   .map((_, j) => (
                                     <Star
                                       key={j}
-                                      className={`h-3 w-3 ${j < 5 - i ? "fill-primary text-primary" : "fill-muted text-muted"}`}
+                                      className={`h-3 w-3 ${j < 5 - i ? "fill-gray-900 text-gray-900" : "fill-gray-200 text-gray-200"}`}
                                     />
                                   ))}
                               </div>
-                              <span className="text-xs text-muted-foreground">
+                              <span className="text-xs text-gray-500">
                                 {new Date(Date.now() - i * 86400000).toLocaleDateString()}
                               </span>
                             </div>
@@ -459,7 +459,7 @@ export default function ProductPage() {
                           <Badge variant="outline">Verified Purchase</Badge>
                         </div>
                         <h5 className="font-medium">Great product, highly recommend!</h5>
-                        <p className="mt-1 text-sm text-muted-foreground">
+                        <p className="mt-1 text-sm text-gray-500">
                           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies
                           lacinia, nisl nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel
                           ultricies lacinia.
