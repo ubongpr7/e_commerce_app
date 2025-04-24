@@ -62,7 +62,7 @@ export function HomeBanner() {
   }, [])
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden mt-24 rounded-md">
       <div
         className="flex transition-transform duration-500 ease-in-out"
         style={{ transform: `translateX(-${currentSlide * 100}%)` }}

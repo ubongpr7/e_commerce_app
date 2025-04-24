@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next/dist/lib/metadata/types/metadata-interface"
+import type { Viewport } from "next";
 import "./globals.css"
 import { Toaster } from "@/components/ui/toaster"
 import StoreProvider from "@/redux/provider"
@@ -11,6 +12,13 @@ export const metadata: Metadata = {
   description: "A multivendor e-commerce platform connecting customers with quality vendors",
     
 }
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1.0,
+  maximumScale: 1.0,
+  userScalable: false,
+};
 
 export default function RootLayout({
   children,

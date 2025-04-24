@@ -41,8 +41,8 @@ export function MainNav() {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white  ">
-      <div className="container flex h-16 items-center justify-between">
+    <header className="fixed right-0 left-0 top-0 z-50 w-full border-b bg-white ">
+      <div className="container flex h-20 pl-12 items-center justify-between">
         {/* Mobile Menu */}
         <Sheet>
           <SheetTrigger asChild>
@@ -125,22 +125,36 @@ export function MainNav() {
         </Sheet>
 
         {/* Logo */}
-        <Link href="/" className="hidden md:flex text-xl font-bold text-gray-800 ">
-          MultiVendor
+        <Link href="/" className="hidden md:flex text-3xl font-bold text-gray-800 ">
+          JEMFAVE
         </Link>
+
+        {/* Search */}
+        <div className={cn("hidden md:block", isSearchOpen && "flex")}>
+            <form className="relative w-full md:w-auto">
+              <Search className="absolute left-2.5 mt-3 h-4 w-4 text-gray-400 " />
+              <Input
+                type="text"
+                placeholder="Search products..."
+                className="w-full rounded-full bg-gray-100  pl-8 md:w-[200px] lg:w-[300px]"
+              />
+            </form>
+          </div>
 
         {/* Desktop Nav */}
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle() }>
-                  Home
+                <NavigationMenuLink className={navigationMenuTriggerStyle() } >
+                  <p className="text-base">Home</p>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Products</NavigationMenuTrigger>
+              <NavigationMenuTrigger>
+                <p className="text-base">Products</p>
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid w-[500px] gap-3 p-4 md:grid-cols-2">
                   <li className="row-span-3">
@@ -185,7 +199,7 @@ export function MainNav() {
             <NavigationMenuItem>
               <Link href="/vendors" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Vendors
+                  <p className="text-base">Vendors</p>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
@@ -194,17 +208,7 @@ export function MainNav() {
 
         {/* Right Side */}
         <div className="flex items-center space-x-3">
-          {/* Search */}
-          <div className={cn("hidden md:block", isSearchOpen && "flex")}>
-            <form className="relative w-full md:w-auto">
-              <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-gray-400 " />
-              <Input
-                type="search"
-                placeholder="Search products..."
-                className="w-full rounded-full bg-gray-100  pl-8 md:w-[200px] lg:w-[300px]"
-              />
-            </form>
-          </div>
+          
           <Button
             variant="ghost"
             size="icon"
@@ -218,16 +222,16 @@ export function MainNav() {
           {/* Theme Toggle */}
           <button onClick={() => dispatch(setIsDarkMode(!isDarkMode))}>
             {isDarkMode ? (
-              <Moon size={20} className="text-blue-600" />
+              <Moon size={25} className="text-blue-600" />
             ) : (
-              <Sun size={20} className="text-yellow-400" />
+              <Sun size={25} className="text-yellow-400" />
             )}
           </button>
 
           {/* Cart */}
           <Link href="/cart">
             <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-5 w-5" />
+              <ShoppingCart className="h-10 w-10" />
               {cartItemCount > 0 && (
                 <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs">
                   {cartItemCount}
@@ -248,12 +252,12 @@ export function MainNav() {
           ) : (
             <>
               <Link href="/login">
-                <Button variant="ghost" size="sm" className="hidden md:flex">
+                <Button variant="ghost" size="sm" className="hidden md:flex text-base">
                   Login
                 </Button>
               </Link>
               <Link href="/vendor/register/start">
-                <Button size="sm" className="hidden md:flex">
+                <Button size="sm" className="hidden md:flex bg-orange-600 hover:bg-orange-700" >
                   Become a Vendor
                 </Button>
               </Link>
