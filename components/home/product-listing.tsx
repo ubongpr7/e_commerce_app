@@ -40,8 +40,8 @@ export function ProductListing() {
           Browse through our extensive collection of quality products from trusted vendors.
         </p>
 
-        <Tabs defaultValue="all" className="w-full mb-8" onValueChange={setActiveCategory}>
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 gap-2 bg-gray-200  p-2 rounded-lg">
+        <Tabs defaultValue="all" className="w-full mb-8 text-black" onValueChange={setActiveCategory}>
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 gap-2 bg-gray-200 p-2 rounded-lg">
             {categories.map((category) => (
               <TabsTrigger
                 key={category.id}
@@ -102,7 +102,7 @@ export function ProductListing() {
 
         <div className="mt-8">
           <Link href="/products">
-            <Button size="lg" className="text-gray-900 ">
+            <Button size="lg" className="text-white">
               View All Products
             </Button>
           </Link>

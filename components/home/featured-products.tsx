@@ -43,10 +43,9 @@ export function FeaturedProducts() {
         <div className="mt-10">
           <Link href="/products">
             <Button 
-              variant="outline" 
+              variant="default" 
               size="lg"
-              className="border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-gray-900 
-                        "
+              className="text-white bg-orange-600 hover:bg-orange-700"
             >
               View All Products
             </Button>

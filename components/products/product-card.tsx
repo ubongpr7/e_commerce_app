@@ -110,7 +110,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
         </CardContent>
 
         <CardFooter className="p-4 pt-0">
-          <Button className="w-full gap-2 bg-blue-600 text-white hover:bg-blue-700" onClick={handleAddToCart}>
+          <Button className="w-full gap-2 bg-orange-600 text-white hover:bg-orange-700" onClick={handleAddToCart}>
             <ShoppingCart className="h-4 w-4" />
             Add to Cart
           </Button>

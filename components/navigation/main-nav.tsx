@@ -160,20 +160,27 @@ export function MainNav() {
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
                       <Link
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gray-100  p-6 no-underline outline-none focus:shadow-md"
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-orange-600 text-black  p-6 no-underline outline-none focus:shadow-md"
                         href="/products"
                       >
                         <div className="mb-2 mt-4 text-lg font-medium">All Products</div>
-                        <p className="text-sm text-gray-600 ">
+                        <p className="text-sm text-white ">
                           Browse all products from our trusted vendors
                         </p>
                       </Link>
                     </NavigationMenuLink>
                   </li>
                   {[
-                    { label: "Electronics", value: "electronics" },
-                    { label: "Fashion", value: "fashion" },
-                    { label: "Home & Kitchen", value: "home" },
+                    { label: "Study Materials", value: "study" },
+                    { label: "Electronic Gadgets", value: "electronic" },
+                    { label: "Office Supplies", value: "office" },
+                    { label: "Fashion & Apparel", value: "fashion" },
+                    { label: "Food & Groceries", value: "food" },
+                    { label: "Beauty & Health", value: "beauty" },
+                    { label: "Home Essentials", value: "home" },
+                    { label: "Sporting Goods", value: "sport" },
+                    { label: "Automobile", value: "automobile" },
+                    { label: "Entertaiment", value: "entertainment" },
                   ].map(({ label, value }) => (
                     <li key={value}>
                       <NavigationMenuLink asChild>
@@ -222,18 +229,18 @@ export function MainNav() {
           {/* Theme Toggle */}
           <button onClick={() => dispatch(setIsDarkMode(!isDarkMode))}>
             {isDarkMode ? (
-              <Moon size={25} className="text-blue-600" />
+              <Moon size={25} className="text-orange-600" />
             ) : (
-              <Sun size={25} className="text-yellow-400" />
+              <Sun size={25} className="text-orange-600" />
             )}
           </button>
 
           {/* Cart */}
           <Link href="/cart">
             <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="h-10 w-10" />
+              <ShoppingCart className="h-20 w-20" />
               {cartItemCount > 0 && (
-                <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full p-0 text-xs">
+                <Badge className="absolute -right-1 text-center -top-1 h-5 w-5 pl-1.5 rounded-full text-xs">
                   {cartItemCount}
                 </Badge>
               )}

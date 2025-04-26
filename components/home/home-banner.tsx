@@ -19,7 +19,7 @@ interface BannerSlide {
 const bannerSlides: BannerSlide[] = [
   {
     id: "1",
-    imageUrl: "/placeholder.svg?height=600&width=1200",
+    imageUrl: "\public\SPECIAL\ad1.png",
     title: "Summer Collection",
     description: "Discover our new summer collection with amazing discounts",
     ctaText: "Shop Now",
@@ -27,7 +27,7 @@ const bannerSlides: BannerSlide[] = [
   },
   {
     id: "2",
-    imageUrl: "/placeholder.svg?height=600&width=1200",
+    imageUrl: "\public\SPECIAL\ad2.jpg",
     title: "New Vendors Join Daily",
     description: "Find unique products from our expanding vendor network",
     ctaText: "Explore Vendors",
@@ -35,7 +35,7 @@ const bannerSlides: BannerSlide[] = [
   },
   {
     id: "3",
-    imageUrl: "/placeholder.svg?height=600&width=1200",
+    imageUrl: "\public\SPECIAL\ad3.jpg",
     title: "Become a Vendor",
     description: "Join our platform and start selling your products today",
     ctaText: "Register Now",
@@ -87,7 +87,7 @@ export function HomeBanner() {
               <Button 
                 size="lg" 
                 asChild
-                className="bg-blue-600 text-white hover:bg-blue-700 "
+                className="bg-orange-600 text-white hover:bg-orange-700 "
               >
                 <Link href={slide.ctaLink}>{slide.ctaText}</Link>
               </Button>
