@@ -5,6 +5,9 @@ import "./globals.css"
 import { Toaster } from "@/components/ui/toaster"
 import StoreProvider from "@/redux/provider"
 import NextTopLoader from 'nextjs-toploader';
+import "material-icons/iconfont/material-icons.css";
+import "@/lib/fontawesome"; // Import once
+
 
 
 export const metadata: Metadata = {
@@ -28,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       
-      <body >
+      <body className="w-full h-full" >
       <NextTopLoader />
 
         <StoreProvider>
