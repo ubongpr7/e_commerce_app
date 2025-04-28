@@ -4,7 +4,7 @@ import { ShoppingBag, BarChart, Package } from "lucide-react";
 
 export function CallToAction() {
   return (
-    <section className="container py-12 md:py-16">
+    <section className=" md:py-16">
       <div className="rounded-xl bg-blue-700  p-8 md:p-12 text-white">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-4 text-3xl font-bold md:text-4xl">Become a Vendor Today</h2>

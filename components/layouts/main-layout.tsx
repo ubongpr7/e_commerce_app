@@ -22,12 +22,13 @@ export function MainLayout({ children }: MainLayoutProps) {
     }
   })
   return (
-    <div className={` ${ isDarkMode ?'dark':'light'} flex min-h-screen flex-col bg-gray-50`}>
-      <div className="ml-4 flex-1 mr-4">
+    <div className={` ${ isDarkMode ?'dark':'light'} flex min-h-screen flex-col`}>
+      <div className="px-4">
         <MainNav />
         <main className="flex-1">{children}</main>
-        <MainFooter />
       </div>
+
+      <MainFooter />
     </div>
   )
 }

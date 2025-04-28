@@ -14,8 +14,8 @@ import {
 
 export function MainFooter() {
   return (
-    <footer className="bg-gray-100 w-screen">
-      <div className="w-screen max-w-screen !px-0  py-12 md:py-16">
+    <footer className="bg-orange-600 w-full relative mt-4">
+      <div className=" !px-0  py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-gray-800 px-4 md:px-8">
           <div>
             <Link href="/" className="flex items-center gap-2 font-bold">
