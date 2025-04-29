@@ -14,17 +14,17 @@ interface MainLayoutProps {
 export function MainLayout({ children }: MainLayoutProps) {
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
-  useEffect(()=>{
-    if (isDarkMode){
+  useEffect(() => {
+    if (isDarkMode) {
       document.documentElement.classList.add('dark')
-    }else{  
+    } else {
       document.documentElement.classList.add('light')
     }
   })
   return (
-    <div className={` ${ isDarkMode ?'dark':'light'} flex min-h-screen flex-col`}>
-      <div className="px-4">
-        <MainNav />
+    <div className={` ${isDarkMode ? 'dark' : 'light'} flex min-h-screen flex-col bg-gray-50`}>
+      <MainNav />
+      <div className="">
         <main className="flex-1">{children}</main>
       </div>
 

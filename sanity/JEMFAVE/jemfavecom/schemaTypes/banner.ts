@@ -1,33 +1,35 @@
-import { defineField, defineType } from 'sanity';
+import { defineType } from "sanity"
 
-export default defineType({
-  name: 'banner',
-  title: 'Banner',
-  type: 'document',
+const banner = defineType({
+  name: "banner",
+  title: "Advert Banners",
+  type: "document",
   fields: [
-    defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
-    }),
-    defineField({
-      name: 'image',
-      title: 'Image',
-      type: 'image',
+    {
+      name: "title",
+      title: "Title",
+      type: "string",
+    },
+    {
+      name: "image",
+      title: "Image",
+      type: "image",
       options: {
-        hotspot: true, // lets you set focus point on images
+        hotspot: true, // Enables image cropping
       },
-    }),
-    defineField({
-      name: 'link',
-      title: 'Link',
-      type: 'url',
-    }),
-    defineField({
-      name: 'order',
-      title: 'Order',
-      type: 'number',
-      description: 'Controls the position of the banner in the carousel.',
-    }),
+    },
+    {
+      name: "link",
+      title: "Link",
+      type: "url", // Allows clickable links
+    },
+    {
+      name: "order",
+      title: "Order",
+      type: "number",
+      description: "Use this to control the display order",
+    },
   ],
-});
+})
+
+export default banner

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -13,144 +13,92 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger, SheetOverlay } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
 import {
-  Search,
-  ShoppingCart,
   User,
+  ShoppingCart,
   MenuIcon,
   X,
   Moon,
   Sun,
+  Search
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import {
-  setIsDarkMode,
-  setIsSidebarCollapsed,
-} from "../../redux/state";
+import { setIsDarkMode } from "../../redux/state";
 
 export function MainNav() {
-  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isUserOpen, setIsUserOpen] = useState(false);
   const pathname = usePathname();
   const cartItemCount = useAppSelector((state) => state.cart.items.length);
   const isLoggedIn = useAppSelector((state) => state.auth.isAuthenticated);
   const dispatch = useAppDispatch();
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
+  // Lock body scroll when side sheets are open
+  useEffect(() => {
+    if (isMenuOpen || isUserOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isMenuOpen, isUserOpen]);
+
   return (
-    <header className="fixed right-0 left-0 top-0 z-50 w-full border-b bg-white ">
-      <div className="container flex h-20 pl-12 items-center justify-between">
-        {/* Mobile Menu */}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="md:hidden">
-              <MenuIcon className="h-5 w-5" />
-              <span className="sr-only">Toggle menu</span>
-            </Button>
-          </SheetTrigger>
-          <SheetContent side="left" className="w-[300px] sm:w-[400px] bg-white ">
-            <nav className="flex flex-col gap-4 text-gray-800 ">
-              <Link href="/" className="text-xl font-bold">
-                MultiVendor
-              </Link>
-              {[
-                { href: "/", label: "Home" },
-                { href: "/products", label: "Products" },
-                { href: "/vendors", label: "Vendors" },
-              ].map(({ href, label }) => (
-                <Link
-                  key={href}
-                  href={href}
-                  className={cn(
-                    "text-lg font-medium transition-colors hover:text-blue-600 ",
-                    {
-                      "text-blue-600 ": pathname === href,
-                    }
-                  )}
-                >
-                  {label}
-                </Link>
-              ))}
+    <header className="fixed right-0 left-0 top-0 z-50 w-full shadow-md bg-white border-t-4 border-t-orange-600">
+      <div className="container flex h-20 pl-4 pr-4 items-center justify-between">
 
-              {isLoggedIn ? (
-                <>
-                  <Link
-                    href="/dashboard"
-                    className={cn(
-                      "text-lg font-medium transition-colors hover:text-blue-600 ",
-                      {
-                        "text-blue-600": pathname?.includes("/dashboard"),
-                      }
-                    )}
-                  >
-                    Dashboard
-                  </Link>
-                  <Link
-                    href="/account"
-                    className={cn(
-                      "text-lg font-medium transition-colors hover:text-blue-600 ",
-                      {
-                        "text-blue-600 ": pathname?.includes("/account"),
-                      }
-                    )}
-                  >
-                    Account
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link href="/login" className="text-lg hover:text-blue-600 ">
-                    Login
-                  </Link>
-                  <Link href="/register" className="text-lg hover:text-blue-600 ">
-                    Register
-                  </Link>
-                </>
-              )}
-              <div className="flex items-center mt-2">
-                <span className="mr-2 text-sm font-medium">Theme:</span>
-                <button onClick={() => dispatch(setIsDarkMode(!isDarkMode))}>
-                  {isDarkMode ? (
-                    <Sun size={20} className="text-gray-400 hover:text-yellow-400" />
-                  ) : (
-                    <Moon size={20} className="text-gray-600 hover:text-blue-600" />
-                  )}
-                </button>
-              </div>
-            </nav>
-          </SheetContent>
-        </Sheet>
+        {/* Mobile Menu and Logo */}
+        <div className="flex items-center md:hidden gap-2">
+          {/* Menu Button */}
+          <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(true)}>
+            <MenuIcon className="h-5 w-5" />
+            <span className="sr-only">Toggle menu</span>
+          </Button>
 
-        {/* Logo */}
-        <Link href="/" className="hidden md:flex text-3xl font-bold text-gray-800 ">
+          {/* Logo */}
+          <Link href="/" className="text-2xl font-bold text-gray-800">
+            JEMFAVE
+          </Link>
+        </div>
+
+        {/* Logo Desktop */}
+        <Link href="/" className="hidden md:flex text-3xl font-bold text-gray-800">
           JEMFAVE
         </Link>
 
-        {/* Search */}
-        <div className={cn("hidden md:block", isSearchOpen && "flex")}>
-            <form className="relative w-full md:w-auto">
-              <Search className="absolute left-2.5 mt-3 h-4 w-4 text-gray-400 " />
-              <Input
-                type="text"
-                placeholder="Search products..."
-                className="w-full rounded-full bg-gray-100  pl-8 md:w-[200px] lg:w-[300px]"
-              />
-            </form>
-          </div>
+        {/* Desktop Search */}
+        <div className="hidden md:block">
+          <form className="relative w-full md:w-auto flex flex-row gap-1">
+            <Input
+              type="text"
+              placeholder="Search products..."
+              className="w-full rounded-lg bg-gray-100 pl-8 md:w-[200px] lg:w-[300px]"
+            />
+            <Button
+              type="submit"
+              size="icon"
+              className="bg-orange-600 hover:bg-orange-700 rounded-lg"
+            >
+              <Search className="h-5 w-5 text-white" />
+            </Button>
+          </form>
+        </div>
 
-        {/* Desktop Nav */}
+        {/* Desktop Navigation */}
         <NavigationMenu className="hidden md:flex">
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle() } >
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <p className="text-base">Home</p>
                 </NavigationMenuLink>
               </Link>
             </NavigationMenuItem>
+
             <NavigationMenuItem>
               <NavigationMenuTrigger>
                 <p className="text-base">Products</p>
@@ -160,16 +108,17 @@ export function MainNav() {
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
                       <Link
-                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-orange-600 text-black  p-6 no-underline outline-none focus:shadow-md"
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-orange-600 text-black p-6 no-underline outline-none focus:shadow-md"
                         href="/products"
                       >
                         <div className="mb-2 mt-4 text-lg font-medium">All Products</div>
-                        <p className="text-sm text-white ">
+                        <p className="text-sm text-white">
                           Browse all products from our trusted vendors
                         </p>
                       </Link>
                     </NavigationMenuLink>
                   </li>
+                  {/* Product Categories */}
                   {[
                     { label: "Study Materials", value: "study" },
                     { label: "Electronic Gadgets", value: "electronic" },
@@ -180,22 +129,16 @@ export function MainNav() {
                     { label: "Home Essentials", value: "home" },
                     { label: "Sporting Goods", value: "sport" },
                     { label: "Automobile", value: "automobile" },
-                    { label: "Entertaiment", value: "entertainment" },
+                    { label: "Entertainment", value: "entertainment" },
                   ].map(({ label, value }) => (
                     <li key={value}>
                       <NavigationMenuLink asChild>
                         <Link
                           href={`/products?category=${value}`}
-                          className="block space-y-1 rounded-md p-3 transition-colors hover:bg-gray-200 "
+                          className="block space-y-1 rounded-md p-3 transition-colors hover:bg-gray-200"
                         >
                           <div className="text-sm font-medium">{label}</div>
-                          <p className="text-sm text-gray-600 ">
-                            {label === "Electronics"
-                              ? "Latest gadgets and tech"
-                              : label === "Fashion"
-                              ? "Clothing and accessories"
-                              : "Appliances and decor"}
-                          </p>
+                          <p className="text-sm text-gray-600">Subcategory</p>
                         </Link>
                       </NavigationMenuLink>
                     </li>
@@ -203,6 +146,7 @@ export function MainNav() {
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
+
             <NavigationMenuItem>
               <Link href="/vendors" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -213,20 +157,9 @@ export function MainNav() {
           </NavigationMenuList>
         </NavigationMenu>
 
-        {/* Right Side */}
+        {/* Right Controls */}
         <div className="flex items-center space-x-3">
-          
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsSearchOpen(!isSearchOpen)}
-          >
-            {isSearchOpen ? <X className="h-5 w-5" /> : <Search className="h-5 w-5" />}
-            <span className="sr-only">Toggle search</span>
-          </Button>
-
-          {/* Theme Toggle */}
+          {/* Dark Mode Toggle */}
           <button onClick={() => dispatch(setIsDarkMode(!isDarkMode))}>
             {isDarkMode ? (
               <Moon size={25} className="text-orange-600" />
@@ -240,38 +173,97 @@ export function MainNav() {
             <Button variant="ghost" size="icon" className="relative">
               <ShoppingCart className="h-20 w-20" />
               {cartItemCount > 0 && (
-                <Badge className="absolute -right-1 text-center -top-1 h-5 w-5 pl-1.5 rounded-full text-xs">
+                <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full text-xs">
                   {cartItemCount}
                 </Badge>
               )}
-              <span className="sr-only">Cart</span>
             </Button>
           </Link>
 
-          {/* Auth Buttons */}
+          {/* User Button (for mobile) */}
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsUserOpen(true)}>
+            <User className="h-5 w-5" />
+          </Button>
+
+          {/* Desktop Login/Register */}
           {isLoggedIn ? (
             <Link href="/dashboard">
-              <Button variant="ghost" size="icon">
+              <Button variant="ghost" size="icon" className="hidden md:flex">
                 <User className="h-5 w-5" />
-                <span className="sr-only">Dashboard</span>
               </Button>
             </Link>
           ) : (
-            <>
+            <div className="hidden md:flex items-center gap-2">
               <Link href="/login">
-                <Button variant="ghost" size="sm" className="hidden md:flex text-base">
+                <Button variant="ghost" size="sm" className="text-base">
                   Login
                 </Button>
               </Link>
               <Link href="/vendor/register/start">
-                <Button size="sm" className="hidden md:flex bg-orange-600 hover:bg-orange-700" >
+                <Button size="sm" className="bg-orange-600 hover:bg-orange-700">
                   Become a Vendor
                 </Button>
               </Link>
-            </>
+            </div>
           )}
         </div>
       </div>
+
+      {/* Mobile Search Form */}
+      <div className="md:hidden px-4 -mt-5 mb-2.5">
+        <form className="flex items-center gap-2">
+          <Input
+            type="text"
+            placeholder="Search products..."
+            className="flex-1 h-8 text-sm bg-gray-100 rounded-full"
+          />
+          <Button
+            type="submit"
+            size="icon"
+            className="bg-orange-600 hover:bg-orange-700 rounded-full h-8 w-8"
+          >
+            <Search className="h-2 w-2 text-white" />
+          </Button>
+        </form>
+      </div>
+
+      {/* Menu Sheet */}
+      {isMenuOpen && (
+        <>
+          <div className="fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setIsMenuOpen(false)} />
+          <div className="fixed top-0 left-0 z-50 w-64 h-full bg-white p-4">
+            {/* Add your menu links here */}
+            <nav className="flex flex-col gap-4">
+              <Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
+              <Link href="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
+              <Link href="/vendors" onClick={() => setIsMenuOpen(false)}>Vendors</Link>
+            </nav>
+          </div>
+        </>
+      )}
+
+      {/* User Sheet */}
+      {isUserOpen && (
+        <>
+          <div className="fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setIsUserOpen(false)} />
+          <div className="fixed top-0 right-0 z-50 w-64 h-full bg-white p-4">
+            {/* Add your user page links/components here */}
+            <div className="flex flex-col gap-4">
+              {isLoggedIn ? (
+                <>
+                  <Link href="/dashboard" onClick={() => setIsUserOpen(false)}>Dashboard</Link>
+                  <Link href="/account" onClick={() => setIsUserOpen(false)}>Account</Link>
+                </>
+              ) : (
+                <>
+                  <Link href="/login" onClick={() => setIsUserOpen(false)}>Login</Link>
+                  <Link href="/register" onClick={() => setIsUserOpen(false)}>Register</Link>
+                </>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </header>
   );
 }

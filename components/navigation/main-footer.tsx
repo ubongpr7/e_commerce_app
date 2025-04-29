@@ -14,8 +14,8 @@ import {
 
 export function MainFooter() {
   return (
-    <footer className="bg-orange-600 w-full relative mt-4">
-      <div className=" !px-0  py-12 md:py-16">
+    <footer className="bg-gray-100 px-5">
+      <div className="py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-gray-800 px-4 md:px-8">
           <div>
             <Link href="/" className="flex items-center gap-2 font-bold">
@@ -92,7 +92,7 @@ export function MainFooter() {
         </div>
       </div>
 
-      <div className="border-t border-gray-300 w-screen max-w-screen !px-0">
+      <div className="border-t border-gray-300">
         <div className="w-full px-4 md:px-8 flex flex-col items-center justify-between py-6 md:flex-row">
           <p className="text-center text-sm text-gray-600">
             © {new Date().getFullYear()} MultiVendor Marketplace. All rights reserved.
@@ -110,3 +110,7 @@ export function MainFooter() {
     </footer>
   );
 }
+
+
+
+

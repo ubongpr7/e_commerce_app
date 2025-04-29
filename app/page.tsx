@@ -8,12 +8,10 @@ import { CallToAction } from "@/components/home/call-to-action"
 export default function HomePage() {
   return (
     <MainLayout>
-      <Banner />
-
-      <div className="bg-main-red mt-2 text-white text-center w-full p-2 font-semibold text-base md:hidden lg:hidden xl:hidden 2xl:hidden">
+      <div className="bg-main-red mt-28 text-white text-center w-full p-2 font-semibold text-base md:hidden lg:hidden xl:hidden 2xl:hidden">
         SHOP YOUR STYLE
       </div>
-
+      <Banner />
       <FeaturedProducts />
       <ProductListing />
       <FeaturedVendors />

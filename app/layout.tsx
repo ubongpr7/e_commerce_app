@@ -11,8 +11,8 @@ import "@/lib/fontawesome"; // Import once
 
 
 export const metadata: Metadata = {
-  title: "MultiVendor Marketplace",
-  description: "A multivendor e-commerce platform connecting customers with quality vendors",
+  title: "JEMFAVE",
+  description: "Global Student Shopping Platform",
     
 }
 
