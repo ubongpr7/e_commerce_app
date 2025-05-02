@@ -14,13 +14,13 @@ import {
 
 export function MainFooter() {
   return (
-    <footer className="bg-gray-100 px-5">
+    <footer className="bg-gray-100">
       <div className="py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-gray-800 px-4 md:px-8">
           <div>
             <Link href="/" className="flex items-center gap-2 font-bold">
               <Package className="h-6 w-6" />
-              <span className="text-xl">MultiVendor</span>
+              <span className="text-xl">JEMFAVE</span>
             </Link>
             <p className="mt-4 text-gray-600">
               A multivendor e-commerce platform connecting customers with quality vendors.
@@ -52,12 +52,12 @@ export function MainFooter() {
           <div>
             <h3 className="mb-4 text-lg font-medium">Quick Links</h3>
             <ul className="space-y-2 text-gray-600">
-              <li><Link href="/" className="hover:text-blue-600">Home</Link></li>
-              <li><Link href="/products" className="hover:text-blue-600">Products</Link></li>
-              <li><Link href="/vendors" className="hover:text-blue-600">Vendors</Link></li>
-              <li><Link href="/vendor/register/start" className="hover:text-blue-600">Become a Vendor</Link></li>
-              <li><Link href="/about" className="hover:text-blue-600">About Us</Link></li>
-              <li><Link href="/contact" className="hover:text-blue-600">Contact</Link></li>
+              <li><Link href="/" className="hover:text-orange-600">Home</Link></li>
+              <li><Link href="/products" className="hover:text-orange-600">Products</Link></li>
+              <li><Link href="/vendors" className="hover:text-orange-600">Vendors</Link></li>
+              <li><Link href="/vendor/register/start" className="hover:text-orange-600">Become a Vendor</Link></li>
+              <li><Link href="/about" className="hover:text-orange-600">About Us</Link></li>
+              <li><Link href="/contact" className="hover:text-orange-600">Contact</Link></li>
             </ul>
           </div>
 
@@ -65,15 +65,15 @@ export function MainFooter() {
             <h3 className="mb-4 text-lg font-medium">Contact Information</h3>
             <ul className="space-y-4 text-gray-600">
               <li className="flex items-start gap-3">
-                <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-blue-600" />
+                <MapPin className="mt-0.5 h-5 w-5 flex-shrink-0 text-orange-600" />
                 <span>123 Market St, San Francisco, CA 94103</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 flex-shrink-0 text-blue-600" />
+                <Phone className="h-5 w-5 flex-shrink-0 text-orange-600" />
                 <span>+1 (555) 123-4567</span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="h-5 w-5 flex-shrink-0 text-blue-600" />
+                <Mail className="h-5 w-5 flex-shrink-0 text-orange-600" />
                 <span>support@multivendor.com</span>
               </li>
             </ul>
@@ -98,10 +98,10 @@ export function MainFooter() {
             © {new Date().getFullYear()} MultiVendor Marketplace. All rights reserved.
           </p>
           <div className="mt-4 flex gap-4 md:mt-0">
-            <Link href="/privacy" className="text-sm text-gray-600 hover:text-blue-600">
+            <Link href="/privacy" className="text-sm text-gray-600 hover:text-orange-600">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="text-sm text-gray-600 hover:text-blue-600">
+            <Link href="/terms" className="text-sm text-gray-600 hover:text-orange-600">
               Terms of Service
             </Link>
           </div>

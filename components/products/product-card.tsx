@@ -90,13 +90,13 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
           </div>
 
           <Link href={`/product/${product.slug}`}>
-            <h3 className="mb-2 line-clamp-2 font-semibold hover:text-blue-600">
+            <h3 className="mb-2 line-clamp-2 font-semibold hover:text-orange-600">
               {product.name}
             </h3>
           </Link>
 
           <div className="mb-2 flex items-center gap-2">
-            <span className="font-bold text-blue-600">${product.price.toFixed(2)}</span>
+            <span className="font-medium text-gray-900">${product.price.toFixed(2)}</span>
             {product.compareAtPrice > 0 && (
               <span className="text-sm text-gray-500 line-through">
                 ${product.compareAtPrice.toFixed(2)}

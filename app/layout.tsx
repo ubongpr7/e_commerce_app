@@ -13,7 +13,7 @@ import "@/lib/fontawesome"; // Import once
 export const metadata: Metadata = {
   title: "JEMFAVE",
   description: "Global Student Shopping Platform",
-    
+
 }
 
 export const viewport: Viewport = {
@@ -30,12 +30,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      
+
       <body className="w-full h-full" >
-      <NextTopLoader />
+        <NextTopLoader
+          color="#f97316" // Tailwind orange-500
+          height={4}
+          showSpinner={false}
+        />
 
         <StoreProvider>
-            {children}
+          {children}
         </StoreProvider>
       </body>
     </html>

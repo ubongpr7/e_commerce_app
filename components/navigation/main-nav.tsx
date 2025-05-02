@@ -48,11 +48,11 @@ export function MainNav() {
   }, [isMenuOpen, isUserOpen]);
 
   return (
-    <header className="fixed right-0 left-0 top-0 z-50 w-full shadow-md bg-white border-t-4 border-t-orange-600">
-      <div className="container flex h-20 pl-4 pr-4 items-center justify-between">
+    <header className="fixed right-0 left-0 top-0 z-50 md:px-8 lg:px-8 xl:px-8 2xl:px-8 w-full shadow-md bg-white">
+      <div className="container flex h-20 pl-6 pr-6 items-center justify-between">
 
         {/* Mobile Menu and Logo */}
-        <div className="flex items-center md:hidden gap-2">
+        <div className="flex items-center md:hidden gap-1 ml-2">
           {/* Menu Button */}
           <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(true)}>
             <MenuIcon className="h-5 w-5" />
@@ -75,8 +75,8 @@ export function MainNav() {
           <form className="relative w-full md:w-auto flex flex-row gap-1">
             <Input
               type="text"
-              placeholder="Search products..."
-              className="w-full rounded-lg bg-gray-100 pl-8 md:w-[200px] lg:w-[300px]"
+              placeholder="Search products, brands and categories..."
+              className="w-full rounded-lg bg-gray-100 pl-4 md:w-[200px] lg:w-[300px]"
             />
             <Button
               type="submit"
@@ -158,9 +158,9 @@ export function MainNav() {
         </NavigationMenu>
 
         {/* Right Controls */}
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center mr-2 space-x-3">
           {/* Dark Mode Toggle */}
-          <button onClick={() => dispatch(setIsDarkMode(!isDarkMode))}>
+          <button onClick={() => dispatch(setIsDarkMode(!isDarkMode))} className="hidden">
             {isDarkMode ? (
               <Moon size={25} className="text-orange-600" />
             ) : (
@@ -173,12 +173,15 @@ export function MainNav() {
             <Button variant="ghost" size="icon" className="relative">
               <ShoppingCart className="h-20 w-20" />
               {cartItemCount > 0 && (
-                <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full text-xs">
+                <Badge
+                  className="absolute -right-1 -top-1 h-5 w-5 rounded-full text-xs flex items-center justify-center p-0"
+                >
                   {cartItemCount}
                 </Badge>
               )}
             </Button>
           </Link>
+
 
           {/* User Button (for mobile) */}
           <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsUserOpen(true)}>
@@ -210,11 +213,11 @@ export function MainNav() {
       </div>
 
       {/* Mobile Search Form */}
-      <div className="md:hidden px-4 -mt-5 mb-2.5">
+      <div className="md:hidden px-4 -mt-3 mb-2.5">
         <form className="flex items-center gap-2">
           <Input
             type="text"
-            placeholder="Search products..."
+            placeholder="Search products, brands and categories..."
             className="flex-1 h-8 text-sm bg-gray-100 rounded-full"
           />
           <Button

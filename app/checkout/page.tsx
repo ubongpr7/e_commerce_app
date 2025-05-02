@@ -58,10 +58,10 @@ export default function CheckoutPage() {
     <MainLayout>
       <div className="container py-8">
         <div className="mb-6 flex items-center justify-between">
-          <h1 className="text-3xl font-bold">Checkout</h1>
+          <h1 className="text-gray-900 text-xs p-4 font-medium">Checkout</h1>
           <Link href="/cart">
-            <Button variant="ghost" className="gap-2">
-              <ArrowLeft className="h-4 w-4" />
+            <Button variant="ghost" className="gap-2 text-gray-900 text-xs p-4 font-medium">
+              <ArrowLeft className="h-1 w-1" />
               Back to Cart
             </Button>
           </Link>
@@ -194,7 +194,7 @@ export default function CheckoutPage() {
                   <Textarea
                     id="notes"
                     placeholder="Special instructions for delivery or order"
-                    className="mt-1"
+                    className="mt-1 outline-none"
                     rows={3}
                   />
                 </div>
