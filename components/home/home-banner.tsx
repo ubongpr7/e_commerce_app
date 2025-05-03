@@ -54,7 +54,7 @@ const Carousel = () => {
   return (
     <div className="group p-2 relative w-full lg:-mt-28 lg:border-0 max-w-2xl mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
       {loading ? (
-        <div className="relative w-full h-48 md:h-72 animate-pulse">
+        <div className="relative w-full h-48 lg:h-72 animate-pulse">
           <div className="w-full h-full bg-gray-300 rounded-lg" />
         </div>
       ) : (
