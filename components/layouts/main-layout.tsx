@@ -24,7 +24,7 @@ export function MainLayout({ children }: MainLayoutProps) {
   return (
     <div className={` ${isDarkMode ? 'dark' : 'light'} flex min-h-screen flex-col bg-gray-50`}>
       <MainNav />
-      <div className="mt-28">
+      <div className="">
         <main className="flex-1">{children}</main>
       </div>
 

@@ -52,7 +52,7 @@ const Carousel = () => {
   }, [activeIndex]);
 
   return (
-    <div className="group p-2 relative w-full lg:-mt-28 lg:border-0 max-w-2xl mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
+    <div className="group relative w-full lg:-mt-20 lg:border-0 max-w-2xl mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
       {loading ? (
         <div className="relative w-full h-48 lg:h-72 animate-pulse">
           <div className="w-full h-full bg-gray-300 rounded-lg" />
@@ -61,7 +61,7 @@ const Carousel = () => {
         <>
           {/* Mobile Carousel */}
           <div
-            className="flex md:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-0"
+            className="flex lg:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-0 pb-1.5"
             ref={carouselRef}
           >
             {banners.map((banner, index) => (
@@ -71,17 +71,17 @@ const Carousel = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`relative shrink-0 h-48 w-[85%] snap-center rounded-lg transition-transform duration-500 ease-in-out ${index === 0
-                  ? "mr-2"
+                  ? "mr-1"
                   : index === banners.length - 1
-                    ? "ml-2"
-                    : "mx-2"
+                    ? "ml-1"
+                    : "mx-1"
                   }`}
               >
                 <Image
                   src={urlForImage(banner.image).url()}
                   alt={`Banner ${index + 1}`}
                   fill
-                  className="object-cover rounded-lg"
+                  className="object-cover rounded-sm"
                   loading="lazy"
                 />
               </a>
@@ -100,7 +100,7 @@ const Carousel = () => {
                   href={banner.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute inset-0 block w-full h-full rounded-lg overflow-hidden"
+                  className="absolute inset-0 block w-full h-full rounded-sm overflow-hidden"
                 >
                   <Image
                     src={urlForImage(banner.image).url()}

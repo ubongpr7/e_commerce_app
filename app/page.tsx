@@ -10,15 +10,18 @@ export default function HomePage() {
   return (
     <main>
       <MainLayout>
-        <div className="bg-main-red text-white text-center w-full p-2 font-semibold text-base lg:hidden">
-          SHOP YOUR STYLE
-        </div>
+        
+
         <Banner />
-        <Category1 />
-        <FeaturedProducts />
-        <ProductListing />
-        <FeaturedVendors />
-        <CallToAction />
+
+        <div className="p-3 lg:p-5">
+          <Category1 />
+          <FeaturedProducts />
+          <ProductListing />
+          <FeaturedVendors />
+          <CallToAction />
+        </div>
+
       </MainLayout>
     </main>
   )

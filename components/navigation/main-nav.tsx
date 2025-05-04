@@ -59,8 +59,8 @@ export function MainNav() {
         className="hidden lg:block w-full object-cover"
       />
 
-      <header className="sticky right-0 left-0 top-0 z-50 lg:px-8 w-full shadow-md bg-white">
-        <div className="container flex h-20 pl-6 pr-6 items-center justify-between">
+      <header className="sticky right-0 left-0 top-0 z-50 w-full mb-2 lg:mb-0 shadow-md bg-white">
+        <div className="container flex h-20 pl-6 pr-6 items-center justify-between lg:px-8">
           {/* Mobile Menu and Logo */}
           <div className="flex items-center lg:hidden gap-1 ml-2">
             <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(true)}>
@@ -268,6 +268,14 @@ export function MainNav() {
             </div>
           </>
         )}
+
+        <div className="bg-red-500 text-white text-center w-full p-2 font-semibold text-base lg:hidden animate-blink">
+          SHOP YOUR STYLE
+        </div>
+
+        <div className="bg-red-500 text-white text-center w-full p-2 font-semibold text-base hidden lg:block animate-blink">
+          SHOP YOUR STYLE WITH BEST AFFORDABLE PRICES
+        </div>
       </header>
     </>
   );

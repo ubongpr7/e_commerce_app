@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react"; // ✅ Added hooks
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,13 +13,33 @@ import {
   Twitter,
   Instagram,
   Linkedin,
+  ChevronUp as ChevronUpIcon,
 } from "lucide-react";
 
 export function MainFooter() {
+  const [showScrollTop, setShowScrollTop] = useState(false); // ✅ State for scroll detection
+
+  // ✅ Detect scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 100); // Show button after scrolling 100px
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   return (
-    <footer className="bg-gray-100">
+    <footer className="bg-gray-100 relative">
       <div className="py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-gray-800 px-4 md:px-8">
+          {/* Company Info */}
           <div>
             <Link href="/" className="flex items-center gap-2 font-bold">
               <Package className="h-6 w-6" />
@@ -49,6 +72,7 @@ export function MainFooter() {
             </div>
           </div>
 
+          {/* Quick Links */}
           <div>
             <h3 className="mb-4 text-lg font-medium">Quick Links</h3>
             <ul className="space-y-2 text-gray-600">
@@ -61,6 +85,7 @@ export function MainFooter() {
             </ul>
           </div>
 
+          {/* Contact Info */}
           <div>
             <h3 className="mb-4 text-lg font-medium">Contact Information</h3>
             <ul className="space-y-4 text-gray-600">
@@ -79,6 +104,7 @@ export function MainFooter() {
             </ul>
           </div>
 
+          {/* Newsletter */}
           <div>
             <h3 className="mb-4 text-lg font-medium">Subscribe to Our Newsletter</h3>
             <p className="mb-4 text-gray-600">
@@ -92,6 +118,20 @@ export function MainFooter() {
         </div>
       </div>
 
+      {/* Scroll to Top Button (Only show when scrolled 100px or more) */}
+      {showScrollTop && (
+        <div className="fixed bottom-6 right-6 z-50 flex justify-center mb-6">
+          <button
+            onClick={scrollToTop}
+            aria-label="Scroll to top"
+            className="bg-orange-600 text-white p-2 rounded-full shadow hover:bg-orange-600 transition"
+          >
+            <ChevronUpIcon className="h-5 w-5" />
+          </button>
+        </div>
+      )}
+
+      {/* Footer Bottom */}
       <div className="border-t border-gray-300">
         <div className="w-full px-4 md:px-8 flex flex-col items-center justify-between py-6 md:flex-row">
           <p className="text-center text-sm text-gray-600">
@@ -110,7 +150,3 @@ export function MainFooter() {
     </footer>
   );
 }
-
-
-
-
