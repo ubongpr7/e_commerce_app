@@ -28,6 +28,19 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setIsDarkMode } from "../../redux/state";
+import SanityClient from "@/lib/sanityClient";
+import { urlForImage } from "@/lib/sanityImage";
+
+
+
+type HeaderImageData = {
+  mobileImage: any;
+  mobileLink: string;
+  mobileTitle: string;
+  desktopImage: any;
+  desktopLink: string;
+  desktopTitle: string;
+};
 
 export function MainNav() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,6 +50,24 @@ export function MainNav() {
   const isLoggedIn = useAppSelector((state) => state.auth.isAuthenticated);
   const dispatch = useAppDispatch();
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
+  const [headerData, setHeaderData] = useState<HeaderImageData | null>(null);
+
+  useEffect(() => {
+    const fetchHeaderImages = async () => {
+      const query = `*[_type == "headerImages"][0]{
+        mobileImage,
+        mobileLink,
+        mobileTitle,
+        desktopImage,
+        desktopLink,
+        desktopTitle
+      }`;
+      const result = await SanityClient.fetch(query);
+      setHeaderData(result);
+    };
+
+    fetchHeaderImages();
+  }, []);
 
   // Lock body scroll when side sheets are open
   useEffect(() => {
@@ -45,19 +76,27 @@ export function MainNav() {
 
   return (
     <>
-      {/* Mobile Background Image */}
-      <img
-        src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2025/Awoof-deals/May/AOTM-brands-top-strip.gif"
-        alt="Mobile Background"
-        className="lg:hidden w-full object-cover"
-      />
+      {headerData && (
+        <>
+          {/* Mobile Background Image */}
+          <Link href={headerData.mobileLink} title={headerData.mobileTitle}>
+            <img
+              src={urlForImage(headerData.mobileImage).url()}
+              alt={headerData.mobileTitle}
+              className="lg:hidden w-full object-cover"
+            />
+          </Link>
 
-      {/* Desktop Background Image */}
-      <img
-        src="https://ng.jumia.is/cms/0-1-weekly-cps/0-2025/Awoof-deals/May/AOTM-brands-top-strip.gif"
-        alt="Desktop Background"
-        className="hidden lg:block w-full object-cover"
-      />
+          {/* Desktop Background Image */}
+          <Link href={headerData.desktopLink} title={headerData.desktopTitle}>
+            <img
+              src={urlForImage(headerData.desktopImage).url()}
+              alt={headerData.desktopTitle}
+              className="hidden lg:block w-full object-cover"
+            />
+          </Link>
+        </>
+      )}
 
       <header className="sticky right-0 left-0 top-0 z-50 w-full mb-2 lg:mb-0 shadow-md bg-white">
         <div className="container flex h-20 pl-6 pr-6 items-center justify-between lg:px-8">
@@ -68,13 +107,13 @@ export function MainNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
 
-            <Link href="/" className="text-2xl font-bold text-gray-800">
+            <Link href="/" className="text-2xl tracking-widest font-bold text-gray-800">
               JEMFAVE
             </Link>
           </div>
 
           {/* Logo Desktop */}
-          <Link href="/" className="hidden lg:flex text-3xl font-bold text-gray-800">
+          <Link href="/" className="hidden tracking-widest lg:flex text-3xl font-bold text-gray-800">
             JEMFAVE
           </Link>
 
@@ -269,11 +308,11 @@ export function MainNav() {
           </>
         )}
 
-        <div className="bg-red-500 text-white text-center w-full p-2 font-semibold text-base lg:hidden animate-blink">
+        <div className="bg-red-500 tracking-widest text-white text-center w-full p-2 font-semibold text-base lg:hidden animate-blink">
           SHOP YOUR STYLE
         </div>
 
-        <div className="bg-red-500 text-white text-center w-full p-2 font-semibold text-base hidden lg:block animate-blink">
+        <div className="bg-red-500 text-white tracking-widest text-center w-full p-2 font-semibold text-base hidden lg:block animate-blink">
           SHOP YOUR STYLE WITH BEST AFFORDABLE PRICES
         </div>
       </header>

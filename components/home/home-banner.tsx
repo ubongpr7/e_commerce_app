@@ -89,7 +89,7 @@ const Carousel = () => {
           </div>
 
           {/* Desktop Fade Carousel */}
-          <div className="relative hidden mt-24 md:flex w-full h-80">
+          <div className="relative hidden mt-24 lg:flex w-full h-80">
             {banners.map((banner, index) => (
               <div
                 key={banner._id}

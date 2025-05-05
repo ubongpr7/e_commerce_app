@@ -3,13 +3,15 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import SanityClient from "@/lib/sanityClient";
-import { urlForImage } from '@/lib/sanityImage';
+import { urlForImage } from "@/lib/sanityImage";
 
 const Category2 = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Fetch categories from Sanity
     SanityClient.fetch(`*[_type == "category2"]{_id, title, image, link}`)
       .then((data) => {
         setCategories(data);
@@ -19,7 +21,18 @@ const Category2 = () => {
         console.error(err);
         setLoading(false);
       });
+
+    // Detect screen size
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024); // Tailwind 'lg' = 1024px
+    };
+
+    handleResize(); // Run on load
+    window.addEventListener('resize', handleResize); // Run on resize
+    return () => window.removeEventListener('resize', handleResize); // Clean up
   }, []);
+
+  const visibleCategories = isMobile ? categories.slice(0, 4) : categories;
 
   if (loading) {
     return (
@@ -35,21 +48,23 @@ const Category2 = () => {
   }
 
   return (
-    <div className="flex flex-row justify-between gap-4 mt-2 p-2">
-      {categories.map((category) => (
+    <div className="grid grid-cols-4 lg:ml-16 lg:rounded-md lg:mr-16 lg:grid-cols-6 gap-4 mt-2 lg:p-2 text-center lg:gap-0 lg:bg-orange-600 lg:justify-items-center">
+      {visibleCategories.map((category) => (
         <Link
           key={category._id}
           href={category.link || '#'}
           className="w-full group"
         >
-          <div className="w-full">
+          <div className="w-full flex flex-col items-center">
             <div
-              className="w-full h-[80px] bg-cover bg-center rounded-md transition-transform duration-300 transform group-hover:scale-105 shadow-sm"
+              className="h-[80px] lg:h-[170px] lg:w-[180px] lg:max-w-[200px] w-full max-w-[150px] bg-cover bg-center rounded-md transition-transform duration-300 transform group-hover:scale-105 shadow-sm"
               style={{
                 backgroundImage: `url('${urlForImage(category.image).url()}')`,
               }}
             ></div>
-            <p className="mt-2 text-center text-xs">{category.title}</p>
+            <p className="mt-2 text-center lg:text-gray-900 lg:font-normal lg:text-sm text-xs">
+              {category.title}
+            </p>
           </div>
         </Link>
       ))}

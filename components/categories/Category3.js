@@ -5,14 +5,14 @@ import Link from 'next/link';
 import SanityClient from "@/lib/sanityClient";
 import { urlForImage } from "@/lib/sanityImage";
 
-const Category1 = () => {
+const Category3 = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Fetch categories from Sanity
-    SanityClient.fetch(`*[_type == "category1"]{_id, title, image, link}`)
+    SanityClient.fetch(`*[_type == "category3"]{_id, title, image, link}`)
       .then((data) => {
         setCategories(data);
         setLoading(false);
@@ -72,4 +72,4 @@ const Category1 = () => {
   );
 };
 
-export default Category1;
+export default Category3;

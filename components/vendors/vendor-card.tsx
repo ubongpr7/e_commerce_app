@@ -39,7 +39,7 @@ export function VendorCard({ vendor }: VendorCardProps) {
       </div>
       <CardContent className="pt-16">
         <Link href={`/vendor/${vendor.slug}`}>
-          <h3 className="mb-2 text-xl font-semibold hover:text-blue-600">{vendor.name}</h3>
+          <h3 className="mb-2 text-xl font-semibold hover:text-orange-600">{vendor.name}</h3>
         </Link>
         <p className="mb-4 line-clamp-2 text-sm text-gray-600">{vendor.description}</p>
         <div className="mb-4 flex items-center justify-between text-sm">

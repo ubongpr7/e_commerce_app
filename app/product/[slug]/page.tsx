@@ -154,9 +154,8 @@ export default function ProductPage() {
               {product.images.map((image, index) => (
                 <button
                   key={index}
-                  className={`relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border ${
-                    activeImage === index ? "ring-2 ring-gray-900" : ""
-                  }`}
+                  className={`relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border ${activeImage === index ? "ring-2 ring-gray-900" : ""
+                    }`}
                   onClick={() => setActiveImage(index)}
                 >
                   <Image
@@ -271,21 +270,6 @@ export default function ProductPage() {
                   </Button>
                 </div>
               </div>
-            </div>
-
-            <div className="flex flex-wrap gap-2">
-              <Button className="flex-1 gap-2" size="lg" onClick={handleAddToCart} disabled={!product.inStock}>
-                <ShoppingCart className="h-5 w-5" />
-                Add to Cart
-              </Button>
-              <Button variant="outline" size="icon" className="h-11 w-11">
-                <Heart className="h-5 w-5" />
-                <span className="sr-only">Add to Wishlist</span>
-              </Button>
-              <Button variant="outline" size="icon" className="h-11 w-11">
-                <Share2 className="h-5 w-5" />
-                <span className="sr-only">Share Product</span>
-              </Button>
             </div>
 
             <div className="grid gap-2 pt-4 text-sm">
@@ -474,6 +458,21 @@ export default function ProductPage() {
               </div>
             </TabsContent>
           </Tabs>
+        </div>
+
+        <div className="flex flex-wrap gap-2 sticky bottom-0 bg-gray-50 p-4">
+          <Button className="flex-1 gap-2" size="lg" onClick={handleAddToCart} disabled={!product.inStock}>
+            <ShoppingCart className="h-5 w-5" />
+            Add to Cart
+          </Button>
+          <Button variant="outline" size="icon" className="h-11 w-11">
+            <Heart className="h-5 w-5" />
+            <span className="sr-only">Add to Wishlist</span>
+          </Button>
+          <Button variant="outline" size="icon" className="h-11 w-11">
+            <Share2 className="h-5 w-5" />
+            <span className="sr-only">Share Product</span>
+          </Button>
         </div>
 
         {/* Related Products */}
