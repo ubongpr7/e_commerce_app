@@ -11,6 +11,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/cart/cartSlice";
 import { toast } from "@/components/ui/use-toast";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 interface ProductCardProps {
   product: Product;
@@ -19,6 +20,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product, variant = "default" }: ProductCardProps) {
   const dispatch = useAppDispatch();
+
+  const [liked, setLiked] = useState(false);
 
   const handleAddToCart = () => {
     dispatch(addToCart({ product, quantity: 1 }));
@@ -36,7 +39,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden rounded-xl bg-white transition-all duration-300 ease-in-out shadow-sm hover:shadow-lg hover:scale-[1.015] max-w-[130px] lg:max-w-[180px]  w-full",
+        "group relative overflow-hidden bg-white transition-all duration-300 ease-in-out shadow-sm hover:shadow-lg hover:scale-[1.015] max-w-[130px] lg:max-w-[180px]  w-full",
         variant === "horizontal" && "flex flex-row"
       )}
     >
@@ -67,8 +70,14 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             size="icon"
             className="rounded-full bg-white/80 backdrop-blur hover:bg-white"
             aria-label="Add to wishlist"
+            onClick={() => setLiked(!liked)} // 👈 Toggle the heart state
           >
-            <Heart className="h-5 w-5 text-gray-700 group-hover:text-orange-600 transition-colors" />
+            <Heart
+              className={cn(
+                "h-5 w-5 transition-colors",
+                liked ? "fill-red-500 stroke-red-500" : "text-gray-700 group-hover:text-orange-600"
+              )}
+            />
           </Button>
         </div>
 
