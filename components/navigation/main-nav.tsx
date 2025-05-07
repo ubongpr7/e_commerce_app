@@ -308,11 +308,11 @@ export function MainNav() {
           </>
         )}
 
-        <div className="bg-red-500 tracking-widest text-white text-center w-full p-2 font-semibold text-base lg:hidden animate-blink">
+        <div className="bg-main-red tracking-widest text-white text-center w-full p-2 font-semibold text-base lg:hidden animate-blink">
           SHOP YOUR STYLE
         </div>
 
-        <div className="bg-red-500 text-white tracking-widest text-center w-full p-2 font-semibold text-base hidden lg:block animate-blink">
+        <div className="bg-main-red text-white tracking-widest text-center w-full p-2 font-semibold text-base hidden lg:block animate-blink">
           SHOP YOUR STYLE WITH BEST AFFORDABLE PRICES
         </div>
       </header>

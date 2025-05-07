@@ -48,7 +48,7 @@ const Category1 = () => {
   }
 
   return (
-    <div className="grid grid-cols-4 lg:ml-16 lg:rounded-md lg:mr-16 lg:grid-cols-6 gap-4 mt-2 lg:p-2 text-center lg:gap-0 lg:bg-orange-600 lg:justify-items-center">
+    <div className="grid grid-cols-4 lg:ml-16 lg:rounded-md lg:mr-16 lg:grid-cols-6 gap-4 mt-2 lg:p-2 text-center lg:gap-0 lg:bg-white lg:justify-items-center">
       {visibleCategories.map((category) => (
         <Link
           key={category._id}

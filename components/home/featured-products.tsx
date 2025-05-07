@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button"
 import { ProductCard } from "@/components/products/product-card"
 import { fetchFeaturedProducts } from "@/redux/features/product/productsSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
+import { Zap } from "lucide-react"
+import CountdownTimer from "../timer/countdown-timer"
+import DesktopTimer from "../timer/desktop-timer"
 
 export function FeaturedProducts() {
   const dispatch = useAppDispatch()
@@ -25,14 +28,30 @@ export function FeaturedProducts() {
   }
 
   return (
-    <section className="container py-12 md:py-16">
+    <section className="lg:bg-white lg:mx-16 lg:mt-2 lg:rounded-md lg:px-4 lg:py-0]">
       <div className="flex flex-col items-center justify-center">
-        <h2 className="mb-2 hidden lg:block text-3xl font-bold text-gray-900 md:text-4xl">
+        <h2 className="mb-2 hidden text-3xl font-bold text-gray-900">
           Featured Products
         </h2>
-        <p className="mb-8 hidden lg:block max-w-3xl text-center text-gray-500">
+        <p className="mb-8 hidden max-w-3xl text-center text-gray-500">
           Discover our handpicked selection of top products from our trusted vendors
         </p>
+
+        <Link href={"/"}>
+          <div className="bg-main-red text-white lg:flex rounded-md flex-row justify-between px-3 h-14 w-[1200px] py-2 hidden">
+            <div className="flex flex-row gap-2">
+              <Zap className="h-7 w-7 mt-2 text-gold fill-gold" />
+              <div>
+                <h1 className="text-base lg:mt-1.5 font-semibold lg:text-lg">Flash Sales</h1>
+                <CountdownTimer targetDate="2025-04-18T00:00:00Z" repeatIntervalInSeconds={300} />
+              </div>
+            </div>
+
+            <DesktopTimer targetDate="2025-04-18T00:00:00Z" repeatIntervalInSeconds={300} />
+
+            <p className="text-white text-xs mr-2 lg:text-base lg:mt-1.5">See All</p>
+          </div>
+        </Link>
 
         {/* Scroll area with hover group */}
         <div className="relative w-full group">
@@ -49,7 +68,7 @@ export function FeaturedProducts() {
             <>
               <div
                 ref={scrollRef}
-                className="overflow-x-auto max-w-full snap-x snap-mandatory flex gap-4 py-4 scrollbar-hide"
+                className="overflow-x-auto max-w-full snap-x snap-mandatory flex gap-4 py-4 lg:py-2 scrollbar-hide"
               >
                 {featuredProducts.slice(0, 20).map((product) => (
                   <div key={product.id} className="flex-shrink-0 snap-start">
@@ -73,18 +92,6 @@ export function FeaturedProducts() {
               </button>
             </>
           )}
-        </div>
-
-        <div className="mt-10">
-          <Link href="/products">
-            <Button
-              variant="default"
-              size="lg"
-              className="text-white bg-orange-600 hover:bg-orange-700"
-            >
-              View All Products
-            </Button>
-          </Link>
         </div>
       </div>
     </section>

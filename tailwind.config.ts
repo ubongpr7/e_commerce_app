@@ -18,6 +18,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         'main-red': '#FF0000',
+        'gold': '#FFD700',
       },
     },
   },

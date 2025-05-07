@@ -124,7 +124,7 @@ export function MainFooter() {
           <button
             onClick={scrollToTop}
             aria-label="Scroll to top"
-            className="bg-orange-600 text-white p-2 rounded-full shadow hover:bg-orange-600 transition"
+            className="bg-gray-600 text-white p-2 rounded-full shadow hover:bg-gray-800 transition"
           >
             <ChevronUpIcon className="h-5 w-5" />
           </button>

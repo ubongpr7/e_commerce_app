@@ -52,7 +52,7 @@ const Carousel = () => {
   }, [activeIndex]);
 
   return (
-    <div className="group relative w-full lg:-mt-20 lg:border-0 max-w-2xl mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
+    <div className="relative w-full lg:-mt-20 lg:border-0 max-w-2xl mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
       {loading ? (
         <div className="relative w-full h-48 lg:h-72 animate-pulse">
           <div className="w-full h-full bg-gray-300 rounded-lg" />
@@ -71,10 +71,10 @@ const Carousel = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`relative shrink-0 h-48 w-[85%] snap-center rounded-lg transition-transform duration-500 ease-in-out ${index === 0
-                  ? "mr-1"
-                  : index === banners.length - 1
-                    ? "ml-1"
-                    : "mx-1"
+                    ? "mr-1"
+                    : index === banners.length - 1
+                      ? "ml-1"
+                      : "mx-1"
                   }`}
               >
                 <Image
@@ -89,11 +89,13 @@ const Carousel = () => {
           </div>
 
           {/* Desktop Fade Carousel */}
-          <div className="relative hidden mt-24 lg:flex w-full h-80">
+          <div className="relative hidden lg:flex group w-full h-80 mt-24">
             {banners.map((banner, index) => (
               <div
                 key={banner._id}
-                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === activeIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
+                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === activeIndex
+                    ? "opacity-100 z-10"
+                    : "opacity-0 z-0 pointer-events-none"
                   }`}
               >
                 <a
@@ -113,20 +115,20 @@ const Carousel = () => {
               </div>
             ))}
 
-            {/* Navigation Buttons */}
+            {/* Navigation Buttons (Desktop) */}
             <button
               onClick={() =>
                 setActiveIndex(
                   activeIndex === 0 ? banners.length - 1 : activeIndex - 1
                 )
               }
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full shadow hover:bg-gray-700 opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-600 text-white p-2 bg-gray-800/70 hover:bg-gray-800 rounded-full w-10 h-10 z-10shadow opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             >
               ❮
             </button>
             <button
               onClick={() => setActiveIndex((activeIndex + 1) % banners.length)}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full shadow hover:bg-gray-700 opacity-0 group-hover:opacity-100 transition-opacity"
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-gray-600 text-white p-2 bg-gray-800/70 hover:bg-gray-800 rounded-full w-10 h-10 z-10shadow opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             >
               ❯
             </button>
