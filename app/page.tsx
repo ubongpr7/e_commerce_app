@@ -23,6 +23,10 @@ export default function HomePage() {
         <div className="p-3 lg:p-5">
           <Category1 />
 
+          <div className="hidden lg:block">
+            <FeaturedProducts />
+          </div>
+
           <div className="">
             <Category2 />
           </div>
@@ -45,10 +49,14 @@ export default function HomePage() {
           </Link>
 
           <div className="lg:hidden">
+            <FeaturedProducts />
+          </div>
+
+          <div className="lg:hidden">
             <Category3 />
           </div>
 
-          <FeaturedProducts />
+
           <ProductListing />
           <FeaturedVendors />
           <CallToAction />
