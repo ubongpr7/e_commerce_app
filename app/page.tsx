@@ -11,14 +11,23 @@ import { Zap } from "lucide-react"
 import CountdownTimer from "@/components/timer/countdown-timer"
 import Link from "next/link"
 import DesktopTimer from "@/components/timer/desktop-timer"
+import HoverImage1 from "@/components/hoverimages/hover-image1"
+import HoverImage2 from "@/components/hoverimages/hoveer-image2"
 
 export default function HomePage() {
   return (
     <main>
       <MainPageLayout>
 
+        <div className="lg:hidden">
+          <Banner />
+        </div>
 
-        <Banner />
+        <div className="hidden lg:flex flex-row justify-between px-8">
+          <HoverImage1 />
+          <Banner />
+          <HoverImage2 />
+        </div>
 
         <div className="p-3 lg:p-5">
           <Category1 />

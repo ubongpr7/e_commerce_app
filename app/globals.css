@@ -128,3 +128,18 @@ html, body, #__next {
   animation: blink 1s infinite;
 }
 
+@keyframes heartbeat3d {
+  0% {
+    transform: scale(1) translateZ(0) perspective(500px) rotateY(0deg);
+  }
+  50% {
+    transform: scale(2) translateZ(100px) perspective(500px) rotateY(15deg);
+  }
+  100% {
+    transform: scale(1) translateZ(0) perspective(500px) rotateY(0deg);
+  }
+}
+
+.animate-heartbeat-3d {
+  animation: heartbeat3d 2s ease-in-out infinite;
+}

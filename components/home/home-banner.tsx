@@ -108,7 +108,7 @@ const Carousel = () => {
                     src={urlForImage(banner.image).url()}
                     alt={`Banner ${index + 1}`}
                     fill
-                    className="object-cover"
+                    className="object-cover rounded-lg"
                     loading="lazy"
                   />
                 </a>
