@@ -25,5 +25,3 @@
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/categories/Category1.js"],
   "exclude": ["node_modules"]
 }
-
-
