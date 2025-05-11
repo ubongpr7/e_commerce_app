@@ -6,8 +6,8 @@ const featuredVendors = [
   {
     id: "1",
     name: "TechGadgets",
-    logo: "/placeholder.svg?height=80&width=80",
-    coverImage: "/placeholder.svg?height=200&width=300",
+    logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
     description: "The latest electronic gadgets and accessories.",
     productCount: 42,
     rating: 4.7,

@@ -34,7 +34,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
   const imageUrl =
     product.images?.[0]?.startsWith("http") && product.images[0].length > 10
       ? product.images[0]
-      : "https://images.pexels.com/photos/9836578/pexels-photo-9836578.jpeg?auto=compress&cs=tinysrgb&w=600";
+      : "/placeholder.svg?height=400&width=400";
 
   return (
     <Card
@@ -114,7 +114,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
           </Link>
 
           <div className="mb-1 flex items-center gap-2">
-            <span className="text-gray-900 text-xs lg:text-sm">${product.price.toFixed(2)}</span>
+            <span className="text-gray-900 text-xs lg:text-sm font-medium">${product.price.toFixed(2)}</span>
             {product.compareAtPrice > 0 && (
               <span className="text-xs text-gray-500 line-through">
                 ${product.compareAtPrice.toFixed(2)}

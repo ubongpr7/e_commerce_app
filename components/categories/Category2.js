@@ -48,7 +48,7 @@ const Category2 = () => {
   }
 
   return (
-    <div className="grid grid-cols-4 lg:ml-16 lg:rounded-md lg:mr-16 lg:grid-cols-6 gap-4 mt-2 lg:p-2 text-center lg:gap-0 lg:bg-white lg:justify-items-center">
+    <div className="grid grid-cols-4 lg:ml-16 lg:rounded-md lg:mr-16 lg:grid-cols-6 gap-4 mt-2 lg:p-2 xl:p-2 text-center lg:bg-white lg:justify-items-center">
       {visibleCategories.map((category) => (
         <Link
           key={category._id}
@@ -57,12 +57,12 @@ const Category2 = () => {
         >
           <div className="w-full flex flex-col items-center">
             <div
-              className="h-[80px] lg:h-[170px] lg:w-[180px] lg:max-w-[200px] w-full max-w-[150px] bg-cover bg-center rounded-md transition-transform duration-300 transform group-hover:scale-105 shadow-sm"
+              className="h-[80px] lg:h-[150px] xl:h-[170px] lg:w-[135px] xl:w-[180px] xl:max-w-[200px] w-full max-w-[150px] bg-cover bg-center rounded-md transition-transform duration-300 transform group-hover:scale-105 shadow-sm"
               style={{
                 backgroundImage: `url('${urlForImage(category.image).url()}')`,
               }}
             ></div>
-            <p className="mt-2 text-center lg:text-gray-900 lg:font-normal lg:text-sm text-xs">
+            <p className="mt-2 text-center lg:text-gray-900 lg:font-normal lg:text-sm text-xs lg:line-clamp-1">
               {category.title}
             </p>
           </div>

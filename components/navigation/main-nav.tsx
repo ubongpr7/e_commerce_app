@@ -95,6 +95,12 @@ export function MainNav() {
               className="hidden lg:block w-full object-cover"
             />
           </Link>
+
+          <div className="bg-gray-100 hidden lg:flex flex-row justify-around text-white w-full p-2">
+            <Link href="/vendor/register/start" className="text-orange-600 font-bold text-xs">
+              Sell on Jemfave
+            </Link>
+          </div>
         </>
       )}
 
@@ -241,12 +247,12 @@ export function MainNav() {
             ) : (
               <div className="hidden lg:flex items-center gap-2">
                 <Link href="/login">
-                  <Button variant="ghost" size="sm" className="text-base">
+                  <Button size="sm" className="text-base bg-orange-600 hover:bg-orange-700">
                     Login
                   </Button>
                 </Link>
                 <Link href="/vendor/register/start">
-                  <Button size="sm" className="bg-orange-600 hover:bg-orange-700">
+                  <Button size="sm" className="bg-orange-600 hover:bg-orange-700 hidden">
                     Become a Vendor
                   </Button>
                 </Link>
@@ -308,7 +314,7 @@ export function MainNav() {
           </>
         )}
 
-        <div className="bg-main-red tracking-widest text-white text-center w-full p-2 font-semibold text-base lg:hidden animate-blink">
+        <div className="bg-main-red tracking-widest text-white text-center w-full p-1 font-bold text-sm lg:hidden animate-blink">
           SHOP YOUR STYLE
         </div>
 

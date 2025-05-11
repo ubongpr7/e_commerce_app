@@ -38,7 +38,7 @@ export function FeaturedProducts() {
         </p>
 
         <Link href={"/"}>
-          <div className="bg-main-red text-white lg:flex rounded-md flex-row justify-between px-3 h-14 w-[1200px] py-2 hidden">
+          <div className="bg-main-red text-white lg:flex rounded-md flex-row justify-between px-3 h-14 lg:w-[950px] xl:w-[1200px] py-2 hidden">
             <div className="flex flex-row gap-2">
               <Zap className="h-7 w-7 mt-2 text-gold fill-gold" />
               <div>
@@ -49,7 +49,10 @@ export function FeaturedProducts() {
 
             <DesktopTimer targetDate="2025-04-18T00:00:00Z" repeatIntervalInSeconds={300} />
 
-            <p className="text-white text-xs mr-2 lg:text-base lg:mt-1.5">See All</p>
+            <div className="flex flex-row items-center text-white text-xs lg:text-base lg:mt-1.5">
+              <p>See All</p>
+              <ChevronRight className="h-4 w-4 ml-2" /> {/* Add Chevron icon here */}
+            </div>
           </div>
         </Link>
 
@@ -68,7 +71,7 @@ export function FeaturedProducts() {
             <>
               <div
                 ref={scrollRef}
-                className="overflow-x-auto max-w-full snap-x snap-mandatory flex gap-4 py-4 lg:py-2 scrollbar-hide"
+                className="overflow-x-auto max-w-full mt-14 lg:mt-0 snap-x snap-mandatory flex gap-4 py-4 lg:py-2 scrollbar-hide"
               >
                 {featuredProducts.slice(0, 20).map((product) => (
                   <div key={product.id} className="flex-shrink-0 snap-start">

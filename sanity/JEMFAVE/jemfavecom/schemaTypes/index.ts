@@ -3,5 +3,6 @@ import category1 from "./category1";
 import category2 from "./category2"
 import category3 from "./category3";
 import headerImages from "./headerImages";
+import threeImages from "./threeImages";
 
-export const schemaTypes = [banner, category1, category2, category3, headerImages,];
+export const schemaTypes = [banner, category1, category2, category3, headerImages, threeImages,];
