@@ -155,10 +155,29 @@ export default function HomePage() {
             <FeaturedProducts />
           </div>
 
+          {/*VENDORS*/}
+          <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
+
+          <Link href="/vendors">
+            <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
+              <div className="text-base lg:text-lg font-semibold">
+                Top Vendors
+              </div>
+              <div className="flex flex-row items-center text-white text-xs lg:text-base lg:mt-1.5">
+                <p>See All</p>
+                <ChevronRight className="h-3 w-3 ml-1" /> {/* Add Chevron icon here */}
+              </div>
+            </div>
+          </Link>
+
+          <div className="lg:hidden mt-14">
+            <FeaturedVendors />
+          </div>
 
           
-          <FeaturedVendors />
-          <CallToAction />
+          <div className="hidden">
+            <CallToAction />
+          </div>
         </div>
 
       </MainPageLayout>

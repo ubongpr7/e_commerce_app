@@ -19,45 +19,44 @@ interface VendorCardProps {
 
 export function VendorCard({ vendor }: VendorCardProps) {
   return (
-    <Card className="overflow-hidden transition-all hover:shadow-md bg-white text-gray-800">
-      <div className="relative h-[120px] w-full">
-        <Image
-          src={vendor.coverImage || "/placeholder.svg"}
-          alt={vendor.name}
-          fill
-          className="object-cover"
-        />
-        <div className="absolute -bottom-12 left-4 rounded-full border-4 border-white">
+    <Link href={`/vendor/${vendor.slug}`} className="block group">
+      <Card className="overflow-hidden transition-all hover:shadow-md bg-white text-gray-800">
+        <div className="relative h-[80px] w-full">
           <Image
-            src={vendor.logo || "/placeholder.svg"}
-            width={80}
-            height={80}
+            src={vendor.coverImage || "/placeholder.svg"}
             alt={vendor.name}
-            className="rounded-full bg-white"
+            fill
+            className="object-cover"
           />
+          <div className="absolute -bottom-12 left-4 w-20 h-20 rounded-full border-4 border-white overflow-hidden bg-white">
+            <Image
+              src={vendor.logo || "/placeholder.svg"}
+              width={80}
+              height={80}
+              alt={vendor.name}
+              className="w-full h-full object-cover rounded-full"
+            />
+          </div>
+
         </div>
-      </div>
-      <CardContent className="pt-16">
-        <Link href={`/vendor/${vendor.slug}`}>
+        <CardContent className="pt-12">
           <h3 className="mb-2 text-xl font-semibold hover:text-orange-600">{vendor.name}</h3>
-        </Link>
-        <p className="mb-4 line-clamp-2 text-sm text-gray-600">{vendor.description}</p>
-        <div className="mb-4 flex items-center justify-between text-sm">
-          <div className="flex items-center gap-1 text-yellow-500">
-            <Star className="h-4 w-4 fill-current" />
-            <span>{vendor.rating}</span>
+          <p className="mb-4 line-clamp-2 text-sm text-gray-600 leading-tight">{vendor.description}</p>
+          <div className=" flex items-center justify-between text-sm">
+            <div className="flex items-center gap-1 text-yellow-500">
+              <Star className="h-4 w-4 fill-current" />
+              <span>{vendor.rating}</span>
+            </div>
+            <div className="flex items-center gap-1 text-gray-500">
+              <Package className="h-4 w-4" />
+              <span>{vendor.productCount} products</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1 text-gray-500">
-            <Package className="h-4 w-4" />
-            <span>{vendor.productCount} products</span>
-          </div>
-        </div>
-        <Link href={`/vendor/${vendor.slug}`}>
-          <Button variant="outline" className="w-full border-gray-300 text-gray-700 hover:border-gray-500">
+          <Button variant="outline" className="w-full hidden border-gray-300 text-gray-700 hover:border-gray-500">
             Visit Store
           </Button>
-        </Link>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }

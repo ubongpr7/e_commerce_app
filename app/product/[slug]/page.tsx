@@ -114,7 +114,7 @@ export default function ProductPage() {
     <MainLayout>
       <div className="container py-8">
         {/* Breadcrumbs */}
-        <div className="mb-6 flex items-center text-sm text-gray-500">
+        <div className="mb-6 flex items-center text-sm p-3 text-gray-500">
           <Link href="/" className="hover:text-gray-900">
             Home
           </Link>
@@ -130,7 +130,7 @@ export default function ProductPage() {
           <span className="truncate text-gray-900">{product.name}</span>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="gap-8 md:grid md:grid-cols-2 p-3">
           {/* Product Images */}
           <div className="space-y-4">
             <div className="relative aspect-square overflow-hidden rounded-lg border">
@@ -292,12 +292,12 @@ export default function ProductPage() {
         {/* Product Tabs */}
         <div className="mt-12">
           <Tabs defaultValue="details">
-            <TabsList className="w-full justify-start">
+            <TabsList className="w-full justify-start lg:px-5">
               <TabsTrigger value="details">Details</TabsTrigger>
               <TabsTrigger value="specifications">Specifications</TabsTrigger>
               <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
-            <TabsContent value="details" className="mt-6">
+            <TabsContent value="details" className="mt-6 px-3 lg:px-5">
               <div className="prose max-w-none">
                 <p>{product.description}</p>
                 <p>
@@ -313,7 +313,7 @@ export default function ProductPage() {
                 </ul>
               </div>
             </TabsContent>
-            <TabsContent value="specifications" className="mt-6">
+            <TabsContent value="specifications" className="mt-6 px-3 lg:px-5">
               <div className="grid gap-4 sm:grid-cols-2">
                 <Card className="p-4">
                   <h3 className="mb-2 font-semibold">Dimensions</h3>
@@ -393,7 +393,7 @@ export default function ProductPage() {
                 </Card>
               </div>
             </TabsContent>
-            <TabsContent value="reviews" className="mt-6">
+            <TabsContent value="reviews" className="mt-6 px-3">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
@@ -476,7 +476,7 @@ export default function ProductPage() {
         </div>
 
         {/* Related Products */}
-        <div className="mt-16">
+        <div className="mt-16 px-3 lg:px-5">
           <h2 className="mb-6 text-2xl font-bold">You May Also Like</h2>
           <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {relatedProducts.map((product) => (

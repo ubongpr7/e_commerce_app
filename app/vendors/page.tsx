@@ -14,8 +14,8 @@ const allVendors = [
   {
     id: "1",
     name: "TechGadgets",
-    logo: "/placeholder.svg?height=80&width=80",
-    coverImage: "/placeholder.svg?height=200&width=300",
+    logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/245240/pexels-photo-245240.jpeg?auto=compress&cs=tinysrgb&w=600",
     description: "The latest electronic gadgets and accessories.",
     productCount: 42,
     rating: 4.7,
@@ -24,8 +24,8 @@ const allVendors = [
   {
     id: "2",
     name: "FashionHub",
-    logo: "/placeholder.svg?height=80&width=80",
-    coverImage: "/placeholder.svg?height=200&width=300",
+    logo: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
     description: "Trendy clothing and accessories for all seasons.",
     productCount: 128,
     rating: 4.5,
@@ -34,8 +34,8 @@ const allVendors = [
   {
     id: "3",
     name: "HomeEssentials",
-    logo: "/placeholder.svg?height=80&width=80",
-    coverImage: "/placeholder.svg?height=200&width=300",
+    logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
     description: "Everything you need for your home and kitchen.",
     productCount: 85,
     rating: 4.8,

@@ -64,7 +64,7 @@ export default function VendorPage() {
     return (
       <MainLayout>
         <div className="container py-8">
-          <div className="flex h-96 flex-col items-center justify-center">
+          <div className="flex h-96 flex-col items-center justify-center p-3">
             <h1 className="mb-4 text-2xl font-bold">Vendor Not Found</h1>
             <p className="mb-6 text-muted-foreground">
               The vendor you are looking for does not exist or has been removed.

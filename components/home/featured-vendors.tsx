@@ -7,7 +7,7 @@ const featuredVendors = [
     id: "1",
     name: "TechGadgets",
     logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
-    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/245240/pexels-photo-245240.jpeg?auto=compress&cs=tinysrgb&w=600",
     description: "The latest electronic gadgets and accessories.",
     productCount: 42,
     rating: 4.7,
@@ -16,8 +16,8 @@ const featuredVendors = [
   {
     id: "2",
     name: "FashionHub",
-    logo: "/placeholder.svg?height=80&width=80",
-    coverImage: "/placeholder.svg?height=200&width=300",
+    logo: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
     description: "Trendy clothing and accessories for all seasons.",
     productCount: 128,
     rating: 4.5,
@@ -26,8 +26,188 @@ const featuredVendors = [
   {
     id: "3",
     name: "HomeEssentials",
-    logo: "/placeholder.svg?height=80&width=80",
-    coverImage: "/placeholder.svg?height=200&width=300",
+    logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Everything you need for your home and kitchen.",
+    productCount: 85,
+    rating: 4.8,
+    slug: "home-essentials",
+  },
+  {
+    id: "4",
+    name: "TechGadgets",
+    logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/245240/pexels-photo-245240.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "The latest electronic gadgets and accessories.",
+    productCount: 42,
+    rating: 4.7,
+    slug: "tech-gadgets",
+  },
+  {
+    id: "5",
+    name: "FashionHub",
+    logo: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Trendy clothing and accessories for all seasons.",
+    productCount: 128,
+    rating: 4.5,
+    slug: "fashion-hub",
+  },
+  {
+    id: "6",
+    name: "HomeEssentials",
+    logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Everything you need for your home and kitchen.",
+    productCount: 85,
+    rating: 4.8,
+    slug: "home-essentials",
+  },
+  {
+    id: "7",
+    name: "TechGadgets",
+    logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/245240/pexels-photo-245240.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "The latest electronic gadgets and accessories.",
+    productCount: 42,
+    rating: 4.7,
+    slug: "tech-gadgets",
+  },
+  {
+    id: "8",
+    name: "FashionHub",
+    logo: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Trendy clothing and accessories for all seasons.",
+    productCount: 128,
+    rating: 4.5,
+    slug: "fashion-hub",
+  },
+  {
+    id: "9",
+    name: "HomeEssentials",
+    logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Everything you need for your home and kitchen.",
+    productCount: 85,
+    rating: 4.8,
+    slug: "home-essentials",
+  },
+  {
+    id: "10",
+    name: "TechGadgets",
+    logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/245240/pexels-photo-245240.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "The latest electronic gadgets and accessories.",
+    productCount: 42,
+    rating: 4.7,
+    slug: "tech-gadgets",
+  },
+  {
+    id: "11",
+    name: "FashionHub",
+    logo: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Trendy clothing and accessories for all seasons.",
+    productCount: 128,
+    rating: 4.5,
+    slug: "fashion-hub",
+  },
+  {
+    id: "12",
+    name: "HomeEssentials",
+    logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Everything you need for your home and kitchen.",
+    productCount: 85,
+    rating: 4.8,
+    slug: "home-essentials",
+  },
+  {
+    id: "13",
+    name: "TechGadgets",
+    logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/245240/pexels-photo-245240.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "The latest electronic gadgets and accessories.",
+    productCount: 42,
+    rating: 4.7,
+    slug: "tech-gadgets",
+  },
+  {
+    id: "14",
+    name: "FashionHub",
+    logo: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Trendy clothing and accessories for all seasons.",
+    productCount: 128,
+    rating: 4.5,
+    slug: "fashion-hub",
+  },
+  {
+    id: "15",
+    name: "HomeEssentials",
+    logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Everything you need for your home and kitchen.",
+    productCount: 85,
+    rating: 4.8,
+    slug: "home-essentials",
+  },
+  {
+    id: "16",
+    name: "TechGadgets",
+    logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/245240/pexels-photo-245240.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "The latest electronic gadgets and accessories.",
+    productCount: 42,
+    rating: 4.7,
+    slug: "tech-gadgets",
+  },
+  {
+    id: "17",
+    name: "FashionHub",
+    logo: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Trendy clothing and accessories for all seasons.",
+    productCount: 128,
+    rating: 4.5,
+    slug: "fashion-hub",
+  },
+  {
+    id: "18",
+    name: "HomeEssentials",
+    logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Everything you need for your home and kitchen.",
+    productCount: 85,
+    rating: 4.8,
+    slug: "home-essentials",
+  },
+  {
+    id: "19",
+    name: "TechGadgets",
+    logo: "https://images.pexels.com/photos/3992656/pexels-photo-3992656.png?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/245240/pexels-photo-245240.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "The latest electronic gadgets and accessories.",
+    productCount: 42,
+    rating: 4.7,
+    slug: "tech-gadgets",
+  },
+  {
+    id: "20",
+    name: "FashionHub",
+    logo: "https://images.pexels.com/photos/1130626/pexels-photo-1130626.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/162539/architecture-building-amsterdam-blue-sky-162539.jpeg?auto=compress&cs=tinysrgb&w=600",
+    description: "Trendy clothing and accessories for all seasons.",
+    productCount: 128,
+    rating: 4.5,
+    slug: "fashion-hub",
+  },
+  {
+    id: "21",
+    name: "HomeEssentials",
+    logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
+    coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
     description: "Everything you need for your home and kitchen.",
     productCount: 85,
     rating: 4.8,
@@ -37,29 +217,14 @@ const featuredVendors = [
 
 export function FeaturedVendors() {
   return (
-    <section className="bg-gray-100 ">
-      <div className="container py-12 md:py-16">
-        <div className="flex flex-col items-center text-center">
-          <h2 className="mb-2 text-3xl font-bold md:text-4xl text-gray-800 ">
-            Our Top Vendors
-          </h2>
-          <p className="mb-8 max-w-3xl text-gray-600 ">
-            Meet our most trusted vendors who consistently deliver quality products.
-          </p>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredVendors.map((vendor) => (
-              <VendorCard key={vendor.id} vendor={vendor} />
-            ))}
-          </div>
-
-          <div className="mt-10">
-            <Link href="/vendors">
-              <Button variant="outline" size="lg" className="text-gray-800  border-gray-300 ">
-                Explore All Vendors
-              </Button>
-            </Link>
-          </div>
+    <section className="">
+      <div className="w-full overflow-hidden">
+        <div className="lg:hidden flex flex-row gap-4 overflow-x-auto snap-x scroll-smooth w-full scrollbar-hide">
+          {featuredVendors.map((vendor) => (
+            <div key={vendor.id} className="flex-shrink-0 snap-start w-[250px]">
+              <VendorCard vendor={vendor} />
+            </div>
+          ))}
         </div>
       </div>
     </section>
