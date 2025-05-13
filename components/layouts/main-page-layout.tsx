@@ -22,13 +22,13 @@ export function MainPageLayout({ children }: MainLayoutProps) {
   }, [isDarkMode]);
 
   return (
-    <div className={`${isDarkMode ? 'dark' : 'light'} flex min-h-screen flex-col lg:bg-orange-500 xl:bg-black`}>
+    <div className={`${isDarkMode ? 'dark' : 'light'} flex min-h-screen flex-col bg-gray-300`}>
       <div
         className="w-full bg-no-repeat bg-contain"
         style={{
           backgroundImage: `
             url(''),
-            url('https://your-second-image-url.com')
+            url('')
           `,
           backgroundRepeat: 'no-repeat, no-repeat',
           backgroundPosition: 'top left, bottom right',
