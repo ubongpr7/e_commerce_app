@@ -1,8 +1,7 @@
 import { MainPageLayout } from "@/components/layouts/main-page-layout"
 import Banner from "@/components/home/home-banner"
 import { FeaturedProducts } from "@/components/home/featured-products"
-import { ProductListing } from "@/components/home/product-listing"
-import { FeaturedVendors } from "@/components/home/featured-vendors"
+import FeaturedVendors from "@/components/home/featured-vendors"
 import { CallToAction } from "@/components/home/call-to-action"
 import Category1 from "@/components/categories/Category1"
 import Category2 from "@/components/categories/Category2"
@@ -12,9 +11,19 @@ import CountdownTimer from "@/components/timer/countdown-timer"
 import Link from "next/link"
 import DesktopTimer from "@/components/timer/desktop-timer"
 import HoverImage1 from "@/components/hoverimages/hover-image1"
-import HoverImage2 from "@/components/hoverimages/hoveer-image2"
+import HoverImage2 from "@/components/hoverimages/hover-image2"
 import ThreeImages from "@/components/threeimages/three-images"
 import { ChevronRight } from "lucide-react"
+import { FeaturedProducts2 } from "@/components/home/featured-products2"
+import { FeaturedProducts3 } from "@/components/home/featured-products3"
+import { FeaturedProducts4 } from "@/components/home/featured-products4"
+import { FeaturedProducts5 } from "@/components/home/featured-products5"
+import { FeaturedProducts6 } from "@/components/home/featured-products6"
+import { FeaturedProducts7 } from "@/components/home/featured-products7"
+import { FeaturedProducts8 } from "@/components/home/featured-products8"
+import { FeaturedProducts9 } from "@/components/home/featured-products9"
+import { FeaturedProducts10 } from "@/components/home/featured-products10"
+import { FeaturedProducts11 } from "@/components/home/featured-products11"
 
 export default function HomePage() {
   return (
@@ -40,6 +49,50 @@ export default function HomePage() {
 
           <div className="">
             <Category2 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts2 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts3 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts4 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts5 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedVendors />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts6 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts7 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts8 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts9 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts10 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts11 />
           </div>
 
           <Link href="/">
@@ -102,7 +155,7 @@ export default function HomePage() {
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
           <Link href="/">
-            <div className="z-10 bg-orange-600 mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
+            <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Home Essentials
               </div>
@@ -140,7 +193,7 @@ export default function HomePage() {
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
           <Link href="/">
-            <div className="z-10 bg-orange-600 mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
+            <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Fashion & Apparel
               </div>
@@ -170,7 +223,7 @@ export default function HomePage() {
             </div>
           </Link>
 
-          <div className="lg:hidden mt-14">
+          <div className="lg:hidden mt-14 mb-1">
             <FeaturedVendors />
           </div>
 
@@ -178,7 +231,7 @@ export default function HomePage() {
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
           <Link href="/">
-            <div className="z-10 bg-orange-600 mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
+            <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Beauty & Health
               </div>
@@ -216,7 +269,7 @@ export default function HomePage() {
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
           <Link href="/">
-            <div className="z-10 bg-orange-600 mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
+            <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Entertainment Deals
               </div>
@@ -254,7 +307,7 @@ export default function HomePage() {
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
           <Link href="/">
-            <div className="z-10 bg-orange-600 mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
+            <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Food & Groceries
               </div>
@@ -275,7 +328,7 @@ export default function HomePage() {
           <Link href="/">
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
-                Electronic & Gadgets
+                Electronics & Gadgets
               </div>
               <div className="flex flex-row items-center text-white text-xs lg:text-base lg:mt-1.5">
                 <p>See All</p>
@@ -287,7 +340,7 @@ export default function HomePage() {
           <div className="lg:hidden -mt-4">
             <FeaturedProducts />
           </div>
-          
+
           <div className="hidden">
             <CallToAction />
           </div>

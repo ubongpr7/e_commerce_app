@@ -1,7 +1,11 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { VendorCard } from "@/components/vendors/vendor-card";
 
+// Mock vendors - replace with your actual data or Redux slice
 const featuredVendors = [
   {
     id: "1",
@@ -215,16 +219,59 @@ const featuredVendors = [
   },
 ];
 
-export function FeaturedVendors() {
+export default function FeaturedVendors() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" });
+  };
+
   return (
-    <section className="">
-      <div className="w-full overflow-hidden">
-        <div className="lg:hidden flex flex-row gap-4 overflow-x-auto snap-x scroll-smooth w-full scrollbar-hide">
-          {featuredVendors.map((vendor) => (
-            <div key={vendor.id} className="flex-shrink-0 snap-start w-[250px]">
-              <VendorCard vendor={vendor} />
+    <section className="lg:bg-white lg:mx-16 lg:mt-2 lg:rounded-md lg:px-4 lg:py-0]">
+      <div className="flex flex-col items-center justify-center">
+        <Link href={"/"}>
+          <div className="bg-black text-white lg:flex rounded-md flex-row justify-between px-3 h-14 lg:w-[950px] xl:w-[1200px] py-2 hidden">
+            <div>
+              <h1 className="text-base lg:mt-1.5 font-semibold lg:text-lg">Top Vendors</h1>
             </div>
-          ))}
+
+            <div className="flex flex-row items-center text-white text-xs lg:text-base lg:mt-1.5">
+              <p>See All</p>
+              <ChevronRight className="h-4 w-4 ml-2" /> {/* Add Chevron icon here */}
+            </div>
+          </div>
+        </Link>
+
+        {/* Scroll area with chevrons */}
+        <div className="relative w-full group">
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto max-w-full mt-0 snap-x snap-mandatory flex gap-4 py-2 scrollbar-hide"
+          >
+            {featuredVendors.map((vendor) => (
+              <div key={vendor.id} className="flex-shrink-0 snap-start">
+                <VendorCard vendor={vendor} />
+              </div>
+            ))}
+          </div>
+
+          {/* Scroll buttons (only on lg and on hover) */}
+          <button
+            onClick={scrollLeft}
+            className="hidden lg:group-hover:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-800 text-white rounded-full w-10 h-10 z-10 transition"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={scrollRight}
+            className="hidden lg:group-hover:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-800 text-white rounded-full w-10 h-10 z-10 transition"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
         </div>
       </div>
     </section>

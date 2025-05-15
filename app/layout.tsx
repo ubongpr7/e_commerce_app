@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
 
-      <body className="w-full h-full" >
+      <body className="w-full h-full">
         <NextTopLoader
           color="#f97316" // Tailwind orange-500
           height={4}

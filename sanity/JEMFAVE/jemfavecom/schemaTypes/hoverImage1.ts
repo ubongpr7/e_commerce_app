@@ -1,25 +1,26 @@
-import { defineType, defineField } from "sanity";
+// ./schemas/hoverImage1.ts
+import { defineType } from 'sanity';
 
 export default defineType({
-  name: "hoverImage1",
-  title: "Hover Image 1",
-  type: "document",
+  name: 'hoverImage1',
+  title: 'Hover Image 1',
+  type: 'document',
   fields: [
-    defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
-    }),
-    defineField({
-      name: "image",
-      title: "Image",
-      type: "image",
+    {
+      name: 'image',
+      title: 'Image',
+      type: 'image',
       options: { hotspot: true },
-    }),
-    defineField({
-      name: "link",
-      title: "Link",
-      type: "url",
-    }),
+    },
+    {
+      name: 'link',
+      title: 'Link',
+      type: 'url',
+    },
+    {
+      name: 'alt',
+      title: 'Alt Text',
+      type: 'string',
+    },
   ],
 });
