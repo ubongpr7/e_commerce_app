@@ -63,7 +63,7 @@ export default function SchoolDropdown() {
                         <input
                             type="text"
                             placeholder="Search school..."
-                            className="w-full px-3 py-2 text-sm border-b border-gray-300 focus:outline-none"
+                            className="w-full px-3 py-2 text-gray-700 text-sm border-b border-gray-300 focus:outline-none"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
