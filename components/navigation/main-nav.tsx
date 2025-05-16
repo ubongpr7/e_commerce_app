@@ -31,6 +31,8 @@ import { setIsDarkMode } from "../../redux/state";
 import SanityClient from "@/lib/sanityClient";
 import { urlForImage } from "@/lib/sanityImage";
 
+import SchoolDropdown from "../store/school-dropdown";
+
 
 
 type HeaderImageData = {
@@ -95,16 +97,15 @@ export function MainNav() {
               className="hidden lg:block w-full object-cover"
             />
           </Link>
-
-          <div className="bg-gray-100 hidden lg:flex flex-row justify-around text-white w-full p-2">
-            <Link href="/vendor/register/start" className="text-orange-600 font-bold text-xs">
-              Sell on Jemfave
-            </Link>
-          </div>
         </>
       )}
 
       <header className="sticky right-0 left-0 top-0 z-50 w-full mb-2 lg:mb-0 shadow-md bg-white">
+
+        <div className="bg-gray-100 hidden lg:block text-center text-white w-full p-2">
+          <SchoolDropdown />
+        </div>
+
         <div className="container flex h-20 pl-6 pr-6 items-center justify-between lg:px-8">
           {/* Mobile Menu and Logo */}
           <div className="flex items-center lg:hidden gap-1 ml-2">
