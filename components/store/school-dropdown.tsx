@@ -46,10 +46,21 @@ export default function SchoolDropdown() {
         <div className="relative inline-block text-left w-64 z-50">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full rounded-md shadow-sm px-4 py-2 text-center tracking-widest text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="w-full rounded-md shadow-sm px-4 py-2 text-center tracking-widest text-xs lg:text-sm font-medium text-gray-700"
             >
-                {selectedSchool ? selectedSchool.name : "Select School"}
+                {selectedSchool ? (
+                    <>
+                        {/* Abbreviation on small screens */}
+                        <span className="block lg:hidden">{selectedSchool.abbreviation}</span>
+
+                        {/* Full name on medium and larger screens */}
+                        <span className="hidden lg:block">{selectedSchool.name}</span>
+                    </>
+                ) : (
+                    "Select School"
+                )}
             </button>
+
 
             <AnimatePresence>
                 {isOpen && (

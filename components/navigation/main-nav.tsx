@@ -19,6 +19,7 @@ import {
   User,
   ShoppingCart,
   MenuIcon,
+  Wallet,
   X,
   Moon,
   Sun,
@@ -100,11 +101,15 @@ export function MainNav() {
         </>
       )}
 
-      <header className="sticky right-0 left-0 top-0 z-50 w-full mb-2 lg:mb-0 shadow-md bg-white">
+      <div className="bg-gray-100 hidden lg:block text-center text-white w-full p-2">
+        <SchoolDropdown />
+      </div>
 
-        <div className="bg-gray-100 hidden lg:block text-center text-white w-full p-2">
-          <SchoolDropdown />
-        </div>
+      <div className="bg-gray-100 lg:hidden text-center text-white w-full p-0">
+        <SchoolDropdown />
+      </div>
+
+      <header className="sticky right-0 left-0 top-0 z-20 w-full mb-2 lg:mb-0 shadow-md bg-white">
 
         <div className="container flex h-20 pl-6 pr-6 items-center justify-between lg:px-8">
           {/* Mobile Menu and Logo */}
@@ -230,6 +235,12 @@ export function MainNav() {
                     {cartItemCount}
                   </Badge>
                 )}
+              </Button>
+            </Link>
+
+            <Link href="/wallet">
+              <Button variant="ghost" size="icon" className="relative">
+                <Wallet className="h-20 w-20" />
               </Button>
             </Link>
 
