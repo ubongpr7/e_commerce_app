@@ -17,6 +17,19 @@ import { Sheet, SheetContent, SheetTrigger, SheetOverlay } from "@/components/ui
 import { Input } from "@/components/ui/input";
 import {
   User,
+  Home,
+  BookTextIcon,
+  Plug,
+  LampDesk,
+  Shirt,
+  Popcorn,
+  HandHeart,
+  Sofa,
+  Dumbbell,
+  CarFront,
+  Gamepad2,
+  HandPlatter,
+  Sparkles,
   ShoppingCart,
   MenuIcon,
   Wallet,
@@ -109,7 +122,7 @@ export function MainNav() {
         <SchoolDropdown />
       </div>
 
-      <header className="sticky right-0 left-0 top-0 z-20 w-full mb-2 lg:mb-0 shadow-md bg-white">
+      <header className="sticky right-0 left-0 top-0 z-30 w-full mb-2 lg:mb-0 shadow-md bg-white">
 
         <div className="container flex h-20 pl-6 pr-6 items-center justify-between lg:px-8">
           {/* Mobile Menu and Logo */}
@@ -295,11 +308,131 @@ export function MainNav() {
         {isMenuOpen && (
           <>
             <div className="fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setIsMenuOpen(false)} />
-            <div className="fixed top-0 left-0 z-50 w-64 h-full bg-white p-4">
+            <div className="fixed top-0 left-0 z-50 w-64 h-full bg-white pb-4 overflow-y-auto scrollbar-hide">
               <nav className="flex flex-col gap-4">
-                <Link href="/" onClick={() => setIsMenuOpen(false)}>Home</Link>
-                <Link href="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
-                <Link href="/vendors" onClick={() => setIsMenuOpen(false)}>Vendors</Link>
+                <div className="bg-gray-900 text-white w-64 px-3 py-10 fixed top-0 left-0 z-10">
+                  <div className="text-xs">Browse</div>
+                  <div className="text-xl font-bold tracking-widest">JEMFAVE</div>
+                </div>
+
+                <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <div className="px-3 mt-32 pt-2 flex flex-row justify-between hover:bg-gray-100 py-2">
+                    <div className="text-base">Home</div>
+                    <Home className="h-5 w-5 mt-1" />
+                  </div>
+                </Link>
+
+                <hr className="border-t-8 -mt-4 border-gray-300 w-full" />
+
+                <div className="">
+                  <div className="text-lg font-semibold mb-3 px-3">Trending</div>
+
+                  <Link href="/">
+                    <div className="text-base hover:bg-gray-100 py-2 px-3">Best Sellers</div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="text-base hover:bg-gray-100 py-2 px-3">New Arrival</div>
+                  </Link>
+                  <Link href="/">
+                    <div className="text-base hover:bg-gray-100 py-2 px-3">Movers & Shakers</div>
+                  </Link>
+                </div>
+
+                <hr className="border-t-8 border-gray-300 w-full" />
+
+                <div className="">
+                  <div className="text-lg font-semibold mb-5 px-3">Our Categories</div>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <BookTextIcon className="h-5 w-5" />
+                      <div className="text-base">Study Materials</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <Plug className="h-5 w-5" />
+                      <div className="text-base">Electronics Gadgets</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <LampDesk className="h-5 w-5" />
+                      <div className="text-base">Office Supplies</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <Shirt className="h-5 w-5" />
+                      <div className="text-base">Fashion & Apparel</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <Popcorn className="h-5 w-5" />
+                      <div className="text-base">Food & Groceries</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <HandHeart className="h-5 w-5" />
+                      <div className="text-base">Beauty & Health</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <Sofa className="h-5 w-5" />
+                      <div className="text-base">Home Essentials</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <Dumbbell className="h-5 w-5" />
+                      <div className="text-base">Sporting Goods</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <Gamepad2 className="h-5 w-5" />
+                      <div className="text-base">Entertainment</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <CarFront className="h-5 w-5" />
+                      <div className="text-base">Automobile</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <HandPlatter className="h-5 w-5" />
+                      <div className="text-base">Services</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/">
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                      <Sparkles className="h-5 w-5" />
+                      <div className="text-base">Specials</div>
+                    </div>
+                  </Link>
+
+                  <hr className="border-t-8 border-gray-300 w-full mt-5" />
+
+                  <Link href="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
+                  <Link href="/vendors" onClick={() => setIsMenuOpen(false)}>Vendors</Link>
+                </div>
               </nav>
             </div>
           </>

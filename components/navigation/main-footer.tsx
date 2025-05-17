@@ -43,7 +43,7 @@ export function MainFooter() {
           <div>
             <Link href="/" className="flex items-center gap-2 font-bold">
               <Package className="h-6 w-6 text-orange-600" />
-              <span className="text-xl text-white">JEMFAVE</span>
+              <span className="text-xl text-white tracking-widest">JEMFAVE</span>
             </Link>
             <p className="mt-4 text-white">
               A multivendor e-commerce platform connecting customers with quality vendors.
@@ -124,7 +124,7 @@ export function MainFooter() {
           <button
             onClick={scrollToTop}
             aria-label="Scroll to top"
-            className="bg-gray-100 text-white p-2 rounded-full shadow hover:bg-gray-800 transition"
+            className="bg-gray-100 text-white p-2 rounded-full shadow hover:bg-gray-100 transition"
           >
             <ChevronUpIcon className="h-5 w-5 text-black hover:text-white" />
           </button>
