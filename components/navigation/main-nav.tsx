@@ -15,8 +15,9 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetOverlay } from "@/components/ui/sheet";
 import { Input } from "@/components/ui/input";
+import NotificationBell from "../user/notification-bell";
 import {
-  User,
+  UserRound,
   Home,
   BookTextIcon,
   Plug,
@@ -33,6 +34,16 @@ import {
   ShoppingCart,
   MenuIcon,
   Wallet,
+  Heart,
+  CircleCheckBig,
+  UserRoundPen,
+  MapPinHouse,
+  BellRing,
+  CircleHelp,
+  Plus,
+  LogIn,
+  Settings,
+  LogOut,
   X,
   Moon,
   Sun,
@@ -46,6 +57,7 @@ import SanityClient from "@/lib/sanityClient";
 import { urlForImage } from "@/lib/sanityImage";
 
 import SchoolDropdown from "../store/school-dropdown";
+import LogoutButton from "../user/logout-button";
 
 
 
@@ -259,19 +271,19 @@ export function MainNav() {
 
             {/* User Button (for mobile) */}
             <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setIsUserOpen(true)}>
-              <User className="h-5 w-5" />
+              <UserRound className="h-5 w-5" />
             </Button>
 
             {/* Desktop Login/Register */}
             {isLoggedIn ? (
               <Link href="/dashboard">
                 <Button variant="ghost" size="icon" className="hidden lg:flex">
-                  <User className="h-5 w-5" />
+                  <UserRound className="h-5 w-5" />
                 </Button>
               </Link>
             ) : (
               <div className="hidden lg:flex items-center gap-2">
-                <Link href="/login">
+                <Link href="/accounts/login">
                   <Button size="sm" className="text-base bg-orange-600 hover:bg-orange-700">
                     Login
                   </Button>
@@ -312,7 +324,7 @@ export function MainNav() {
               <nav className="flex flex-col gap-4">
                 <div className="bg-gray-900 text-white w-64 px-3 py-10 fixed top-0 left-0 z-10">
                   <div className="text-xs">Browse</div>
-                  <div className="text-xl font-bold tracking-widest">JEMFAVE</div>
+                  <div className="text-2xl font-bold tracking-widest">JEMFAVE</div>
                 </div>
 
                 <Link href="/" onClick={() => setIsMenuOpen(false)}>
@@ -327,14 +339,14 @@ export function MainNav() {
                 <div className="">
                   <div className="text-lg font-semibold mb-3 px-3">Trending</div>
 
-                  <Link href="/">
-                    <div className="text-base hover:bg-gray-100 py-2 px-3">Best Sellers</div>
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="text-base hover:bg-gray-100 py-2 mb-2 px-3">Best Sellers</div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="text-base hover:bg-gray-100 py-2 px-3">New Arrival</div>
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="text-base hover:bg-gray-100 mb-2 py-2 px-3">New Arrival</div>
                   </Link>
-                  <Link href="/">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
                     <div className="text-base hover:bg-gray-100 py-2 px-3">Movers & Shakers</div>
                   </Link>
                 </div>
@@ -344,84 +356,84 @@ export function MainNav() {
                 <div className="">
                   <div className="text-lg font-semibold mb-5 px-3">Our Categories</div>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
                       <BookTextIcon className="h-5 w-5" />
                       <div className="text-base">Study Materials</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 mb-2 px-3">
                       <Plug className="h-5 w-5" />
                       <div className="text-base">Electronics Gadgets</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
                       <LampDesk className="h-5 w-5" />
                       <div className="text-base">Office Supplies</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
                       <Shirt className="h-5 w-5" />
                       <div className="text-base">Fashion & Apparel</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
                       <Popcorn className="h-5 w-5" />
                       <div className="text-base">Food & Groceries</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <HandHeart className="h-5 w-5" />
                       <div className="text-base">Beauty & Health</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <Sofa className="h-5 w-5" />
                       <div className="text-base">Home Essentials</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <Dumbbell className="h-5 w-5" />
                       <div className="text-base">Sporting Goods</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <Gamepad2 className="h-5 w-5" />
                       <div className="text-base">Entertainment</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <CarFront className="h-5 w-5" />
                       <div className="text-base">Automobile</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <HandPlatter className="h-5 w-5" />
                       <div className="text-base">Services</div>
                     </div>
                   </Link>
 
-                  <Link href="/">
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
                       <Sparkles className="h-5 w-5" />
                       <div className="text-base">Specials</div>
@@ -430,8 +442,26 @@ export function MainNav() {
 
                   <hr className="border-t-8 border-gray-300 w-full mt-5" />
 
-                  <Link href="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
-                  <Link href="/vendors" onClick={() => setIsMenuOpen(false)}>Vendors</Link>
+                  <Link href="/vendors" onClick={() => setIsMenuOpen(false)}>
+                    <div className="hover:bg-gray-100 mt-2 py-2 px-3">
+                      <div className="text-base">Our Vendors</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="hover:bg-gray-100 mt-2 py-2 px-3">
+                      <div className="text-base">Sell on Jemfave</div>
+                    </div>
+                  </Link>
+
+                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                    <div className="hover:bg-gray-100 mt-2 py-2 px-3">
+                      <div className="text-base">Contact us</div>
+                    </div>
+                  </Link>
+
+                  <Link className="hidden" href="/products" onClick={() => setIsMenuOpen(false)}>Products</Link>
+                  <Link className="hidden" href="/vendors" onClick={() => setIsMenuOpen(false)}>Vendors</Link>
                 </div>
               </nav>
             </div>
@@ -443,15 +473,100 @@ export function MainNav() {
             <div className="fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setIsUserOpen(false)} />
             <div className="fixed top-0 right-0 z-50 w-64 h-full bg-white p-4">
               <div className="flex flex-col gap-4">
+                <div className="bg-orange-600 text-black w-64 px-3 py-10 fixed top-0 right-0 z-10">
+                  <div className="text-xs tracking-widest">Jemfave</div>
+                  <div className="text-2xl font-bold">Student</div>
+                </div>
                 {isLoggedIn ? (
                   <>
-                    <Link href="/dashboard" onClick={() => setIsUserOpen(false)}>Dashboard</Link>
-                    <Link href="/account" onClick={() => setIsUserOpen(false)}>Account</Link>
+                    <div className="">
+                      <div className="text-lg font-semibold mb-5 px-3">My Account</div>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <UserRoundPen className="h-5 w-5" />
+                          <div className="text-base">Profile</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <Wallet className="h-5 w-5" />
+                          <div className="text-base">Wallet</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <CircleCheckBig className="h-5 w-5" />
+                          <div className="text-base">Orders</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <Heart className="h-5 w-5" />
+                          <div className="text-base">Saved Items</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <MapPinHouse className="h-5 w-5" />
+                          <div className="text-base">Address</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <BellRing className="h-5 w-5" />
+                          <div className="text-base">Notifications</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <Settings className="h-5 w-5" />
+                          <div className="text-base">Settings</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <CircleHelp className="h-5 w-5" />
+                          <div className="text-base">Support/Help</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <LogOut className="h-5 w-5" />
+                          <div className="text-base">
+                            <LogoutButton />
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
                   </>
                 ) : (
                   <>
-                    <Link href="/login" onClick={() => setIsUserOpen(false)}>Login</Link>
-                    <Link href="/register" onClick={() => setIsUserOpen(false)}>Register</Link>
+                    <div className="mt-20">
+                      <div className="text-lg font-semibold mb-5 px-3">My Account</div>
+
+                      <Link href="/accounts/login" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <LogIn className="h-5 w-5" />
+                          <div className="text-base">Login</div>
+                        </div>
+                      </Link>
+
+                      <Link href="/accounts/register" onClick={() => setIsUserOpen(false)}>
+                        <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                          <Plus className="h-5 w-5" />
+                          <div className="text-base">Register</div>
+                        </div>
+                      </Link>
+                    </div>
                   </>
                 )}
               </div>

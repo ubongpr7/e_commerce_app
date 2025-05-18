@@ -1,223 +1,181 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { z } from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Checkbox } from "@/components/ui/checkbox"
-import { useToast } from "@/components/ui/use-toast"
-import { useAppDispatch } from "@/redux/hooks"
-import { useRegisterMutation } from "@/redux/features/authApiSlice"
+import { useState } from "react";
 
-const registerSchema = z
-  .object({
-    name: z.string().min(2, "Name must be at least 2 characters"),
-    email: z.string().email("Please enter a valid email address"),
-    password: z.string().min(6, "Password must be at least 6 characters"),
-    confirmPassword: z.string(),
-    role: z.enum(["customer", "vendor"], {
-      required_error: "Please select a role",
-    }),
-    terms: z.boolean().refine((val) => val === true, {
-      message: "You must agree to the terms and conditions",
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
-    path: ["confirmPassword"],
-  })
+const schools = [
+    "Springfield High School",
+    "Riverside Academy",
+    "Lincoln Preparatory",
+    "Mountainview College",
+    "Greenwood Institute",
+    // Add more schools as needed
+];
 
 export default function RegisterPage() {
-  const router = useRouter()
-  const dispatch = useAppDispatch()
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [register, { isLoading }] = useRegisterMutation()
-  const form = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-      role: "customer",
-      terms: false,
-    },
-  })
+    const [fullName, setFullName] = useState("");
+    const [email, setEmail] = useState("");
+    const [school, setSchool] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-  async function onSubmit(values: z.infer<typeof registerSchema>) {
-    setIsSubmitting(true)
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
 
-    try {
-      await register({
-        first_name: values.name,
-        email: values.email,
-        password: values.password,
-        role: values.role,
-      }).unwrap()
+        // Basic validation
+        if (!fullName || !email || !school || !password || !confirmPassword) {
+            setError("Please fill in all fields.");
+            return;
+        }
+        if (password !== confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
 
-      toast({
-        title: "Registration successful",
-        description: "Your account has been created successfully",
-      })
+        setError("");
+        setLoading(true);
 
-      if (values.role === "vendor") {
-        router.push("/vendor/register/start")
-      } else {
-        router.push("/dashboard")
-      }
-    } catch (error) {
-      toast({
-        title: "Registration failed",
-        description: "There was an error creating your account. Please try again.",
-        variant: "destructive",
-      })
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
+        try {
+            // TODO: Replace with your Django API call
+            // Example:
+            // const res = await fetch("/api/register", {
+            //   method: "POST",
+            //   headers: { "Content-Type": "application/json" },
+            //   body: JSON.stringify({ fullName, email, school, password }),
+            // });
+            // const data = await res.json();
+            // Handle response...
 
-  return (
-    <div className="container flex min-h-screen flex-col items-center justify-center py-8 bg-gray-100  text-gray-900 ">
-      <div className="mx-auto w-full max-w-md space-y-6 bg-white  rounded-lg shadow-md p-8">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900 ">Create an Account</h1>
-          <p className="mt-2 text-gray-500 ">Sign up to get started with our platform</p>
-        </div>
+            alert(`Registered ${fullName} with email: ${email} from ${school}`);
+        } catch (err) {
+            setError("Registration failed. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-gray-900 ">Full Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="John Doe" {...field} className="bg-gray-100  text-gray-900  border-gray-200 " />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    return (
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+            <div className="max-w-md w-full space-y-8 bg-white p-8 rounded shadow">
+                <h2 className="text-center text-3xl font-extrabold text-gray-900">
+                    Create your account
+                </h2>
+                {error && (
+                    <p className="text-red-600 text-center text-sm font-medium">{error}</p>
+                )}
+                <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
+                    <div>
+                        <label
+                            htmlFor="fullName"
+                            className="block text-sm font-medium text-gray-700"
+                        >
+                            Full Name
+                        </label>
+                        <input
+                            id="fullName"
+                            type="text"
+                            autoComplete="name"
+                            required
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
+                            placeholder="John Doe"
+                        />
+                    </div>
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-gray-900 ">Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="email@example.com" {...field} className="bg-gray-100  text-gray-900  border-gray-200 " />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <div>
+                        <label
+                            htmlFor="email"
+                            className="block text-sm font-medium text-gray-700"
+                        >
+                            Email address
+                        </label>
+                        <input
+                            id="email"
+                            type="email"
+                            autoComplete="email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
+                            placeholder="you@example.com"
+                        />
+                    </div>
 
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-gray-900 ">Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} className="bg-gray-100  text-gray-900  border-gray-200 " />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <div>
+                        <label
+                            htmlFor="school"
+                            className="block text-sm font-medium text-gray-700"
+                        >
+                            School
+                        </label>
+                        <select
+                            id="school"
+                            required
+                            value={school}
+                            onChange={(e) => setSchool(e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded bg-white focus:outline-none focus:ring-orange-600 focus:border-orange-600"
+                        >
+                            <option value="" disabled>
+                                Select your school
+                            </option>
+                            {schools.map((sch) => (
+                                <option key={sch} value={sch}>
+                                    {sch}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
 
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-gray-900 ">Confirm Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} className="bg-gray-100  text-gray-900  border-gray-200 " />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <div>
+                        <label
+                            htmlFor="password"
+                            className="block text-sm font-medium text-gray-700"
+                        >
+                            Password
+                        </label>
+                        <input
+                            id="password"
+                            type="password"
+                            autoComplete="new-password"
+                            required
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
+                            placeholder="Create a password"
+                        />
+                    </div>
 
-            <FormField
-              control={form.control}
-              name="role"
-              render={({ field }) => (
-                <FormItem className="space-y-3">
-                  <FormLabel className="text-gray-900 ">I want to</FormLabel>
-                  <FormControl>
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                      className="flex flex-col space-y-1"
+                    <div>
+                        <label
+                            htmlFor="confirmPassword"
+                            className="block text-sm font-medium text-gray-700"
+                        >
+                            Confirm Password
+                        </label>
+                        <input
+                            id="confirmPassword"
+                            type="password"
+                            autoComplete="new-password"
+                            required
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
+                            placeholder="Confirm your password"
+                        />
+                    </div>
+
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded bg-orange-600 text-white font-semibold hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 ${loading ? "opacity-50 cursor-not-allowed" : ""
+                            }`}
                     >
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="customer" className="ring-offset-gray-100  ring-blue-500 focus:ring-2 focus:ring-offset-0" />
-                        </FormControl>
-                        <FormLabel className="font-normal text-gray-900 ">Shop as a customer</FormLabel>
-                      </FormItem>
-                      <FormItem className="flex items-center space-x-3 space-y-0">
-                        <FormControl>
-                          <RadioGroupItem value="vendor" className="ring-offset-gray-100  ring-blue-500 focus:ring-2 focus:ring-offset-0" />
-                        </FormControl>
-                        <FormLabel className="font-normal text-gray-900 ">Sell as a vendor</FormLabel>
-                      </FormItem>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="terms"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
-                  <FormControl>
-                    <Checkbox checked={field.value} onCheckedChange={field.onChange} className="border-gray-200  focus:ring-blue-500" />
-                  </FormControl>
-                  <div className="space-y-1 leading-none">
-                    <FormLabel className="text-sm font-normal text-gray-900 ">
-                      I agree to the{" "}
-                      <Link href="/terms" className="text-blue-500 hover:underline">
-                        terms of service
-                      </Link>{" "}
-                      and{" "}
-                      <Link href="/privacy" className="text-blue-500 hover:underline">
-                        privacy policy
-                      </Link>
-                    </FormLabel>
-                    <FormMessage />
-                  </div>
-                </FormItem>
-              )}
-            />
-
-            <Button type="submit" className="w-full" disabled={isLoading || isSubmitting}>
-              {isLoading || isSubmitting ? "Creating account..." : "Create Account"}
-            </Button>
-          </form>
-        </Form>
-
-        <div className="text-center text-sm text-gray-500 ">
-          Already have an account?{" "}
-          <Link href="/login" className="text-blue-500 hover:underline">
-            Sign in
-          </Link>
+                        {loading ? "Registering..." : "Register"}
+                    </button>
+                </form>
+            </div>
         </div>
-      </div>
-    </div>
-  )
+    );
 }
