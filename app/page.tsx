@@ -24,6 +24,7 @@ import { FeaturedProducts8 } from "@/components/home/featured-products8"
 import { FeaturedProducts9 } from "@/components/home/featured-products9"
 import { FeaturedProducts10 } from "@/components/home/featured-products10"
 import { FeaturedProducts11 } from "@/components/home/featured-products11"
+import FeaturedAd from "@/components/home/featured-ad"
 
 export default function HomePage() {
   return (
@@ -69,6 +70,10 @@ export default function HomePage() {
 
           <div className="hidden lg:block">
             <FeaturedVendors />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedAd />
           </div>
 
           <div className="hidden lg:block">

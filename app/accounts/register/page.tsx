@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import SchoolSelect from '@/components/user/school-select';
+import Nav3 from '@/components/navigation/nav3';
 
 export default function RegisterPage() {
     const [fullName, setFullName] = useState('');
@@ -10,6 +11,7 @@ export default function RegisterPage() {
     const [school, setSchool] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [acceptedTerms, setAcceptedTerms] = useState(false);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -26,6 +28,10 @@ export default function RegisterPage() {
             setError('Passwords do not match.');
             return;
         }
+        if (!acceptedTerms) {
+            setError('You must accept the terms and conditions.');
+            return;
+        }
 
         setError('');
         setLoading(true);
@@ -40,9 +46,12 @@ export default function RegisterPage() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-            <div className="max-w-md w-full space-y-8 bg-white p-8 rounded shadow">
+
+            <Nav3 />
+
+            <div className="max-w-md w-full space-y-8 bg-white p-8 rounded shadow mt-28">
                 <h2 className="text-center text-3xl font-extrabold text-gray-900">
-                    Create your account
+                    CREATE YOUR ACCOUNT
                 </h2>
                 {error && <p className="text-red-600 text-center text-sm">{error}</p>}
 
@@ -55,17 +64,16 @@ export default function RegisterPage() {
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
                             required
-                            className={`peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent`}
+                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
                             placeholder="Full Name"
                         />
                         <label
                             htmlFor="fullName"
-                            className={`absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600`}
+                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
                         >
                             Full Name
                         </label>
                     </div>
-
 
                     {/* Email */}
                     <div className="relative">
@@ -85,7 +93,6 @@ export default function RegisterPage() {
                             Email Address
                         </label>
                     </div>
-
 
                     {/* School Select */}
                     <SchoolSelect value={school} onChange={setSchool} />
@@ -119,20 +126,19 @@ export default function RegisterPage() {
                         )}
                     </div>
 
-
                     {/* Confirm Password */}
                     <div className="relative">
                         <input
-                            id="password"
+                            id="confirmPassword"
                             type={showConfirmPassword ? 'text' : 'password'}
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             required
                             className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 pr-10 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
-                            placeholder="Create Password"
+                            placeholder="Confirm Password"
                         />
                         <label
-                            htmlFor="confirmpassword"
+                            htmlFor="confirmPassword"
                             className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
                         >
                             Confirm Password
@@ -149,12 +155,32 @@ export default function RegisterPage() {
                         )}
                     </div>
 
+                    {/* Terms and Conditions */}
+                    <div className="flex items-start space-x-2 text-sm">
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            checked={acceptedTerms}
+                            onChange={(e) => setAcceptedTerms(e.target.checked)}
+                            className="mt-1"
+                        />
+                        <label htmlFor="terms" className="text-gray-600">
+                            I accept the{' '}
+                            <a
+                                href="/terms"
+                                target="_blank"
+                                className="text-orange-600 underline hover:text-orange-700"
+                            >
+                                Terms and Conditions
+                            </a>
+                        </label>
+                    </div>
 
                     {/* Submit */}
                     <button
                         type="submit"
-                        disabled={loading}
-                        className={`w-full rounded bg-orange-600 py-2 text-white font-semibold hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 ${loading ? 'opacity-50 cursor-not-allowed' : ''
+                        disabled={loading || !acceptedTerms}
+                        className={`w-full rounded bg-orange-600 py-2 text-white font-semibold hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 ${loading || !acceptedTerms ? 'opacity-50 cursor-not-allowed' : ''
                             }`}
                     >
                         {loading ? 'Registering...' : 'Register'}

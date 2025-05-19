@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Nav3 from '@/components/navigation/nav3';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -26,6 +27,9 @@ export default function LoginPage() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+
+            <Nav3 />
+
             <div className="max-w-md w-full space-y-8 bg-white p-8 rounded shadow">
                 <h2 className="text-center text-3xl font-extrabold text-gray-900">
                     Sign in to your account
@@ -43,14 +47,14 @@ export default function LoginPage() {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="peer w-full rounded border-2 border-gray-300 px-3 pt-5 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
+                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
                             placeholder="Email address"
                         />
                         <label
                             htmlFor="email"
                             className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200
                 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-                peer-focus:top-2 peer-focus:text-sm peer-focus:text-orange-600"
+                peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
                         >
                             Email address
                         </label>
@@ -70,7 +74,7 @@ export default function LoginPage() {
                         />
                         <label
                             htmlFor="password"
-                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200
+                            className="absolute left-3 top-2 text-xs text-gray-500 transition-all duration-200
                 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
                 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
                         >

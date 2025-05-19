@@ -264,7 +264,7 @@ export function MainNav() {
             </Link>
 
             <Link href="/wallet">
-              <Button variant="ghost" size="icon" className="relative">
+              <Button variant="ghost" size="icon" className="relative hidden">
                 <Wallet className="h-20 w-20" />
               </Button>
             </Link>
