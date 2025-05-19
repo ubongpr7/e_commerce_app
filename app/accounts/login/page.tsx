@@ -1,37 +1,26 @@
-'use client'
+'use client';
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function LoginPage() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Basic validation
         if (!email || !password) {
-            setError("Please enter both email and password.");
+            setError('Please enter both email and password.');
             return;
         }
 
-        setError("");
+        setError('');
 
-        // TODO: Replace this stub with your Django API call
         try {
-            // Example:
-            // const res = await fetch("/api/login", {
-            //   method: "POST",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify({ email, password }),
-            // });
-            // const data = await res.json();
-            // Handle response...
-
-            alert(`Login attempted with email: ${email}`); // Placeholder
+            alert(`Login attempted with email: ${email}`);
         } catch (err) {
-            setError("Login failed. Please try again.");
+            setError('Login failed. Please try again.');
         }
     };
 
@@ -45,42 +34,48 @@ export default function LoginPage() {
                     <p className="text-red-600 text-center text-sm font-medium">{error}</p>
                 )}
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
-                    <div>
-                        <label
-                            htmlFor="email"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            Email address
-                        </label>
+                    {/* Email Field */}
+                    <div className="relative">
                         <input
                             id="email"
                             type="email"
                             autoComplete="email"
-                            required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
-                            placeholder="you@example.com"
+                            required
+                            className="peer w-full rounded border-2 border-gray-300 px-3 pt-5 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
+                            placeholder="Email address"
                         />
+                        <label
+                            htmlFor="email"
+                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200
+                peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
+                peer-focus:top-2 peer-focus:text-sm peer-focus:text-orange-600"
+                        >
+                            Email address
+                        </label>
                     </div>
 
-                    <div>
-                        <label
-                            htmlFor="password"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            Password
-                        </label>
+                    {/* Password Field */}
+                    <div className="relative">
                         <input
                             id="password"
                             type="password"
                             autoComplete="current-password"
-                            required
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
-                            placeholder="Your password"
+                            required
+                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
+                            placeholder="Password"
                         />
+                        <label
+                            htmlFor="password"
+                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200
+                peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
+                peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
+                        >
+                            Password
+                        </label>
                     </div>
 
                     <button

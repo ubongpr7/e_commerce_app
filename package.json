@@ -91,6 +91,7 @@
     "zustand": "^5.0.4"
   },
   "devDependencies": {
+    "@sanity/types": "^3.88.3",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",

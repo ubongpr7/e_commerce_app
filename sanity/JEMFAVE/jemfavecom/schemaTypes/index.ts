@@ -6,5 +6,7 @@ import headerImages from "./headerImages";
 import threeImages from "./threeImages";
 import hoverImage1 from "./hoverImage1";
 import hoverImage2 from "./hoverImage2";
+import school from "./school";
+import schooldrop from "./schooldrop";
 
-export const schemaTypes = [banner, category1, category2, category3, headerImages, threeImages, hoverImage1, hoverImage2];
+export const schemaTypes = [banner, category1, category2, category3, headerImages, threeImages, hoverImage1, hoverImage2, school, schooldrop];

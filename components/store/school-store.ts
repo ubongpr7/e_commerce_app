@@ -1,11 +1,14 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+// In your store (school-store.ts)
 export interface School {
+  _id: string;
   name: string;
-  abbreviation: string;
   slug: string;
+  abbreviation: string;
 }
+
 
 interface SchoolState {
   selectedSchool: School | null;

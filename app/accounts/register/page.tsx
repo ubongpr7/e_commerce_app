@@ -1,55 +1,38 @@
-'use client'
+'use client';
 
-import { useState } from "react";
-
-const schools = [
-    "Springfield High School",
-    "Riverside Academy",
-    "Lincoln Preparatory",
-    "Mountainview College",
-    "Greenwood Institute",
-    // Add more schools as needed
-];
+import { useState } from 'react';
+import { Eye, EyeOff } from 'lucide-react';
+import SchoolSelect from '@/components/user/school-select';
 
 export default function RegisterPage() {
-    const [fullName, setFullName] = useState("");
-    const [email, setEmail] = useState("");
-    const [school, setSchool] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
+    const [fullName, setFullName] = useState('');
+    const [email, setEmail] = useState('');
+    const [school, setSchool] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
-        // Basic validation
         if (!fullName || !email || !school || !password || !confirmPassword) {
-            setError("Please fill in all fields.");
+            setError('Please fill in all fields.');
             return;
         }
         if (password !== confirmPassword) {
-            setError("Passwords do not match.");
+            setError('Passwords do not match.');
             return;
         }
 
-        setError("");
+        setError('');
         setLoading(true);
-
         try {
-            // TODO: Replace with your Django API call
-            // Example:
-            // const res = await fetch("/api/register", {
-            //   method: "POST",
-            //   headers: { "Content-Type": "application/json" },
-            //   body: JSON.stringify({ fullName, email, school, password }),
-            // });
-            // const data = await res.json();
-            // Handle response...
-
-            alert(`Registered ${fullName} with email: ${email} from ${school}`);
+            alert(`Registered ${fullName} (${email}) from ${school}`);
         } catch (err) {
-            setError("Registration failed. Please try again.");
+            setError('Registration failed. Try again.');
         } finally {
             setLoading(false);
         }
@@ -61,118 +44,120 @@ export default function RegisterPage() {
                 <h2 className="text-center text-3xl font-extrabold text-gray-900">
                     Create your account
                 </h2>
-                {error && (
-                    <p className="text-red-600 text-center text-sm font-medium">{error}</p>
-                )}
-                <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
-                    <div>
-                        <label
-                            htmlFor="fullName"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            Full Name
-                        </label>
+                {error && <p className="text-red-600 text-center text-sm">{error}</p>}
+
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                    {/* Full Name */}
+                    <div className="relative">
                         <input
                             id="fullName"
                             type="text"
-                            autoComplete="name"
-                            required
                             value={fullName}
                             onChange={(e) => setFullName(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
-                            placeholder="John Doe"
+                            required
+                            className={`peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent`}
+                            placeholder="Full Name"
                         />
+                        <label
+                            htmlFor="fullName"
+                            className={`absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600`}
+                        >
+                            Full Name
+                        </label>
                     </div>
 
-                    <div>
-                        <label
-                            htmlFor="email"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            Email address
-                        </label>
+
+                    {/* Email */}
+                    <div className="relative">
                         <input
                             id="email"
                             type="email"
-                            autoComplete="email"
-                            required
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
-                            placeholder="you@example.com"
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            htmlFor="school"
-                            className="block text-sm font-medium text-gray-700"
-                        >
-                            School
-                        </label>
-                        <select
-                            id="school"
                             required
-                            value={school}
-                            onChange={(e) => setSchool(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded bg-white focus:outline-none focus:ring-orange-600 focus:border-orange-600"
+                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
+                            placeholder="Email Address"
+                        />
+                        <label
+                            htmlFor="email"
+                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
                         >
-                            <option value="" disabled>
-                                Select your school
-                            </option>
-                            {schools.map((sch) => (
-                                <option key={sch} value={sch}>
-                                    {sch}
-                                </option>
-                            ))}
-                        </select>
+                            Email Address
+                        </label>
                     </div>
 
-                    <div>
+
+                    {/* School Select */}
+                    <SchoolSelect value={school} onChange={setSchool} />
+
+                    {/* Password */}
+                    <div className="relative">
+                        <input
+                            id="password"
+                            type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 pr-10 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
+                            placeholder="Create Password"
+                        />
                         <label
                             htmlFor="password"
-                            className="block text-sm font-medium text-gray-700"
+                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
                         >
                             Password
                         </label>
-                        <input
-                            id="password"
-                            type="password"
-                            autoComplete="new-password"
-                            required
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
-                            placeholder="Create a password"
-                        />
+                        {password.length > 0 && (
+                            <button
+                                type="button"
+                                onClick={() => setShowPassword((prev) => !prev)}
+                                className="absolute right-3 bottom-2.5 text-gray-500 hover:text-gray-700"
+                                tabIndex={-1}
+                            >
+                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        )}
                     </div>
 
-                    <div>
+
+                    {/* Confirm Password */}
+                    <div className="relative">
+                        <input
+                            id="password"
+                            type={showConfirmPassword ? 'text' : 'password'}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            required
+                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 pr-10 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
+                            placeholder="Create Password"
+                        />
                         <label
-                            htmlFor="confirmPassword"
-                            className="block text-sm font-medium text-gray-700"
+                            htmlFor="confirmpassword"
+                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
                         >
                             Confirm Password
                         </label>
-                        <input
-                            id="confirmPassword"
-                            type="password"
-                            autoComplete="new-password"
-                            required
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-orange-600 focus:border-orange-600"
-                            placeholder="Confirm your password"
-                        />
+                        {confirmPassword.length > 0 && (
+                            <button
+                                type="button"
+                                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                                className="absolute right-3 bottom-2.5 text-gray-500 hover:text-gray-700"
+                                tabIndex={-1}
+                            >
+                                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                            </button>
+                        )}
                     </div>
 
+
+                    {/* Submit */}
                     <button
                         type="submit"
                         disabled={loading}
-                        className={`w-full flex justify-center py-2 px-4 border border-transparent rounded bg-orange-600 text-white font-semibold hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 ${loading ? "opacity-50 cursor-not-allowed" : ""
+                        className={`w-full rounded bg-orange-600 py-2 text-white font-semibold hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 ${loading ? 'opacity-50 cursor-not-allowed' : ''
                             }`}
                     >
-                        {loading ? "Registering..." : "Register"}
+                        {loading ? 'Registering...' : 'Register'}
                     </button>
                 </form>
             </div>
