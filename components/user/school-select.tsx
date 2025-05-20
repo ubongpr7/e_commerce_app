@@ -19,6 +19,7 @@ export default function SchoolSelect({ value, onChange }: SchoolSelectProps) {
   const [query, setQuery] = useState('');
   const [schools, setSchools] = useState<School[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
 
   useEffect(() => {
     const fetchSchools = async () => {
@@ -45,26 +46,37 @@ export default function SchoolSelect({ value, onChange }: SchoolSelectProps) {
 
   return (
     <Combobox value={value} onChange={onChange}>
-      <div className="relative">
+      <div
+        className={`relative w-full font-sans
+          border rounded-md px-3 py-2
+          focus-within:ring-2 focus-within:ring-orange-600 focus-within:border-orange-600
+          border-gray-300
+        `}
+      >
+        <label
+          htmlFor="school"
+          className={`absolute left-2 px-2 bg-white transition-all pointer-events-none select-none
+            ${(value.length > 0 || isFocused)
+              ? 'text-xs -top-2 text-orange-600'
+              : 'text-gray-400 top-1/2 transform -translate-y-1/2 text-sm'}
+          `}
+        >
+          Your School
+        </label>
+
         <Combobox.Input
           id="school"
-          placeholder="Search for your school"
+          placeholder="Your School"
           displayValue={(school: string) => school}
           onChange={(event) => setQuery(event.target.value)}
-          className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 pr-10 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
+          className="peer w-full border-none outline-none bg-transparent text-gray-900 text-sm placeholder-transparent pr-10"
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
         />
+
         <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-3">
           <ChevronDown className="h-5 w-5 text-gray-400" />
         </Combobox.Button>
-
-        <label
-          htmlFor="school"
-          className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200
-          peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-          peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
-        >
-          School
-        </label>
 
         <Transition
           as={Fragment}
@@ -73,14 +85,14 @@ export default function SchoolSelect({ value, onChange }: SchoolSelectProps) {
           leaveTo="opacity-0"
           afterLeave={() => setQuery('')}
         >
-          <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/10">
+          <Combobox.Options className="absolute left-0 z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/10">
             {isLoading ? (
               <div className="cursor-default select-none px-4 py-2 text-gray-500">
                 Loading...
               </div>
             ) : filteredSchools.length === 0 && query !== '' ? (
               <div className="cursor-default select-none px-4 py-2 text-gray-500">
-                No schools found.
+                Can't find school
               </div>
             ) : (
               filteredSchools.map((s) => (

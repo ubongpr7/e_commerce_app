@@ -1,10 +1,6 @@
-import Nav2 from "@/components/navigation/nav2";
-
 export default function TermsAndConditionsPage() {
     return (
         <main className="px-6 lg:px-8 py-32">
-
-            <Nav2 />
             
             <h1 className="text-3xl font-bold text-gray-900 mb-6">Terms and Conditions</h1>
 

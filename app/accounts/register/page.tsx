@@ -1,192 +1,149 @@
 'use client';
 
-import { useState } from 'react';
-import { Eye, EyeOff } from 'lucide-react';
-import SchoolSelect from '@/components/user/school-select';
-import Nav3 from '@/components/navigation/nav3';
+import React, { useState } from 'react';
+import { PasswordInput } from '@/components/auth/password-input';
+import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
+import SchoolSelector from '@/components/user/school-select'; // your existing component
+import { useRouter } from 'next/navigation';
+import PhoneOrEmailInput from '@/components/auth/phone-email-input';
 
-export default function RegisterPage() {
-    const [fullName, setFullName] = useState('');
-    const [email, setEmail] = useState('');
+function isValidEmail(email: string) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidPhone(phone: string) {
+    return /^(\+?\d{1,3}[-.\s]?|\()?(\d{3}|\d{2,4})\)?[-.\s]?\d{3}[-.\s]?\d{4,6}$/.test(phone);
+}
+
+export const RegisterForm = () => {
+    const [step, setStep] = useState(1);
+    const [emailOrPhone, setEmailOrPhone] = useState('');
     const [school, setSchool] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [acceptedTerms, setAcceptedTerms] = useState(false);
-    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [error, setError] = useState('');
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const router = useRouter();
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!fullName || !email || !school || !password || !confirmPassword) {
-            setError('Please fill in all fields.');
-            return;
-        }
-        if (password !== confirmPassword) {
-            setError('Passwords do not match.');
-            return;
-        }
-        if (!acceptedTerms) {
-            setError('You must accept the terms and conditions.');
-            return;
+    const next = () => {
+        if (step === 1) {
+            if (!emailOrPhone) return;
+
+            if (!isValidEmail(emailOrPhone) && !isValidPhone(emailOrPhone)) {
+                setError('Please enter a valid email or phone number.');
+                return;
+            }
+            setError('');
         }
 
-        setError('');
         setLoading(true);
-        try {
-            alert(`Registered ${fullName} (${email}) from ${school}`);
-        } catch (err) {
-            setError('Registration failed. Try again.');
-        } finally {
+        setTimeout(() => {
             setLoading(false);
-        }
+            setStep((prev) => prev + 1);
+        }, 800);
     };
 
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    const handleSubmit = () => {
+        if (!password) return;
+        setLoading(true);
 
-            <Nav3 />
+        setTimeout(() => {
+            setLoading(false);
+            setSuccess(true);
 
-            <div className="max-w-md w-full space-y-8 bg-white p-8 rounded shadow mt-28">
-                <h2 className="text-center text-3xl font-extrabold text-gray-900">
-                    CREATE YOUR ACCOUNT
-                </h2>
-                {error && <p className="text-red-600 text-center text-sm">{error}</p>}
+            // redirect to login after 2 seconds
+            setTimeout(() => {
+                router.push('/accounts/login');
+            }, 2000);
+        }, 1000);
+    };
 
-                <form className="space-y-6" onSubmit={handleSubmit}>
-                    {/* Full Name */}
-                    <div className="relative">
-                        <input
-                            id="fullName"
-                            type="text"
-                            value={fullName}
-                            onChange={(e) => setFullName(e.target.value)}
-                            required
-                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
-                            placeholder="Full Name"
-                        />
-                        <label
-                            htmlFor="fullName"
-                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
-                        >
-                            Full Name
-                        </label>
-                    </div>
-
-                    {/* Email */}
-                    <div className="relative">
-                        <input
-                            id="email"
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
-                            placeholder="Email Address"
-                        />
-                        <label
-                            htmlFor="email"
-                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
-                        >
-                            Email Address
-                        </label>
-                    </div>
-
-                    {/* School Select */}
-                    <SchoolSelect value={school} onChange={setSchool} />
-
-                    {/* Password */}
-                    <div className="relative">
-                        <input
-                            id="password"
-                            type={showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 pr-10 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
-                            placeholder="Create Password"
-                        />
-                        <label
-                            htmlFor="password"
-                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
-                        >
-                            Password
-                        </label>
-                        {password.length > 0 && (
-                            <button
-                                type="button"
-                                onClick={() => setShowPassword((prev) => !prev)}
-                                className="absolute right-3 bottom-2.5 text-gray-500 hover:text-gray-700"
-                                tabIndex={-1}
-                            >
-                                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                            </button>
-                        )}
-                    </div>
-
-                    {/* Confirm Password */}
-                    <div className="relative">
-                        <input
-                            id="confirmPassword"
-                            type={showConfirmPassword ? 'text' : 'password'}
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required
-                            className="peer w-full rounded border-2 border-gray-300 px-2.5 pt-6 pb-2 pr-10 focus:border-orange-600 focus:ring-orange-600 placeholder-transparent"
-                            placeholder="Confirm Password"
-                        />
-                        <label
-                            htmlFor="confirmPassword"
-                            className="absolute left-3 top-2 text-sm text-gray-500 transition-all duration-200 peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-focus:top-2 peer-focus:text-xs peer-focus:text-orange-600"
-                        >
-                            Confirm Password
-                        </label>
-                        {confirmPassword.length > 0 && (
-                            <button
-                                type="button"
-                                onClick={() => setShowConfirmPassword((prev) => !prev)}
-                                className="absolute right-3 bottom-2.5 text-gray-500 hover:text-gray-700"
-                                tabIndex={-1}
-                            >
-                                {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                            </button>
-                        )}
-                    </div>
-
-                    {/* Terms and Conditions */}
-                    <div className="flex items-start space-x-2 text-sm">
-                        <input
-                            type="checkbox"
-                            id="terms"
-                            checked={acceptedTerms}
-                            onChange={(e) => setAcceptedTerms(e.target.checked)}
-                            className="mt-1"
-                        />
-                        <label htmlFor="terms" className="text-gray-600">
-                            I accept the{' '}
-                            <a
-                                href="/terms"
-                                target="_blank"
-                                className="text-orange-600 underline hover:text-orange-700"
-                            >
-                                Terms and Conditions
-                            </a>
-                        </label>
-                    </div>
-
-                    {/* Submit */}
-                    <button
-                        type="submit"
-                        disabled={loading || !acceptedTerms}
-                        className={`w-full rounded bg-orange-600 py-2 text-white font-semibold hover:bg-orange-700 focus:ring-2 focus:ring-orange-500 ${loading || !acceptedTerms ? 'opacity-50 cursor-not-allowed' : ''
-                            }`}
-                    >
-                        {loading ? 'Registering...' : 'Register'}
-                    </button>
-                </form>
+    if (success) {
+        return (
+            <div className="text-center mt-6">
+                <h2 className="text-xl font-semibold text-green-600">Account Created 🎉</h2>
+                <p className="text-gray-600 mt-2">Redirecting to login...</p>
             </div>
+        );
+    }
+
+    return (
+        <div className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-md">
+            <div className="flex flex-col items-center space-y-2 mb-6">
+                <div className="bg-orange-600 rounded-full p-3 text-white">⭐</div>
+                <h2 className="text-xl font-semibold">
+                    {step === 1 && 'Join ShopMate'}
+                    {step === 2 && 'Select Your School'}
+                    {step === 3 && 'Set a Password'}
+                </h2>
+                <p className="text-gray-600 text-sm">
+                    {step === 1 && 'Enter your email or phone to create an account'}
+                    {step === 2 && 'Choose your school to customize your shopping'}
+                    {step === 3 && 'Create a strong password to secure your account'}
+                </p>
+            </div>
+
+            {step === 1 && (
+                <>
+                    <PhoneOrEmailInput
+                        label="Email or Mobile Number"
+                        value={emailOrPhone}
+                        onChange={(val) => {
+                            setEmailOrPhone(val);
+                            if (error) setError('');
+                        }}
+                        required
+                        error={error}
+                    />
+
+                    <Button
+                        onClick={next}
+                        disabled={loading || !emailOrPhone || !!error}
+                        className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                    >
+                        {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Continue'}
+                    </Button>
+                </>
+            )}
+
+            {step === 2 && (
+                <>
+                    <SchoolSelector value={school} onChange={(selected) => setSchool(selected)} />
+
+                    <Button
+                        onClick={next}
+                        disabled={loading || !school}
+                        className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                    >
+                        {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Continue'}
+                    </Button>
+                </>
+            )}
+
+            {step === 3 && (
+                <>
+                    <PasswordInput value={password} onChange={(e) => setPassword(e.target.value)} />
+
+                    <Button
+                        onClick={handleSubmit}
+                        disabled={loading || !password}
+                        className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                    >
+                        {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Create Account'}
+                    </Button>
+                </>
+            )}
+
+            <p className="mt-4 text-sm text-center text-gray-600">
+                Already have an account?{' '}
+                <a href="/accounts/login" className="text-orange-600 hover:underline">
+                    Login
+                </a>
+            </p>
         </div>
     );
-}
+};
+
+export default RegisterForm;

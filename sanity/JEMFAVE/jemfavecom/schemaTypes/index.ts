@@ -9,5 +9,6 @@ import hoverImage2 from "./hoverImage2";
 import school from "./school";
 import schooldrop from "./schooldrop";
 import featuredAd from "./featuredAd";
+import country from "./country";
 
-export const schemaTypes = [banner, category1, category2, category3, headerImages, threeImages, hoverImage1, hoverImage2, school, schooldrop, featuredAd];
+export const schemaTypes = [banner, category1, category2, category3, headerImages, threeImages, hoverImage1, hoverImage2, school, schooldrop, featuredAd, country];
