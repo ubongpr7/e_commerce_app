@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import SanityClient from "@/lib/sanityClient";
+import { parsePhoneNumberFromString, getCountries, getCountryCallingCode } from 'libphonenumber-js';
 
 interface Country {
   name: string;
   code: string;
   dial_code: string;
-  flag: string;
+  flag: string; // Emoji
 }
 
 interface PhoneOrEmailInputProps {
@@ -19,6 +20,12 @@ interface PhoneOrEmailInputProps {
 }
 
 const isEmail = (val: string) => /\S+@\S+\.\S+/.test(val);
+
+// Convert emoji to country code: 🇳🇬 → "ng"
+const emojiToCode = (emoji: string) => {
+  const codePoints = [...emoji].map(char => char.codePointAt(0)! - 0x1F1E6 + 65);
+  return String.fromCharCode(...codePoints).toLowerCase();
+};
 
 export default function PhoneOrEmailInput({
   label,
@@ -48,13 +55,50 @@ export default function PhoneOrEmailInput({
         console.error('Failed to fetch countries:', err);
       }
     }
-
     fetchCountries();
   }, []);
 
+  // Detect phone/email and set country
   useEffect(() => {
-    setIsPhone(value.length > 0 && /^\d/.test(value) && !isEmail(value));
-  }, [value]);
+    const isPhoneInput = value.length > 0 && /^\d+/.test(value) && !isEmail(value);
+    setIsPhone(isPhoneInput);
+
+    if (!isPhoneInput || countries.length === 0) return;
+
+    const normalized = value.startsWith('+') ? value : `+${value.replace(/^0+/, '')}`;
+    const parsed = parsePhoneNumberFromString(normalized);
+
+    let countryCode = parsed?.country;
+
+    if (!countryCode) {
+      for (const c of countries) {
+        if (
+          value.startsWith(c.dial_code.replace('+', '')) ||
+          normalized.startsWith(c.dial_code)
+        ) {
+          const fallbackCode = c.code.toUpperCase();
+          const match = countries.find(c => c.code.toUpperCase() === fallbackCode);
+          if (match && match.code !== selectedCountry?.code) {
+            setSelectedCountry(match);
+          }
+          break;
+        }
+      }
+    } else {
+      const match = countries.find(c => c.code.toUpperCase() === countryCode);
+      if (match && match.code !== selectedCountry?.code) {
+        setSelectedCountry(match);
+      }
+    }
+
+
+    if (countryCode) {
+      const match = countries.find(c => c.code.toUpperCase() === countryCode);
+      if (match && match.code !== selectedCountry?.code) {
+        setSelectedCountry(match);
+      }
+    }
+  }, [value, countries]);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -79,8 +123,10 @@ export default function PhoneOrEmailInput({
   const handleSelectCountry = (country: Country) => {
     setSelectedCountry(country);
     setShowDropdown(false);
-    if (value.startsWith('0')) {
-      onChange(value.substring(1));
+
+    if (!value.startsWith(country.dial_code)) {
+      const strippedValue = value.replace(/^0+/, '').replace(/^(\+?\d{1,4})/, '');
+      onChange(`${country.dial_code}${strippedValue}`);
     }
   };
 
@@ -113,7 +159,12 @@ export default function PhoneOrEmailInput({
               aria-label="Select country code"
               tabIndex={-1}
             >
-              <span className="text-xl">{selectedCountry.flag}</span>
+              <span className="text-xl block lg:hidden">{selectedCountry.flag}</span>
+              <img
+                src={`https://flagcdn.com/w40/${emojiToCode(selectedCountry.flag)}.png`}
+                alt={selectedCountry.code}
+                className="w-6 h-4 hidden lg:block object-cover rounded-sm"
+              />
               <span className="font-medium">{selectedCountry.dial_code}</span>
               <svg
                 className={`w-4 h-4 ml-1 transition-transform ${showDropdown ? 'rotate-180' : 'rotate-0'}`}
@@ -134,7 +185,12 @@ export default function PhoneOrEmailInput({
                     className="flex items-center gap-2 px-3 py-2 cursor-pointer hover:bg-orange-100"
                     onClick={() => handleSelectCountry(country)}
                   >
-                    <span className="text-xl">{country.flag}</span>
+                    <span className="text-xl block lg:hidden">{country.flag}</span>
+                    <img
+                      src={`https://flagcdn.com/w40/${emojiToCode(country.flag)}.png`}
+                      alt={country.code}
+                      className="w-6 h-4 hidden lg:block object-cover rounded-sm"
+                    />
                     <span>{country.name}</span>
                     <span className="ml-auto font-mono text-gray-500">{country.dial_code}</span>
                   </li>
@@ -150,9 +206,8 @@ export default function PhoneOrEmailInput({
           value={value}
           onChange={handleInputChange}
           required={required}
-          className={`flex-1 border-none outline-none bg-transparent text-gray-900 text-sm placeholder-transparent ${
-            isPhone ? 'pl-2' : ''
-          }`}
+          className={`flex-1 border-none outline-none bg-transparent text-gray-900 text-sm placeholder-transparent ${isPhone ? 'pl-2' : ''
+            }`}
           placeholder={label}
           autoComplete="off"
         />

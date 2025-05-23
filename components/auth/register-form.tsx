@@ -2,39 +2,59 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowLeft, Loader2 } from 'lucide-react';
+import { PasswordInput } from '@/components/auth/password-input';
 import { Button } from '@/components/ui/button';
+import { Loader2, ArrowLeft } from 'lucide-react';
+import SchoolSelector from '@/components/user/school-select';
+import { useRouter } from 'next/navigation';
 import PhoneOrEmailInput from '@/components/auth/phone-email-input';
 import OTPInput from '@/components/auth/otp-input';
-import { PasswordInput } from '@/components/auth/password-input';
-import { useRouter } from 'next/navigation';
 
-const steps = ['Input', 'OTP', 'New Password', 'Confirm Password'];
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
-const ForgotPasswordForm = () => {
+function isValidPhone(phone: string) {
+  return /^(\+?\d{1,3}[-.\s]?|\()?(\d{3}|\d{2,4})\)?[-.\s]?\d{3}[-.\s]?\d{4,6}$/.test(phone);
+}
+
+const steps = ['Input', 'OTP', 'School', 'Password', 'Confirm'];
+
+export const RegisterForm = () => {
   const [step, setStep] = useState(1);
   const [emailOrPhone, setEmailOrPhone] = useState('');
   const [otp, setOtp] = useState('');
-  const [newPassword, setNewPassword] = useState('');
+  const [school, setSchool] = useState('');
+  const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const router = useRouter();
 
-  const isValidEmail = (email: string) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-  const isValidPhone = (phone: string) =>
-    /^(\+?\d{1,3}[-.\s]?|\()?(\d{3}|\d{2,4})\)?[-.\s]?\d{3}[-.\s]?\d{4,6}$/.test(phone);
-
-  const handleBack = () => {
-    if (step > 1) setStep(step - 1);
-  };
-
   const handleResend = () => {
     console.log('Resend clicked');
+  };
+
+  const sendOTP = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setStep(2);
+    }, 1000);
+  };
+
+  const verifyOTP = () => {
+    if (otp.length !== 6) {
+      setError('Please enter the 6-digit code.');
+      return;
+    }
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setStep(3);
+    }, 1000);
   };
 
   const handleNextFromInput = () => {
@@ -46,36 +66,11 @@ const ForgotPasswordForm = () => {
     }
 
     setError('');
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setStep(2);
-    }, 1000);
+    sendOTP();
   };
 
-  const handleVerifyOTP = () => {
-    if (otp.length !== 6) {
-      setError('Please enter the 6-digit code.');
-      return;
-    }
-
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setStep(3);
-    }, 1000);
-  };
-
-  const handleNextFromNewPassword = () => {
-    if (!newPassword) return;
-
-    setStep(4);
-  };
-
-  const handleResetPassword = () => {
-    if (!confirmPassword) return;
-
-    if (confirmPassword !== newPassword) {
+  const handleSubmit = () => {
+    if (!confirmPassword || confirmPassword !== password) {
       setError('Passwords do not match.');
       return;
     }
@@ -87,13 +82,17 @@ const ForgotPasswordForm = () => {
       setTimeout(() => {
         router.push('/accounts/login');
       }, 2000);
-    }, 1500);
+    }, 1000);
+  };
+
+  const goBack = () => {
+    if (step > 1) setStep(step - 1);
   };
 
   if (success) {
     return (
       <div className="text-center mt-6">
-        <h2 className="text-xl font-semibold text-green-600">Password Reset 🎉</h2>
+        <h2 className="text-xl font-semibold text-green-600">Account Created 🎉</h2>
         <p className="text-gray-600 mt-2">Redirecting to login...</p>
       </div>
     );
@@ -101,9 +100,9 @@ const ForgotPasswordForm = () => {
 
   return (
     <div className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-md">
-      {/* Progress Bar */}
+      {/* Progress Indicator */}
       <div className="flex items-center justify-between mb-6">
-        {steps.map((_, i) => (
+        {steps.map((s, i) => (
           <div
             key={i}
             className={`h-2 flex-1 mx-1 rounded-full transition-all duration-300 ${
@@ -113,30 +112,32 @@ const ForgotPasswordForm = () => {
         ))}
       </div>
 
-      {/* Title & Subtext */}
+      {/* Title */}
       <div className="flex items-center mb-4 space-x-3">
         {step > 1 && (
-          <button onClick={handleBack} className="text-gray-600 hover:text-orange-600">
+          <button onClick={goBack} className="text-gray-600 hover:text-orange-600">
             <ArrowLeft className="w-5 h-5" />
           </button>
         )}
         <div className="flex flex-col">
           <h2 className="text-xl font-semibold">
-            {step === 1 && 'Reset Your Password'}
-            {step === 2 && 'Verify Code'}
-            {step === 3 && 'Create New Password'}
-            {step === 4 && 'Confirm Password'}
+            {step === 1 && 'Join Jemfave'}
+            {step === 2 && 'Verify Your Account'}
+            {step === 3 && 'Select Your School'}
+            {step === 4 && 'Set a Password'}
+            {step === 5 && 'Confirm Password'}
           </h2>
           <p className="text-gray-600 text-sm">
-            {step === 1 && 'Enter your email or phone to receive a reset code'}
-            {step === 2 && `We’ve sent a 6-digit code to ${emailOrPhone}`}
-            {step === 3 && 'Create a strong new password for your account'}
-            {step === 4 && 'Re-enter your new password to confirm'}
+            {step === 1 && 'Enter your email or phone to create an account'}
+            {step === 2 && `We've sent a 6-digit code to ${emailOrPhone}`}
+            {step === 3 && 'Choose your school to customize your shopping'}
+            {step === 4 && 'Create a strong password to secure your account'}
+            {step === 5 && 'Re-enter your password to confirm'}
           </p>
         </div>
       </div>
 
-      {/* Step Content */}
+      {/* Step Content with Animation */}
       <AnimatePresence mode="wait">
         <motion.div
           key={step}
@@ -172,13 +173,13 @@ const ForgotPasswordForm = () => {
               <OTPInput
                 value={otp}
                 onChange={setOtp}
-                onComplete={(val) => setOtp(val)}
+                onComplete={(code) => console.log('OTP complete:', code)}
                 error={error}
                 length={6}
                 onResend={handleResend}
               />
               <Button
-                onClick={handleVerifyOTP}
+                onClick={verifyOTP}
                 disabled={loading || otp.length !== 6}
                 className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
               >
@@ -189,17 +190,13 @@ const ForgotPasswordForm = () => {
 
           {step === 3 && (
             <>
-              <PasswordInput
-                label="New Password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-              />
+              <SchoolSelector value={school} onChange={(selected) => setSchool(selected)} />
               <Button
-                onClick={handleNextFromNewPassword}
-                disabled={loading || !newPassword}
+                onClick={() => setStep(4)}
+                disabled={loading || !school}
                 className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
               >
-                Continue
+                {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Continue'}
               </Button>
             </>
           )}
@@ -207,20 +204,33 @@ const ForgotPasswordForm = () => {
           {step === 4 && (
             <>
               <PasswordInput
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <Button
+                onClick={() => setStep(5)}
+                disabled={loading || !password}
+                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+              >
+                {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Continue'}
+              </Button>
+            </>
+          )}
+
+          {step === 5 && (
+            <>
+              <PasswordInput
                 label="Confirm Password"
                 value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                  if (error) setError('');
-                }}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
-              {error && <p className="text-sm text-red-600 mt-1">{error}</p>}
+              {error && <p className="text-sm text-red-600 mt-2">{error}</p>}
               <Button
-                onClick={handleResetPassword}
+                onClick={handleSubmit}
                 disabled={loading || !confirmPassword}
                 className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
               >
-                {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Reset Password'}
+                {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Create Account'}
               </Button>
             </>
           )}
@@ -228,13 +238,13 @@ const ForgotPasswordForm = () => {
       </AnimatePresence>
 
       <p className="mt-4 text-sm text-center text-gray-600">
-        Remembered your password?{' '}
+        Already have an account?{' '}
         <a href="/accounts/login" className="text-orange-600 hover:underline">
-          Back to Login
+          Login
         </a>
       </p>
     </div>
   );
 };
 
-export default ForgotPasswordForm;
+export default RegisterForm;

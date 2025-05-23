@@ -56,7 +56,7 @@ export default function SchoolSelect({ value, onChange }: SchoolSelectProps) {
         <label
           htmlFor="school"
           className={`absolute left-2 px-2 bg-white transition-all pointer-events-none select-none
-            ${(value.length > 0 || isFocused)
+            ${((value?.length ?? 0) > 0 || isFocused)
               ? 'text-xs -top-2 text-orange-600'
               : 'text-gray-400 top-1/2 transform -translate-y-1/2 text-sm'}
           `}

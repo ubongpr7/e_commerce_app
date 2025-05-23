@@ -1,6 +1,6 @@
 // app/forgot-password/page.tsx
 import React from 'react';
-import { ForgotPasswordForm } from '@/components/auth/forgot-password-form';
+import ForgotPasswordForm from '@/components/auth/forgot-password-form';
 
 const ForgotPasswordPage = () => {
     return (
