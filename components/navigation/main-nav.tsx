@@ -160,7 +160,7 @@ export function MainNav() {
               <Input
                 type="text"
                 placeholder="Search products, brands and categories..."
-                className="w-full rounded-lg bg-gray-100 pl-4 lg:w-[300px]"
+                className="w-full rounded-lg bg-gray-100 pl-4 lg:w-[300px] text-gray-700"
               />
               <Button
                 type="submit"
@@ -304,7 +304,7 @@ export function MainNav() {
             <Input
               type="text"
               placeholder="Search products, brands and categories..."
-              className="flex-1 h-8 text-sm bg-gray-100 rounded-full"
+              className="flex-1 h-8 text-sm text-gray-700 bg-gray-100 rounded-full"
             />
             <Button
               type="submit"

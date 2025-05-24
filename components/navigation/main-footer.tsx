@@ -46,7 +46,7 @@ export function MainFooter() {
               <span className="text-xl text-white tracking-widest">JEMFAVE</span>
             </Link>
             <p className="mt-4 text-white">
-              A multivendor e-commerce platform connecting customers with quality vendors.
+              #1 Global Student Shopping Platform
             </p>
             <div className="mt-6 flex space-x-4">
               <Button variant="ghost" size="icon" asChild>
@@ -99,7 +99,7 @@ export function MainFooter() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 flex-shrink-0 text-orange-600" />
-                <span>support@multivendor.com</span>
+                <span>support@jemfave.com</span>
               </li>
             </ul>
           </div>

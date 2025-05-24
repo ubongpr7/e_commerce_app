@@ -47,7 +47,7 @@ export default function SchoolSelect({ value, onChange }: SchoolSelectProps) {
   return (
     <Combobox value={value} onChange={onChange}>
       <div
-        className={`relative w-full font-sans
+        className={`relative w-full
           border rounded-md px-3 py-2
           focus-within:ring-2 focus-within:ring-orange-600 focus-within:border-orange-600
           border-gray-300
@@ -57,8 +57,8 @@ export default function SchoolSelect({ value, onChange }: SchoolSelectProps) {
           htmlFor="school"
           className={`absolute left-2 px-2 bg-white transition-all pointer-events-none select-none
             ${((value?.length ?? 0) > 0 || isFocused)
-              ? 'text-xs -top-2 text-orange-600'
-              : 'text-gray-400 top-1/2 transform -translate-y-1/2 text-sm'}
+              ? 'text-xs lg:text-sm -top-2 text-orange-600'
+              : 'text-gray-400 top-1/2 transform -translate-y-1/2 text-sm lg:text-base'}
           `}
         >
           Your School
@@ -69,7 +69,7 @@ export default function SchoolSelect({ value, onChange }: SchoolSelectProps) {
           placeholder="Your School"
           displayValue={(school: string) => school}
           onChange={(event) => setQuery(event.target.value)}
-          className="peer w-full border-none outline-none bg-transparent text-gray-900 text-sm placeholder-transparent pr-10"
+          className="peer w-full border-none outline-none bg-transparent lg:text-base text-gray-900 text-sm placeholder-transparent pr-10"
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
@@ -87,11 +87,11 @@ export default function SchoolSelect({ value, onChange }: SchoolSelectProps) {
         >
           <Combobox.Options className="absolute left-0 z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-sm shadow-lg ring-1 ring-black/10">
             {isLoading ? (
-              <div className="cursor-default select-none px-4 py-2 text-gray-500">
+              <div className="cursor-default select-none px-4 py-2 lg:text-base text-gray-500">
                 Loading...
               </div>
             ) : filteredSchools.length === 0 && query !== '' ? (
-              <div className="cursor-default select-none px-4 py-2 text-gray-500">
+              <div className="cursor-default select-none px-4 py-2 lg:text-base text-gray-500">
                 Can't find school
               </div>
             ) : (

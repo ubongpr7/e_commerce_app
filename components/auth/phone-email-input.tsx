@@ -140,7 +140,7 @@ export default function PhoneOrEmailInput({
       <label
         htmlFor="phoneOrEmailInput"
         className={`absolute left-2 px-2 bg-white transition-all pointer-events-none select-none
-        ${floatLabel ? 'text-orange-600 text-xs -top-2' : 'text-gray-400 top-1/2 transform -translate-y-1/2 text-sm'}`}
+        ${floatLabel ? 'text-orange-600 text-xs lg:text-sm -top-2' : 'text-gray-400 top-1/2 transform -translate-y-1/2 text-sm lg:text-base'}`}
       >
         {label} {required && '*'}
       </label>
@@ -206,7 +206,7 @@ export default function PhoneOrEmailInput({
           value={value}
           onChange={handleInputChange}
           required={required}
-          className={`flex-1 border-none outline-none bg-transparent text-gray-900 text-sm placeholder-transparent ${isPhone ? 'pl-2' : ''
+          className={`flex-1 border-none outline-none bg-transparent text-gray-900 text-sm lg:text-base placeholder-transparent ${isPhone ? 'pl-2' : ''
             }`}
           placeholder={label}
           autoComplete="off"
@@ -214,7 +214,7 @@ export default function PhoneOrEmailInput({
       </div>
 
       {error && (
-        <p className="text-sm mt-1 text-red-600" role="alert">
+        <p className="text-sm mt-1 lg:text-base text-red-600" role="alert">
           {error}
         </p>
       )}

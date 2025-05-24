@@ -132,12 +132,12 @@ const OTPInput: React.FC<OTPInputProps> = ({
                         ref={(el) => {
                             inputsRef.current[i] = el;
                         }}
-                        className="w-10 h-12 text-center border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-600 text-lg"
+                        className="w-10 h-12 text-center border lg:text-base border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-600 text-lg"
                     />
                 ))}
             </div>
 
-            {error && <p className="text-sm text-red-600 text-center">{error}</p>}
+            {error && <p className="text-sm text-red-600 lg:text-base text-center">{error}</p>}
 
             <div className="text-center text-sm text-gray-600">
                 {isResendDisabled ? (
@@ -149,7 +149,7 @@ const OTPInput: React.FC<OTPInputProps> = ({
                         variant="link"
                         size="sm"
                         onClick={handleResend}
-                        className="text-orange-600 hover:underline p-0"
+                        className="text-orange-600 hover:underline lg:text-base p-0"
                     >
                         Resend Code
                     </Button>

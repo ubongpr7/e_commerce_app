@@ -102,7 +102,7 @@ export const LoginForm = () => {
     }
 
     return (
-        <div className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-md">
+        <div className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-2xl border-orange-600 border-t-4 border-b-4">
             {/* Progress Indicator */}
             <div className="flex items-center justify-between mb-6">
                 {steps.map((_, i) => (
@@ -122,12 +122,12 @@ export const LoginForm = () => {
                     </button>
                 )}
                 <div className="flex flex-col">
-                    <h2 className="text-xl font-semibold">
+                    <h2 className="text-xl font-semibold lg:text-3xl">
                         {step === 1 && 'Welcome Back'}
-                        {step === 2 && 'Verify Your Login'}
-                        {step === 3 && 'Enter Your Password'}
+                        {step === 2 && 'Verify Login'}
+                        {step === 3 && 'Enter Password'}
                     </h2>
-                    <p className="text-gray-600 text-sm">
+                    <p className="text-gray-600 text-sm lg:text-lg">
                         {step === 1 && 'Enter your email or phone to log in'}
                         {step === 2 && `We've sent a 6-digit code to ${emailOrPhone}`}
                         {step === 3 && 'Enter your password to continue'}
@@ -158,7 +158,7 @@ export const LoginForm = () => {
                             <Button
                                 onClick={handleNextFromInput}
                                 disabled={loading || !emailOrPhone || !!error}
-                                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                                className="w-full mt-6 bg-orange-600 lg:text-base lg:font-bold hover:bg-orange-700 text-white"
                             >
                                 {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Continue'}
                             </Button>
@@ -178,7 +178,7 @@ export const LoginForm = () => {
                             <Button
                                 onClick={verifyOTP}
                                 disabled={loading || otp.length !== 6}
-                                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 lg:text-base lg:font-bold text-white"
                             >
                                 {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Verify'}
                             </Button>
@@ -194,7 +194,7 @@ export const LoginForm = () => {
                             <Button
                                 onClick={handleLogin}
                                 disabled={loading || !password}
-                                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                                className="w-full mt-6 bg-orange-600 lg:text-base lg:font-bold hover:bg-orange-700 text-white"
                             >
                                 {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Login'}
                             </Button>
@@ -203,15 +203,15 @@ export const LoginForm = () => {
                 </motion.div>
             </AnimatePresence>
 
-            <p className="mt-4 text-sm text-center text-gray-600">
+            <p className="mt-4 text-sm lg:text-base text-center text-gray-600">
                 Don&apos;t have an account?{' '}
                 <a href="/accounts/register" className="text-orange-600 hover:underline">
                     Register
                 </a>
             </p>
-            <p className="mt-2 text-sm text-center">
+            <p className="mt-2 text-sm text-center lg:text-base">
                 <a href="/accounts/password-reset" className="text-orange-600 hover:underline">
-                    Forgot your password?
+                    Forgot password?
                 </a>
             </p>
         </div>

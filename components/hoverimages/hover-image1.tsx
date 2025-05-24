@@ -37,7 +37,7 @@ const HoverImage1 = () => {
     >
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="absolute top-0 left-0 flex justify-center space-x-4">
-          <div className="w-16 h-16 bg-main-red rounded-full animate-heartbeat-3d" />
+          <div className="w-16 h-16 bg-main-red rounded-full animate-heartbeat-3d hidden" />
         </div>
       </div>
     </a>

@@ -22,7 +22,7 @@ export function MainPageLayout({ children }: MainLayoutProps) {
   }, [isDarkMode]);
 
   return (
-    <div className={`${isDarkMode ? 'dark' : 'light'} flex min-h-screen flex-col bg-gray-50 lg:bg-orange-600`}>
+    <div className={`${isDarkMode ? 'dark' : 'light'} flex min-h-screen flex-col bg-gray-50 lg:bg-orange-500`}>
       <div
         className="w-full bg-no-repeat bg-contain"
         style={{

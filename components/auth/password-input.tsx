@@ -46,8 +46,8 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
                         className={cn(
                             'absolute left-2 px-2 bg-white transition-all pointer-events-none select-none text-orange-600',
                             floatLabel
-                                ? 'text-xs -top-2'
-                                : 'text-gray-400 top-1/2 transform -translate-y-1/2 text-sm'
+                                ? 'text-xs lg:text-sm -top-2'
+                                : 'text-gray-400 top-1/2 transform -translate-y-1/2 text-sm lg:text-base'
                         )}
                     >
                         {label}
@@ -62,7 +62,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
                         placeholder={label}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
-                        className="w-full border-none outline-none bg-transparent text-gray-900 text-sm placeholder-transparent pr-10"
+                        className="w-full border-none outline-none bg-transparent lg:text-base text-gray-900 text-sm placeholder-transparent pr-10"
                         {...props}
                     />
 
@@ -80,7 +80,7 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputPro
 
                 {showStrengthMeter && value && (
                     <div className="mt-2">
-                        <div className="text-xs font-normal">
+                        <div className="text-xs lg:text-sm font-normal">
                             <span
                                 className={cn('transition-colors', {
                                     'text-red-500': strength === 'weak',

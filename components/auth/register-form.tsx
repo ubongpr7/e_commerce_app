@@ -99,7 +99,7 @@ export const RegisterForm = () => {
   }
 
   return (
-    <div className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-2xl">
       {/* Progress Indicator */}
       <div className="flex items-center justify-between mb-6">
         {steps.map((s, i) => (
@@ -120,14 +120,14 @@ export const RegisterForm = () => {
           </button>
         )}
         <div className="flex flex-col">
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-xl font-semibold lg:text-3xl">
             {step === 1 && 'Join Jemfave'}
-            {step === 2 && 'Verify Your Account'}
-            {step === 3 && 'Select Your School'}
-            {step === 4 && 'Set a Password'}
+            {step === 2 && 'Verify Account'}
+            {step === 3 && 'Select School'}
+            {step === 4 && 'Set Password'}
             {step === 5 && 'Confirm Password'}
           </h2>
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 text-sm lg:text-lg">
             {step === 1 && 'Enter your email or phone to create an account'}
             {step === 2 && `We've sent a 6-digit code to ${emailOrPhone}`}
             {step === 3 && 'Choose your school to customize your shopping'}
@@ -161,7 +161,7 @@ export const RegisterForm = () => {
               <Button
                 onClick={handleNextFromInput}
                 disabled={loading || !emailOrPhone || !!error}
-                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                className="w-full mt-6 bg-orange-600 lg:text-base lg:font-bold hover:bg-orange-700 text-white"
               >
                 {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Continue'}
               </Button>
@@ -181,7 +181,7 @@ export const RegisterForm = () => {
               <Button
                 onClick={verifyOTP}
                 disabled={loading || otp.length !== 6}
-                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 lg:text-base lg:font-bold text-white"
               >
                 {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Verify'}
               </Button>
@@ -194,7 +194,7 @@ export const RegisterForm = () => {
               <Button
                 onClick={() => setStep(4)}
                 disabled={loading || !school}
-                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 lg:text-base lg:font-bold text-white"
               >
                 {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Continue'}
               </Button>
@@ -210,7 +210,7 @@ export const RegisterForm = () => {
               <Button
                 onClick={() => setStep(5)}
                 disabled={loading || !password}
-                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white lg:text-base lg:font-bold"
               >
                 {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Continue'}
               </Button>
@@ -228,7 +228,7 @@ export const RegisterForm = () => {
               <Button
                 onClick={handleSubmit}
                 disabled={loading || !confirmPassword}
-                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 text-white"
+                className="w-full mt-6 bg-orange-600 hover:bg-orange-700 lg:text-base lg:font-bold text-white"
               >
                 {loading ? <Loader2 className="animate-spin h-5 w-5" /> : 'Create Account'}
               </Button>
@@ -237,7 +237,7 @@ export const RegisterForm = () => {
         </motion.div>
       </AnimatePresence>
 
-      <p className="mt-4 text-sm text-center text-gray-600">
+      <p className="mt-4 text-sm text-center lg:text-base text-gray-600">
         Already have an account?{' '}
         <a href="/accounts/login" className="text-orange-600 hover:underline">
           Login

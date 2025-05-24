@@ -4,7 +4,7 @@ import { LoginForm } from '@/components/auth/login-form';
 
 const LoginPage = () => {
     return (
-        <main className="min-h-screen flex items-center justify-center bg-gray-50 lg:bg-orange-600 px-4">
+        <main className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
             <LoginForm />
         </main>
     );

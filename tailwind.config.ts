@@ -20,6 +20,9 @@ const config: Config = {
         'main-red': '#FF0000',
         'gold': '#FFD700',
       },
+      fontFamily: {
+        sans: ['"Segoe UI"', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      },
     },
   },
   plugins: [
