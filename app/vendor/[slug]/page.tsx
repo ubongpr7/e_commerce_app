@@ -7,7 +7,7 @@ import Link from "next/link"
 import { MainLayout } from "@/components/layouts/main-layout"
 import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { ProductCard } from "@/components/products/product-card"
+import ProductCard from "@/components/products/product-card"
 import { useAppSelector } from "@/redux/hooks"
 import { MapPin, Mail, Phone, Globe, Star, Package, Calendar, ChevronRight } from "lucide-react"
 

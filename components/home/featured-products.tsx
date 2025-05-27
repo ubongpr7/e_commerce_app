@@ -2,14 +2,14 @@
 import { useEffect, useRef } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { ProductCard } from "@/components/products/product-card"
+import ProductCard from "@/components/products/product-card"
 import { fetchFeaturedProducts } from "@/redux/features/product/productsSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { Zap } from "lucide-react"
 import CountdownTimer from "../timer/countdown-timer"
 import DesktopTimer from "../timer/desktop-timer"
 
-export function FeaturedProducts() {
+export default function FeaturedProducts() {
   const dispatch = useAppDispatch()
   const { featuredProducts, loading } = useAppSelector((state) => state.products)
   const scrollRef = useRef<HTMLDivElement>(null)

@@ -1,6 +1,6 @@
 import { MainPageLayout } from "@/components/layouts/main-page-layout"
 import Banner from "@/components/home/home-banner"
-import { FeaturedProducts } from "@/components/home/featured-products"
+import FeaturedProducts from "@/components/home/featured-products"
 import FeaturedVendors from "@/components/home/featured-vendors"
 import { CallToAction } from "@/components/home/call-to-action"
 import Category1 from "@/components/categories/Category1"

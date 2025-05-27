@@ -99,7 +99,7 @@ export const RegisterForm = () => {
   }
 
   return (
-    <div className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-2xl">
+    <div className="max-w-md w-full mx-auto bg-white p-6 rounded-lg shadow-2xl border-orange-600 border-t-4 border-b-4">
       {/* Progress Indicator */}
       <div className="flex items-center justify-between mb-6">
         {steps.map((s, i) => (

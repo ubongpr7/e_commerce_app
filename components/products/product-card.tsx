@@ -10,15 +10,16 @@ import type { Product } from "@/types/product";
 import { useAppDispatch } from "@/redux/hooks";
 import { addToCart } from "@/redux/cart/cartSlice";
 import { toast } from "@/components/ui/use-toast";
-import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { cn, formatCurrency } from "@/lib/utils";
 
 interface ProductCardProps {
   product: Product;
   variant?: "default" | "horizontal";
+  page?: "explore" | "default";
 }
 
-export function ProductCard({ product, variant = "default" }: ProductCardProps) {
+export default function ProductCard({ product, variant = "default", page = "default" }: ProductCardProps) {
   const dispatch = useAppDispatch();
 
   const [liked, setLiked] = useState(false);
@@ -39,8 +40,12 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden bg-white transition-all duration-300 ease-in-out shadow-sm hover:shadow-lg hover:scale-[1.015] max-w-[130px] lg:max-w-[180px]  w-full",
-        variant === "horizontal" && "flex flex-row"
+        "group relative overflow-hidden bg-white transition-all duration-300 ease-in-out shadow-sm hover:scale-[1.015] hover:shadow-lg",
+        variant === "horizontal" && "flex flex-row",
+        page === "explore" && "hover:scale-[1.015] hover:shadow-lg",
+        "w-full",
+        page === "explore" ? "lg:max-w-[280px]" : "lg:max-w-[180px]",
+        "w-full"
       )}
     >
       <div
@@ -70,7 +75,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             size="icon"
             className="rounded-full bg-white/80 backdrop-blur hover:bg-white"
             aria-label="Add to wishlist"
-            onClick={() => setLiked(!liked)} // 👈 Toggle the heart state
+            onClick={() => setLiked(!liked)}
           >
             <Heart
               className={cn(
@@ -82,14 +87,16 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
         </div>
 
         {/* Badges */}
-        <div className="absolute left-2 top-2 z-10 space-y-1">
-          {product.onSale && (
-            <Badge className="bg-red-500 mr-1 text-white hover:bg-red-600 shadow-sm">Sale</Badge>
-          )}
-          {product.isNew && (
-            <Badge className="bg-green-500 mr-1 text-white hover:bg-green-600 shadow-sm">New</Badge>
-          )}
-        </div>
+        <Link href={`/product/${product.slug}`}>
+          <div className="absolute left-2 top-2 z-10 space-y-1">
+            {product.onSale && (
+              <Badge className="bg-red-500 mr-1 text-white hover:bg-red-600 shadow-sm">Sale</Badge>
+            )}
+            {product.isNew && (
+              <Badge className="bg-green-500 mr-1 text-white hover:bg-green-600 shadow-sm">New</Badge>
+            )}
+          </div>
+        </Link>
       </div>
 
       <div className={cn(variant === "horizontal" && "flex flex-1 flex-col")}>
@@ -97,7 +104,7 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
           <div className="mb-1 flex items-center justify-between text-xs">
             <Link
               href={`/vendor/${product.vendor.slug}`}
-              className="text-gray-500 hover:text-orange-600 transition-colors text-xs lg:text-xs"
+              className="text-gray-500 hover:text-orange-600 transition-colors text-xs lg:text-xs line-clamp-1"
             >
               {product.vendor.name}
             </Link>
@@ -113,21 +120,30 @@ export function ProductCard({ product, variant = "default" }: ProductCardProps) 
             </h3>
           </Link>
 
-          <div className="mb-1 flex items-center gap-2">
-            <span className="text-gray-900 text-xs lg:text-sm font-medium">${product.price.toFixed(2)}</span>
-            {product.compareAtPrice > 0 && (
-              <span className="text-xs text-gray-500 line-through">
-                ${product.compareAtPrice.toFixed(2)}
+          <Link href={`/product/${product.slug}`}>
+            <div className="mb-1 flex items-center gap-2">
+              <span className="text-gray-900 text-xs lg:text-sm font-medium">
+                {formatCurrency(product.price)}
               </span>
-            )}
-          </div>
+              {product.compareAtPrice > 0 && (
+                <span className="text-xs text-gray-500 line-through">
+                  {formatCurrency(product.compareAtPrice)}
+                </span>
+              )}
+            </div>
+          </Link>
 
           {variant === "horizontal" && (
             <p className="mb-1 text-xs text-gray-500 line-clamp-2">{product.description}</p>
           )}
         </CardContent>
 
-        <CardFooter className="p-2 pt-0 hidden">
+        <CardFooter
+          className={cn(
+            "p-2 pt-0 transition-all duration-300",
+            page === "explore" ? "block" : "hidden"
+          )}
+        >
           <Button
             onClick={handleAddToCart}
             className="w-full gap-2 bg-orange-600 text-white hover:bg-orange-700 hover:shadow-orange-200 hover:shadow-lg transition-all"

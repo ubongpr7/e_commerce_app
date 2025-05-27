@@ -95,7 +95,7 @@ export default function VendorsPage() {
 
   return (
     <MainLayout>
-      <div className="container py-8">
+      <div className="py-2 px-3 lg:px-5">
         {/* Breadcrumbs */}
         <div className="mb-6 flex items-center text-sm text-muted-foreground">
           <Link href="/" className="hover:text-primary">
@@ -122,7 +122,7 @@ export default function VendorsPage() {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 outline-none">
               <Select value={sortBy} onValueChange={setSortBy}>
                 <SelectTrigger className="w-[180px]">
                   <SelectValue placeholder="Sort by" />
@@ -140,7 +140,7 @@ export default function VendorsPage() {
         </div>
 
         {loading ? (
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+          <div className="">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="h-[300px] animate-pulse rounded-lg bg-muted" />
             ))}
@@ -154,9 +154,9 @@ export default function VendorsPage() {
             <Button onClick={() => setSearchTerm("")}>Clear Search</Button>
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
+          <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
             {sortedVendors.map((vendor) => (
-              <VendorCard key={vendor.id} vendor={vendor} />
+              <VendorCard key={vendor.id} vendor={vendor} page="explore" />
             ))}
           </div>
         )}

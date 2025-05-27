@@ -16,7 +16,7 @@ const loginSchema = z.object({
   rememberMe: z.boolean().default(false),
 })
 
-export function LoginFormRTK() {
+export default function LoginFormRTK() {
   const router = useRouter()
   const { toast } = useToast()
   const [login, { isLoading }] = useLoginMutation()

@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ProductCard } from "@/components/products/product-card";
+import ProductCard from "@/components/products/product-card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { fetchProducts } from "@/redux/features/product/productsSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";

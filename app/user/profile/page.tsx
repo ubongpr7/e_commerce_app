@@ -1,7 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Pencil, Save } from 'lucide-react'
+import { Pencil, Save, Camera } from 'lucide-react'
+import SchoolDropdown from '@/components/user/school-select'
 
 const initialUser = {
     name: 'John Doe',
@@ -32,16 +33,39 @@ export default function ProfilePage() {
         alert('Profile saved (mock)')
     }
 
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+            const imageUrl = URL.createObjectURL(file)
+            setUser((prev) => ({ ...prev, image: imageUrl }))
+        }
+    }
+
     return (
         <div className="p-4 md:p-6 max-w-3xl mx-auto">
             <h1 className="text-2xl font-bold mb-6">User Profile</h1>
             <div className="bg-white p-4 rounded-lg shadow-md">
-                <div className="flex items-center gap-4 mb-6">
-                    <img
-                        src={user.image}
-                        alt="Profile"
-                        className="w-20 h-20 rounded-full object-cover border"
-                    />
+                <div className="flex items-center gap-4 mb-6 relative group">
+                    <label className="cursor-pointer relative">
+                        <img
+                            src={user.image}
+                            alt="Profile"
+                            className="w-20 h-20 rounded-full object-cover border"
+                        />
+                        {editing && (
+                            <div className="absolute bottom-0 right-0 bg-white p-1 rounded-full shadow-sm">
+                                <Camera className="w-4 h-4 text-gray-600" />
+                            </div>
+                        )}
+                        {editing && (
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                className="absolute inset-0 opacity-0 cursor-pointer"
+                            />
+                        )}
+                    </label>
                     <div>
                         <p className="font-bold text-lg">{user.name}</p>
                         <p className="text-gray-500">{user.email}</p>
@@ -70,13 +94,14 @@ export default function ProfilePage() {
                         disabled={!editing}
                         onChange={handleChange}
                     />
-                    <InputField
-                        label="School"
-                        name="school"
-                        value={user.school}
-                        disabled={!editing}
-                        onChange={handleChange}
-                    />
+                    <div>
+                        <label className="block text-sm font-medium text-gray-600 mb-1">School</label>
+                        <SchoolDropdown
+                            value={user.school}
+                            disabled={!editing}
+                            onChange={(value: string) => setUser((prev) => ({ ...prev, school: value }))}
+                        />
+                    </div>
                     <InputField
                         label="Department"
                         name="department"

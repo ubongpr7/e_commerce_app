@@ -15,6 +15,7 @@ import {
   Linkedin,
   ChevronUp as ChevronUpIcon,
 } from "lucide-react";
+import Image from "next/image";
 
 export function MainFooter() {
   const [showScrollTop, setShowScrollTop] = useState(false); // ✅ State for scroll detection
@@ -41,9 +42,26 @@ export function MainFooter() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-white px-4 md:px-8">
           {/* Company Info */}
           <div>
-            <Link href="/" className="flex items-center gap-2 font-bold">
-              <Package className="h-6 w-6 text-orange-600" />
-              <span className="text-xl text-white tracking-widest">JEMFAVE</span>
+            <Link href="/" className="lg:flex hidden items-center gap-2 font-bold">
+              {/* Logo Desktop */}
+              <Image
+                src="/jemfave.png" // path relative to the public folder
+                alt="JEMFAVE Logo"
+                width={200}              // adjust width as needed
+                height={150}              // adjust height as needed
+                priority                 // optional: ensures it loads fast
+              />
+            </Link>
+
+            <Link href="/" className="flex lg:hidden items-center gap-2 font-bold">
+              {/* Logo Desktop */}
+              <Image
+                src="/jemfave.png" // path relative to the public folder
+                alt="JEMFAVE Logo"
+                width={150}              // adjust width as needed
+                height={60}              // adjust height as needed
+                priority                 // optional: ensures it loads fast
+              />
             </Link>
             <p className="mt-4 text-white">
               #1 Global Student Shopping Platform

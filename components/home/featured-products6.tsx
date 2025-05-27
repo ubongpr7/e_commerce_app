@@ -2,7 +2,7 @@
 import { useEffect, useRef } from "react"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import { ProductCard } from "@/components/products/product-card"
+import ProductCard from "@/components/products/product-card"
 import { fetchFeaturedProducts } from "@/redux/features/product/productsSlice"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 

@@ -20,17 +20,16 @@ import {
   UserRound,
   Home,
   BookTextIcon,
+  TabletSmartphone,
   Plug,
   LampDesk,
-  Shirt,
   Popcorn,
   HandHeart,
   Sofa,
-  Dumbbell,
   CarFront,
+  FilePenLine,
   Gamepad2,
   HandPlatter,
-  Sparkles,
   ShoppingCart,
   MenuIcon,
   Wallet,
@@ -48,6 +47,17 @@ import {
   Moon,
   Sun,
   Search,
+  Users,
+  Sparkles,
+  BookOpen,
+  ShoppingBasket,
+  Car,
+  HeartPulse,
+  MonitorSmartphone,
+  Dumbbell,
+  Briefcase,
+  BedDouble,
+  Shirt,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -58,6 +68,7 @@ import { urlForImage } from "@/lib/sanityImage";
 
 import SchoolDropdown from "../store/school-dropdown";
 import LogoutButton from "../user/logout-button";
+import Image from "next/image";
 
 
 
@@ -144,14 +155,26 @@ export function MainNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
 
-            <Link href="/" className="text-2xl tracking-widest font-bold text-gray-800">
-              JEMFAVE
+            <Link href="/user/profile" className="text-2xl tracking-widest font-bold text-gray-800">
+              <Image
+                src="/jemfave.png" // path relative to the public folder
+                alt="JEMFAVE Logo"
+                width={140}              // adjust width as needed
+                height={50}              // adjust height as needed
+                priority                 // optional: ensures it loads fast
+              />
             </Link>
           </div>
 
           {/* Logo Desktop */}
-          <Link href="/" className="hidden tracking-widest lg:flex text-3xl font-bold text-gray-800">
-            JEMFAVE
+          <Link href="/user/profile" className="hidden tracking-widest lg:flex text-3xl font-bold text-gray-800">
+            <Image
+              src="/jemfave.png" // path relative to the public folder
+              alt="JEMFAVE Logo"
+              width={200}              // adjust width as needed
+              height={150}              // adjust height as needed
+              priority                 // optional: ensures it loads fast
+            />
           </Link>
 
           {/* Desktop Search */}
@@ -188,40 +211,94 @@ export function MainNav() {
                   <p className="text-base">Products</p>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
-                  <ul className="grid w-[500px] gap-3 p-4 lg:grid-cols-2">
+                  <ul className="grid w-[500px] h-[500px] gap-3 p-4 lg:grid-cols-2 overflow-auto scrollbar-hide">
                     <li className="row-span-3">
                       <NavigationMenuLink asChild>
                         <Link
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-orange-600 text-black p-6 no-underline outline-none focus:shadow-md"
                           href="/products"
                         >
-                          <div className="mb-2 mt-4 text-lg font-medium">All Products</div>
+                          <div className="mb-2 mt-4 text-lg font-bold">Jemfave Products</div>
                           <p className="text-sm text-white">
                             Browse all products from our trusted vendors
                           </p>
                         </Link>
                       </NavigationMenuLink>
                     </li>
+
                     {[
-                      { label: "Study Materials", value: "study" },
-                      { label: "Electronic Gadgets", value: "electronic" },
-                      { label: "Office Supplies", value: "office" },
-                      { label: "Fashion & Apparel", value: "fashion" },
-                      { label: "Food & Groceries", value: "food" },
-                      { label: "Beauty & Health", value: "beauty" },
-                      { label: "Home Essentials", value: "home" },
-                      { label: "Sporting Goods", value: "sport" },
-                      { label: "Automobile", value: "automobile" },
-                      { label: "Entertainment", value: "entertainment" },
-                    ].map(({ label, value }) => (
+                      {
+                        label: "Study Materials",
+                        value: "study-materials",
+                        icon: BookOpen,
+                        subcategory: "Textbooks · Past Questions · Notes",
+                      },
+                      {
+                        label: "Electronic Gadgets",
+                        value: "electronics-gadgets",
+                        icon: TabletSmartphone,
+                        subcategory: "Phones · Earbuds · Chargers",
+                      },
+                      {
+                        label: "Office Supplies",
+                        value: "office-supplies",
+                        icon: FilePenLine,
+                        subcategory: "Pens · Files · Stationery",
+                      },
+                      {
+                        label: "Fashion & Apparel",
+                        value: "fashion-wear",
+                        icon: Shirt,
+                        subcategory: "Clothes · Shoes · Accessories",
+                      },
+                      {
+                        label: "Food & Groceries",
+                        value: "food-grocery",
+                        icon: ShoppingCart,
+                        subcategory: "Snacks · Meals · Groceries",
+                      },
+                      {
+                        label: "Beauty & Health",
+                        value: "beauty-health",
+                        icon: Heart,
+                        subcategory: "Skincare · Wellness · Makeup",
+                      },
+                      {
+                        label: "Home Essentials",
+                        value: "home-essentials",
+                        icon: Home,
+                        subcategory: "Buckets · Mats · Bedding",
+                      },
+                      {
+                        label: "Sporting Goods",
+                        value: "sporting-goods",
+                        icon: Dumbbell,
+                        subcategory: "Sportswear · Equipment",
+                      },
+                      {
+                        label: "Automobile Goods",
+                        value: "automobile-goods",
+                        icon: CarFront,
+                        subcategory: "Car Fresheners · Mats",
+                      },
+                      {
+                        label: "Entertainment & Games",
+                        value: "entertainment-games",
+                        icon: Gamepad2,
+                        subcategory: "Board Games · Cards · Gadgets",
+                      },
+                    ].map(({ label, value, icon: Icon, subcategory }) => (
                       <li key={value}>
                         <NavigationMenuLink asChild>
                           <Link
                             href={`/products?category=${value}`}
-                            className="block space-y-1 rounded-md p-3 transition-colors hover:bg-gray-200"
+                            className="flex items-start gap-3 rounded-md p-3 hover:bg-gray-100 transition-colors"
                           >
-                            <div className="text-sm font-medium">{label}</div>
-                            <p className="text-sm text-gray-600">Subcategory</p>
+                            <Icon className="w-6 h-6 mt-1 text-orange-600" />
+                            <div>
+                              <div className="text-sm font-medium text-gray-900">{label}</div>
+                              <p className="text-xs text-gray-600">{subcategory}</p>
+                            </div>
                           </Link>
                         </NavigationMenuLink>
                       </li>
@@ -231,12 +308,113 @@ export function MainNav() {
               </NavigationMenuItem>
 
               <NavigationMenuItem>
-                <Link href="/vendors" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    <p className="text-base">Vendors</p>
-                  </NavigationMenuLink>
-                </Link>
+                <NavigationMenuTrigger>
+                  <p className="text-base">Services</p>
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[500px] h-[500px] gap-3 p-4 lg:grid-cols-2 overflow-auto scrollbar-hide">
+                    <li className="row-span-3">
+                      <NavigationMenuLink asChild>
+                        <Link
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-orange-600 text-black p-6 no-underline outline-none focus:shadow-md"
+                          href="/services"
+                        >
+                          <div className="mb-2 mt-4 text-lg font-bold">Jemfave Services</div>
+                          <p className="text-sm text-white">
+                            Browse all services from our trusted vendors
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+
+                    {[
+                      {
+                        label: "Event Support & Ushering",
+                        value: "event-ushering",
+                        icon: Users,
+                        subcategory: "Campus Events · Ushers · Setup",
+                      },
+                      {
+                        label: "Home Services",
+                        value: "home-services",
+                        icon: Home,
+                        subcategory: "Cooking · Cleaning · Washing",
+                      },
+                      {
+                        label: "Laundry & Cleaning",
+                        value: "laundry-cleaning",
+                        icon: Sparkles,
+                        subcategory: "Laundry · Cleaning Services",
+                      },
+                      {
+                        label: "Tutoring & Academic Assistance",
+                        value: "academic-tutoring",
+                        icon: BookOpen,
+                        subcategory: "Tutors · Assignments · Study Help",
+                      },
+                      {
+                        label: "Grocery & Food Delivery",
+                        value: "food-delivery",
+                        icon: ShoppingBasket,
+                        subcategory: "Groceries · Meals · Snacks",
+                      },
+                      {
+                        label: "Transportation & Bolts",
+                        value: "transport-services",
+                        icon: Car,
+                        subcategory: "Campus Rides · Bolt",
+                      },
+                      {
+                        label: "Health & Wellness",
+                        value: "health-wellness",
+                        icon: HeartPulse,
+                        subcategory: "Fitness · Therapy · First Aid",
+                      },
+                      {
+                        label: "Tech Support & Device Repair",
+                        value: "tech-repair",
+                        icon: MonitorSmartphone,
+                        subcategory: "Phone Fix · Laptop Help",
+                      },
+                      {
+                        label: "Career & Professional Development",
+                        value: "career-support",
+                        icon: Briefcase,
+                        subcategory: "CV · Internships · Skills",
+                      },
+                      {
+                        label: "Home & Dorm Essential Rental",
+                        value: "essential-rentals",
+                        icon: BedDouble,
+                        subcategory: "Fan · Chair · Bedding",
+                      },
+                      {
+                        label: "Fashion & Beauty",
+                        value: "beauty-fashion",
+                        icon: Shirt,
+                        subcategory: "Clothing · Makeup · Accessories",
+                      },
+                    ].map(({ label, value, icon: Icon, subcategory }) => (
+                      <li key={value}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={`/services?category=${value}`}
+                            className="flex items-start gap-3 rounded-md p-3 hover:bg-gray-100 transition-colors"
+                          >
+                            <Icon className="w-6 h-6 mt-1 text-orange-600" />
+                            <div>
+                              <div className="text-sm font-medium text-gray-900">{label}</div>
+                              <p className="text-xs text-gray-600">{subcategory}</p>
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
               </NavigationMenuItem>
+
+
             </NavigationMenuList>
           </NavigationMenu>
 

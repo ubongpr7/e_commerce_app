@@ -6,6 +6,7 @@ import { apiSlice } from "./services/apiSlice";
 import globalReducer from "./state";
 import cartReducer from  './cart/cartSlice';
 import productsReducer from "./features/product/productsSlice"
+import servicesReducer from "./features/service/servicesSlice"; // Add this import
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 const createNoopStorage = () => ({
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   cart: cartReducer,
   products: productsReducer,
+  services: servicesReducer, // ✅ Add this line
   [apiSlice.reducerPath]: apiSlice.reducer,
   global: persistReducer(globalPersistConfig, globalReducer),
 });
