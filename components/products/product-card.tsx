@@ -43,7 +43,7 @@ export default function ProductCard({ product, variant = "default", page = "defa
         "group relative overflow-hidden bg-white transition-all duration-300 ease-in-out shadow-sm hover:scale-[1.015] hover:shadow-lg",
         variant === "horizontal" && "flex flex-row",
         page === "explore" && "hover:scale-[1.015] hover:shadow-lg",
-        "w-full",
+        "max-w-[130px]",
         page === "explore" ? "lg:max-w-[280px]" : "lg:max-w-[180px]",
         "w-full"
       )}

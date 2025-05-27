@@ -24,7 +24,7 @@ interface VendorCardProps {
 export function VendorCard({ vendor, variant = "default", page = "default" }: VendorCardProps) {
   return (
     <Link href={`/vendor/${vendor.slug}`} className="block group">
-      <Card className="w-full overflow-hidden transition-all bg-white shadow-sm hover:shadow-lg hover:scale-[1.015] text-gray-800">
+      <Card className="overflow-hidden transition-all bg-white shadow-sm hover:shadow-lg hover:scale-[1.015] text-gray-800 w-[165px] lg:w-[250px]">
         <div className="relative h-[50px] lg:h-[70px] w-full">
           <Image
             src={vendor.coverImage || "/placeholder.svg"}
