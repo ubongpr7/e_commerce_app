@@ -42,26 +42,22 @@ export function MainFooter() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-white px-4 md:px-8">
           {/* Company Info */}
           <div>
-            <Link href="/" className="lg:flex hidden items-center gap-2 font-bold">
+            <Link href="/" className="lg:flex hidden items-center gap-0 font-bold flex-row">
               {/* Logo Desktop */}
-              <Image
-                src="/jemfave.png" // path relative to the public folder
-                alt="JEMFAVE Logo"
-                width={200}              // adjust width as needed
-                height={150}              // adjust height as needed
-                priority                 // optional: ensures it loads fast
-              />
+              <div className="bg-orange-600 text-gray-900 text-5xl rounded-full w-14 h-14 flex items-center justify-center font-bold">
+                J
+              </div>
+
+              <div className="text-white font-bold text-4xl -ml-6">emfave</div>
             </Link>
 
-            <Link href="/" className="flex lg:hidden items-center gap-2 font-bold">
-              {/* Logo Desktop */}
-              <Image
-                src="/jemfave.png" // path relative to the public folder
-                alt="JEMFAVE Logo"
-                width={150}              // adjust width as needed
-                height={60}              // adjust height as needed
-                priority                 // optional: ensures it loads fast
-              />
+            <Link href="/" className="flex lg:hidden items-center gap-0 font-bold flex-row">
+              {/* Logo Mobile */}
+              <div className="bg-orange-600 text-gray-900 text-4xl rounded-full w-12 h-12 flex items-center justify-center font-bold">
+                J
+              </div>
+
+              <div className="text-white font-bold text-3xl -ml-5">emfave</div>
             </Link>
             <p className="mt-4 text-white">
               #1 Global Student Shopping Platform
@@ -129,7 +125,7 @@ export function MainFooter() {
               Get the latest updates on new products and upcoming sales.
             </p>
             <form className="space-y-2">
-              <Input placeholder="Your email address" type="email" />
+              <Input placeholder="Your email address" type="email" className="text-white" />
               <Button className="w-full">Subscribe</Button>
             </form>
           </div>

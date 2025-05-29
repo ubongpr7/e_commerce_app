@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator"
 import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { fetchProducts } from "@/redux/features/product/productsSlice"
 import { Filter, Search, SlidersHorizontal, X } from "lucide-react"
+import { formatCurrency } from "@/lib/utils";
 
 export default function ProductsPage() {
   const searchParams = useSearchParams()
@@ -129,7 +130,7 @@ export default function ProductsPage() {
                   <SelectItem value="rating">Highest Rated</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="outline" className="md:hidden" onClick={() => setFiltersOpen(!filtersOpen)}>
+              <Button variant="outline" className="hidden" onClick={() => setFiltersOpen(!filtersOpen)}>
                 <Filter className="mr-2 h-4 w-4" />
                 Filters
               </Button>
@@ -186,8 +187,8 @@ export default function ProductsPage() {
                     onValueChange={setPriceRange}
                   />
                   <div className="flex items-center justify-between">
-                    <span>${priceRange[0]}</span>
-                    <span>${priceRange[1]}</span>
+                    <span>{formatCurrency(priceRange[0])}</span>
+                    <span>{formatCurrency(priceRange[1])}</span>
                   </div>
                 </div>
               </div>

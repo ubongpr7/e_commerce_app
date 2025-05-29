@@ -139,7 +139,7 @@ export default function HomePage() {
 
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href="/products">
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Sponsored Products
@@ -159,7 +159,7 @@ export default function HomePage() {
           {/*HOME ESSENTIALS*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=home-essentials`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Home Essentials
@@ -178,7 +178,7 @@ export default function HomePage() {
           {/*SCHOOL DEALS*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=study-materials`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 School Deals
@@ -197,7 +197,7 @@ export default function HomePage() {
           {/*FASHION & APPAREL*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=fashion-wear`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Fashion & Apparel
@@ -235,7 +235,7 @@ export default function HomePage() {
           {/*BEAUTY & HEALTH*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=beauty-health`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Beauty & Health
@@ -254,7 +254,7 @@ export default function HomePage() {
           {/*SPORTING DEALS*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=sporting-goods`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Sporting Deals
@@ -273,7 +273,7 @@ export default function HomePage() {
           {/*ENTERTAINMENT DEALS*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=entertainment-games`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Entertainment Deals
@@ -292,7 +292,7 @@ export default function HomePage() {
           {/*AUTOMOBILE DEALS*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=automobile-goods`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Automobile Deals
@@ -311,7 +311,7 @@ export default function HomePage() {
           {/*FOOD & GROCERIES*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=food-grocery`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Food & Groceries
@@ -330,10 +330,25 @@ export default function HomePage() {
           {/*ELECTRONICS & GADGETS*/}
           <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
 
-          <Link href="/">
+          <Link href={`/products?category=electronics-gadgets`}>
             <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
               <div className="text-base lg:text-lg font-semibold">
                 Electronics & Gadgets
+              </div>
+              <div className="flex flex-row items-center text-white text-xs lg:text-base lg:mt-1.5">
+                <p>See All</p>
+                <ChevronRight className="h-3 w-3 ml-1" /> {/* Add Chevron icon here */}
+              </div>
+            </div>
+          </Link>
+
+          {/*OFFICE SUPPLIES*/}
+          <hr className="border-b-8 border-gray-300 lg:hidden right-0 left-0 absolute" />
+
+          <Link href={`/products?category=office-supplies`}>
+            <div className="z-10 bg-black mt-2 absolute right-0 left-0 text-white flex flex-row justify-between px-3 h-10 w-full py-2 lg:hidden cursor-pointer">
+              <div className="text-base lg:text-lg font-semibold">
+                Stationery & Office
               </div>
               <div className="flex flex-row items-center text-white text-xs lg:text-base lg:mt-1.5">
                 <p>See All</p>

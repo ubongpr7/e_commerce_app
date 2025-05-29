@@ -16,6 +16,7 @@ import { fetchProductBySlug } from "@/redux/features/product/productsSlice"
 import { addToCart } from "@/redux/cart/cartSlice"
 import { useToast } from "@/components/ui/use-toast"
 import { Heart, Share2, ShoppingCart, Star, Truck, Shield, RotateCcw, ChevronRight } from "lucide-react"
+import { formatCurrency } from "@/lib/utils";
 
 export default function ProductPage() {
   const { slug } = useParams()
@@ -123,7 +124,7 @@ export default function ProductPage() {
             Products
           </Link>
           <ChevronRight className="mx-1 h-4 w-4" />
-          <Link href={`/products?category=${product.category}`} className="capitalize hover:text-gray-900">
+          <Link href={`/products?category=${product.category}`} className="capitalize hover:text-gray-900 line-clamp-1">
             {product.category}
           </Link>
           <ChevronRight className="mx-1 h-4 w-4" />
@@ -205,18 +206,20 @@ export default function ProductPage() {
             </div>
 
             <div className="space-y-1">
-              <div className="flex items-center gap-2">
+              <div className="flex lg:flex-row flex-col items-start lg:items-center gap-2">
                 {isOnSale && (
                   <span className="text-lg text-gray-500 line-through">
-                    ${product.compareAtPrice.toFixed(2)}
+                    {formatCurrency(product.compareAtPrice)}
                   </span>
                 )}
-                <span className="text-2xl font-bold text-gray-900">${currentPrice.toFixed(2)}</span>
-                {isOnSale && (
-                  <Badge variant="outline" className="text-red-500 border-red-200">
-                    Save ${(product.compareAtPrice - currentPrice).toFixed(2)}
-                  </Badge>
-                )}
+                <div className="flex flex-row justify-between">
+                  <span className="text-2xl font-bold text-gray-900 mr-2">{formatCurrency(currentPrice)}</span>
+                  {isOnSale && (
+                    <Badge variant="outline" className="text-red-500 border-red-200">
+                      Save {formatCurrency(product.compareAtPrice - currentPrice)}
+                    </Badge>
+                  )}
+                </div>
               </div>
               <p className="text-sm text-gray-500">{product.inStock ? "In Stock" : "Out of Stock"}</p>
             </div>

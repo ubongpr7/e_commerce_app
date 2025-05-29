@@ -42,10 +42,9 @@ export default function ProductCard({ product, variant = "default", page = "defa
       className={cn(
         "group relative overflow-hidden bg-white transition-all duration-300 ease-in-out shadow-sm hover:scale-[1.015] hover:shadow-lg",
         variant === "horizontal" && "flex flex-row",
-        page === "explore" && "hover:scale-[1.015] hover:shadow-lg",
-        "max-w-[130px]",
-        page === "explore" ? "lg:max-w-[280px]" : "lg:max-w-[180px]",
-        "w-full"
+        page !== "explore" && "hover:scale-[1.015] hover:shadow-lg",
+        "w-full",
+        page === "explore" ? "w-full lg:max-w-[280px]" : "lg:max-w-[180px] max-w-[130px]"
       )}
     >
       <div
@@ -121,12 +120,12 @@ export default function ProductCard({ product, variant = "default", page = "defa
           </Link>
 
           <Link href={`/product/${product.slug}`}>
-            <div className="mb-1 flex items-center gap-2">
-              <span className="text-gray-900 text-xs lg:text-sm font-medium">
+            <div className="mb-1 flex flex-col items-start gap-0">
+              <span className="text-gray-900 text-sm lg:text-base font-normal lg:font-medium">
                 {formatCurrency(product.price)}
               </span>
               {product.compareAtPrice > 0 && (
-                <span className="text-xs text-gray-500 line-through">
+                <span className="text-xs text-gray-500 hidden line-through">
                   {formatCurrency(product.compareAtPrice)}
                 </span>
               )}

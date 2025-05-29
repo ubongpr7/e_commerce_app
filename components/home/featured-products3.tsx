@@ -33,7 +33,7 @@ export function FeaturedProducts3() {
                     Discover our handpicked selection of top products from our trusted vendors
                 </p>
 
-                <Link href={"/"}>
+                <Link href={`/products?category=home-essentials`}>
                     <div className="bg-black text-white lg:flex rounded-md flex-row justify-between px-3 h-14 lg:w-[950px] xl:w-[1200px] py-2 hidden">
                         <div>
                             <h1 className="text-base lg:mt-1.5 font-semibold lg:text-lg">Home Essentials</h1>

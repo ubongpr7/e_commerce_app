@@ -155,26 +155,23 @@ export function MainNav() {
               <span className="sr-only">Toggle menu</span>
             </Button>
 
-            <Link href="/user/profile" className="text-2xl tracking-widest font-bold text-gray-800">
-              <Image
-                src="/jemfave.png" // path relative to the public folder
-                alt="JEMFAVE Logo"
-                width={140}              // adjust width as needed
-                height={50}              // adjust height as needed
-                priority                 // optional: ensures it loads fast
-              />
+            <Link href="/" className="flex items-center gap-0 font-bold flex-row">
+              {/* Logo Mobile */}
+              <div className="bg-orange-600 text-white text-4xl rounded-full w-12 h-12 flex items-center justify-center font-bold">
+                J
+              </div>
+
+              <div className="text-gray-900 font-bold text-3xl -ml-5">emfave</div>
             </Link>
           </div>
 
-          {/* Logo Desktop */}
-          <Link href="/user/profile" className="hidden tracking-widest lg:flex text-3xl font-bold text-gray-800">
-            <Image
-              src="/jemfave.png" // path relative to the public folder
-              alt="JEMFAVE Logo"
-              width={200}              // adjust width as needed
-              height={150}              // adjust height as needed
-              priority                 // optional: ensures it loads fast
-            />
+          <Link href="/" className="lg:flex hidden items-center gap-0 font-bold flex-row">
+            {/* Logo Desktop */}
+            <div className="bg-orange-600 text-white text-5xl rounded-full w-14 h-14 flex items-center justify-center font-bold">
+              J
+            </div>
+
+            <div className="text-gray-900 font-bold text-4xl -ml-6">emfave</div>
           </Link>
 
           {/* Desktop Search */}
@@ -500,13 +497,20 @@ export function MainNav() {
             <div className="fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setIsMenuOpen(false)} />
             <div className="fixed top-0 left-0 z-50 w-64 h-full bg-white pb-4 overflow-y-auto scrollbar-hide">
               <nav className="flex flex-col gap-4">
-                <div className="bg-gray-900 text-white w-64 px-3 py-10 fixed top-0 left-0 z-10">
-                  <div className="text-xs">Browse</div>
-                  <div className="text-2xl font-bold tracking-widest">JEMFAVE</div>
+                <div className="bg-gray-900 text-white w-64 h-40 px-3 py-10 fixed top-0 left-0 z-10">
+                  <div className="text-xs tracking-widest">Browse</div>
+                  <Link href="/" className="flex items-center gap-0 font-bold flex-row" onClick={() => setIsMenuOpen(false)}>
+                    {/* Logo Desktop */}
+                    <div className="bg-orange-600 text-gray-900 text-4xl rounded-full w-12 h-12 flex items-center justify-center font-bold">
+                      J
+                    </div>
+
+                    <div className="text-white font-bold text-3xl -ml-5">emfave</div>
+                  </Link>
                 </div>
 
                 <Link href="/" onClick={() => setIsMenuOpen(false)}>
-                  <div className="px-3 mt-32 pt-2 flex flex-row justify-between hover:bg-gray-100 py-2">
+                  <div className="px-3 mt-40 pt-2 flex flex-row justify-between hover:bg-gray-100 py-2">
                     <div className="text-base">Home</div>
                     <Home className="h-5 w-5 mt-1" />
                   </div>
@@ -518,14 +522,14 @@ export function MainNav() {
                   <div className="text-lg font-semibold mb-3 px-3">Trending</div>
 
                   <Link href="/" onClick={() => setIsMenuOpen(false)}>
-                    <div className="text-base hover:bg-gray-100 py-2 mb-2 px-3">Best Sellers</div>
+                    <div className="text-base hover:bg-gray-100 py-2 mb-2 px-3 hidden">Best Sellers</div>
                   </Link>
 
                   <Link href="/" onClick={() => setIsMenuOpen(false)}>
                     <div className="text-base hover:bg-gray-100 mb-2 py-2 px-3">New Arrival</div>
                   </Link>
                   <Link href="/" onClick={() => setIsMenuOpen(false)}>
-                    <div className="text-base hover:bg-gray-100 py-2 px-3">Movers & Shakers</div>
+                    <div className="text-base hover:bg-gray-100 py-2 px-3 hidden">Movers & Shakers</div>
                   </Link>
                 </div>
 
@@ -534,77 +538,77 @@ export function MainNav() {
                 <div className="">
                   <div className="text-lg font-semibold mb-5 px-3">Our Categories</div>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=study-materials`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
                       <BookTextIcon className="h-5 w-5" />
                       <div className="text-base">Study Materials</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=electronics-gadgets`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 mb-2 px-3">
                       <Plug className="h-5 w-5" />
                       <div className="text-base">Electronics Gadgets</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=office-supplies`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
                       <LampDesk className="h-5 w-5" />
                       <div className="text-base">Office Supplies</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=fashion-wear`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
                       <Shirt className="h-5 w-5" />
                       <div className="text-base">Fashion & Apparel</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=food-grocery`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
                       <Popcorn className="h-5 w-5" />
                       <div className="text-base">Food & Groceries</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=beauty-health`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <HandHeart className="h-5 w-5" />
                       <div className="text-base">Beauty & Health</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=home-essentials`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <Sofa className="h-5 w-5" />
                       <div className="text-base">Home Essentials</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=sporting-goods`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <Dumbbell className="h-5 w-5" />
                       <div className="text-base">Sporting Goods</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=entertainment-games`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <Gamepad2 className="h-5 w-5" />
                       <div className="text-base">Entertainment</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href={`/products?category=automobile-goods`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <CarFront className="h-5 w-5" />
                       <div className="text-base">Automobile</div>
                     </div>
                   </Link>
 
-                  <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/services" onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
                       <HandPlatter className="h-5 w-5" />
                       <div className="text-base">Services</div>
@@ -651,7 +655,7 @@ export function MainNav() {
             <div className="fixed inset-0 z-40 bg-black bg-opacity-50" onClick={() => setIsUserOpen(false)} />
             <div className="fixed top-0 right-0 z-50 w-64 h-full bg-white p-4">
               <div className="flex flex-col gap-4">
-                <div className="bg-orange-600 text-black w-64 px-3 py-10 fixed top-0 right-0 z-10">
+                <div className="bg-orange-600 text-black w-64 h-40 px-3 py-10 fixed top-0 right-0 z-10">
                   <div className="text-xs tracking-widest">Jemfave</div>
                   <div className="text-2xl font-bold">Student</div>
                 </div>
@@ -728,7 +732,7 @@ export function MainNav() {
                   </>
                 ) : (
                   <>
-                    <div className="mt-20">
+                    <div className="mt-40">
                       <div className="text-lg font-semibold mb-5 px-3">My Account</div>
 
                       <Link href="/accounts/login" onClick={() => setIsUserOpen(false)}>

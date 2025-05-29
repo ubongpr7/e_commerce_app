@@ -30,10 +30,9 @@ export default function ServiceCard({ service, variant = "default", page = "defa
             className={cn(
                 "group relative overflow-hidden bg-white transition-all duration-300 ease-in-out shadow-sm hover:scale-[1.015] hover:shadow-lg",
                 variant === "horizontal" && "flex flex-row",
-                page === "explore" && "hover:scale-[1.015] hover:shadow-lg",
-                "max-w-[130px]",
-                page === "explore" ? "lg:max-w-[280px]" : "lg:max-w-[180px]",
-                "w-full"
+                page !== "explore" && "hover:scale-[1.015] hover:shadow-lg",
+                "w-full",
+                page === "explore" ? "w-full lg:max-w-[280px]" : "lg:max-w-[180px] max-w-[130px]"
             )}
         >
             {/* Image */}

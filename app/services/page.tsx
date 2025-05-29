@@ -76,7 +76,7 @@ export default function ServicesPage() {
 
   return (
     <MainLayout>
-      <div className="container py-8 lg:py-12 lg:px-5 px-3">
+      <div className="py-2 px-3 lg:px-5">
         <div className="mb-8 flex flex-col space-y-4">
           <h1 className="text-3xl font-bold">Services</h1>
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -102,7 +102,7 @@ export default function ServicesPage() {
                   <SelectItem value="rating">Highest Rated</SelectItem>
                 </SelectContent>
               </Select>
-              <Button variant="outline" className="md:hidden" onClick={() => setFiltersOpen(!filtersOpen)}>
+              <Button variant="outline" className="hidden" onClick={() => setFiltersOpen(!filtersOpen)}>
                 <Filter className="mr-2 h-4 w-4" />
                 Filters
               </Button>
@@ -227,7 +227,7 @@ export default function ServicesPage() {
                 <Button onClick={clearFilters}>Clear Filters</Button>
               </div>
             ) : (
-              <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
                 {sortedServices.map((service) => (
                   <ServiceCard key={service.id} service={service} page="explore" />
                 ))}
@@ -235,7 +235,7 @@ export default function ServicesPage() {
             )}
 
             {sortedServices.length > 0 && (
-              <div className="mt-8 flex justify-center">
+              <div className="mt-10 flex justify-center mb-5">
                 <Button variant="outline">Load More</Button>
               </div>
             )}
