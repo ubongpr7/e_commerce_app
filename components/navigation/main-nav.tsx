@@ -122,7 +122,7 @@ export function MainNav() {
             <img
               src={urlForImage(headerData.mobileImage).url()}
               alt={headerData.mobileTitle}
-              className="lg:hidden w-full object-cover"
+              className="md:hidden w-full object-cover"
             />
           </Link>
 
@@ -131,7 +131,7 @@ export function MainNav() {
             <img
               src={urlForImage(headerData.desktopImage).url()}
               alt={headerData.desktopTitle}
-              className="hidden lg:block w-full object-cover"
+              className="hidden md:block w-full object-cover"
             />
           </Link>
         </>
@@ -180,7 +180,7 @@ export function MainNav() {
               <Input
                 type="text"
                 placeholder="Search products, brands and categories..."
-                className="w-full rounded-lg bg-gray-100 pl-4 lg:w-[300px] text-gray-700"
+                className="w-full rounded-lg bg-gray-100 pl-4 xl:w-[500px] text-gray-700"
               />
               <Button
                 type="submit"
@@ -428,8 +428,9 @@ export function MainNav() {
 
             {/* Cart */}
             <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="h-20 w-20" />
+              <Button variant="ghost" size="default" className="relative">
+                <div className="hidden lg:hidden md:block mr-0">Cart</div>
+                <ShoppingCart className="h-7 w-7" />
                 {cartItemCount > 0 && (
                   <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full text-xs flex items-center justify-center p-0">
                     {cartItemCount}
@@ -440,13 +441,14 @@ export function MainNav() {
 
             <Link href="/wallet">
               <Button variant="ghost" size="icon" className="relative hidden">
-                <Wallet className="h-20 w-20" />
+                <Wallet className="h-7 w-7" />
               </Button>
             </Link>
 
             {/* User Button (for mobile) */}
-            <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setIsUserOpen(true)}>
-              <UserRound className="h-5 w-5" />
+            <Button variant="ghost" size="default" className="lg:hidden" onClick={() => setIsUserOpen(true)}>
+              <div className="hidden lg:hidden md:block mr-0">Account</div>
+              <UserRound className="h-7 w-7" />
             </Button>
 
             {/* Desktop Login/Register */}

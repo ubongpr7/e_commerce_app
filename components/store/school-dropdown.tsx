@@ -69,8 +69,8 @@ export default function SchoolDropdown() {
       >
         {selectedSchool ? (
           <>
-            <span className="block lg:hidden text-gray-700">{selectedSchool.abbreviation}</span>
-            <span className="hidden lg:block text-gray-700">{selectedSchool.name}</span>
+            <span className="block md:hidden text-gray-700">{selectedSchool.abbreviation}</span>
+            <span className="hidden md:block text-gray-700">{selectedSchool.name}</span>
           </>
         ) : (
           "Find Your School"

@@ -24,6 +24,7 @@ import { FeaturedProducts8 } from "@/components/home/featured-products8"
 import { FeaturedProducts9 } from "@/components/home/featured-products9"
 import { FeaturedProducts10 } from "@/components/home/featured-products10"
 import { FeaturedProducts11 } from "@/components/home/featured-products11"
+import { FeaturedProducts12 } from "@/components/home/featured-products12"
 import FeaturedAd from "@/components/home/featured-ad"
 
 export default function HomePage() {
@@ -35,7 +36,7 @@ export default function HomePage() {
           <Banner />
         </div>
 
-        <div className="hidden lg:flex flex-row justify-between px-8">
+        <div className="hidden lg:flex gap-4 flex-row justify-between px-8">
           <HoverImage1 />
           <Banner />
           <HoverImage2 />
@@ -98,6 +99,10 @@ export default function HomePage() {
 
           <div className="hidden lg:block">
             <FeaturedProducts11 />
+          </div>
+
+          <div className="hidden lg:block">
+            <FeaturedProducts12 />
           </div>
 
           <Link href="/">

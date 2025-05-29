@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { fetchProducts } from "@/redux/features/product/productsSlice"
 import { Filter, Search, SlidersHorizontal, X } from "lucide-react"
 import { formatCurrency } from "@/lib/utils";
+import { useRouter } from "next/navigation"
 
 export default function ProductsPage() {
   const searchParams = useSearchParams()
@@ -293,7 +294,7 @@ export default function ProductsPage() {
                 <Button onClick={clearFilters}>Clear Filters</Button>
               </div>
             ) : (
-              <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
+              <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
                 {sortedProducts.map((product) => (
                   <ProductCard key={product.id} product={product} page="explore" />
                 ))}

@@ -52,7 +52,7 @@ const Carousel = () => {
   }, [activeIndex]);
 
   return (
-    <div className="relative w-full lg:-mt-20 lg:border-0 max-w-2xl mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
+    <div className="relative w-full lg:-mt-20 lg:max-w-lg xl:max-w-2xl lg:border-0 mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
       {loading ? (
         <div className="relative w-full h-48 lg:h-72 animate-pulse">
           <div className="w-full h-full bg-gray-300 rounded-lg" />
@@ -61,7 +61,7 @@ const Carousel = () => {
         <>
           {/* Mobile Carousel */}
           <div
-            className="flex lg:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-0 pb-1.5"
+            className="flex lg:hidden md:h-80 overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-0 pb-1.5"
             ref={carouselRef}
           >
             {banners.map((banner, index) => (
@@ -70,7 +70,7 @@ const Carousel = () => {
                 href={banner.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`relative shrink-0 h-48 w-[85%] snap-center rounded-lg transition-transform duration-500 ease-in-out ${index === 0
+                className={`relative shrink-0 h-48 md:h-80 w-[85%] snap-center rounded-lg transition-transform duration-500 ease-in-out ${index === 0
                     ? "mr-1"
                     : index === banners.length - 1
                       ? "ml-1"

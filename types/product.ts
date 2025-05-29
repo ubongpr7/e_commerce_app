@@ -13,6 +13,7 @@ export interface Vendor {
 }
 
 export interface Product {
+  isNewArrival: any
   id: string
   name: string
   slug: string
