@@ -65,7 +65,7 @@ export default function SchoolDropdown() {
     <div className="relative inline-block text-left w-64">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full rounded-md shadow-sm px-4 py-2 text-center tracking-widest text-xs lg:text-sm font-medium text-gray-700"
+        className="w-full rounded-md shadow-sm px-4 py-2 text-center tracking-widest text-xs lg:text-xs font-medium text-gray-700"
       >
         {selectedSchool ? (
           <>

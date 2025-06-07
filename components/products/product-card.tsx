@@ -44,7 +44,7 @@ export default function ProductCard({ product, variant = "default", page = "defa
         variant === "horizontal" && "flex flex-row",
         page !== "explore" && "hover:scale-[1.015] hover:shadow-lg",
         "w-full",
-        page === "explore" ? "w-full lg:max-w-[280px]" : "lg:max-w-[180px] max-w-[130px]"
+        page === "explore" ? "w-full lg:max-w-[280px]" : "lg:max-w-[180px] md:max-w-[160px] max-w-[130px]"
       )}
     >
       <div
@@ -79,7 +79,7 @@ export default function ProductCard({ product, variant = "default", page = "defa
             <Heart
               className={cn(
                 "h-5 w-5 transition-colors",
-                liked ? "fill-red-500 stroke-red-500" : "text-gray-700 group-hover:text-orange-600"
+                liked ? "fill-orange-600 stroke-orange-600" : "text-gray-700 group-hover:text-orange-600"
               )}
             />
           </Button>

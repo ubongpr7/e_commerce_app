@@ -36,10 +36,14 @@ export default function HomePage() {
           <Banner />
         </div>
 
-        <div className="hidden lg:flex gap-4 flex-row justify-between px-8">
+        <div className="hidden xl:flex gap-4 flex-row justify-between px-8">
           <HoverImage1 />
           <Banner />
           <HoverImage2 />
+        </div>
+
+        <div className="hidden lg:block xl:hidden">
+          <Banner />
         </div>
 
         <div className="p-3 lg:p-5">

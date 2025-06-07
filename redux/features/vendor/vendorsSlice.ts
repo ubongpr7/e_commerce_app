@@ -1,12 +1,26 @@
-"use client";
+import { createSlice, createAsyncThunk, type PayloadAction } from "@reduxjs/toolkit"
+import type { Vendor } from "@/types/vendor"
 
-import { useRef } from "react";
-import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { VendorCard } from "@/components/vendors/vendor-card";
+interface VendorsState {
+  vendors: Vendor[]
+  featuredVendors: Vendor[]
+  vendor: Vendor | null
+  loading: boolean
+  error: string | null
+}
 
-// Mock vendors - replace with your actual data or Redux slice
-const featuredVendors = [
+
+const initialState: VendorsState = {
+  vendors: [],
+  featuredVendors: [],
+  vendor: null,
+  loading: false,
+  error: null,
+}
+
+
+// Updated vendor data with mock categories
+const mockVendors = [
   {
     id: "1",
     name: "Tech Gadgets",
@@ -34,7 +48,7 @@ const featuredVendors = [
     description: "Trendy clothing and accessories for all seasons.",
     productCount: 128,
     rating: 4.5,
-    slug: "fashion-wear",
+    slug: "fashion-hub",
     joinedDate: "2023-10-15",
     school: "University of Lagos",
     address: "123 Tech Street, Lagos",
@@ -187,63 +201,90 @@ const featuredVendors = [
     website: "https://techgadgets.example.com",
     reviewCount: 120,
   },
-];
+]
 
-export default function FeaturedVendors() {
-  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const scrollLeft = () => {
-    scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
-  };
+// Fetch all vendors
+export const fetchVendors = createAsyncThunk("vendors/fetchVendors", async (_, { rejectWithValue }) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    return mockVendors
+  } catch (error) {
+    return rejectWithValue("Failed to fetch vendors")
+  }
+})
 
-  const scrollRight = () => {
-    scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" });
-  };
+// Fetch featured vendors
+export const fetchFeaturedVendors = createAsyncThunk("vendors/fetchFeaturedVendors", async (_, { rejectWithValue }) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    return mockVendors // Filter if needed
+  } catch (error) {
+    return rejectWithValue("Failed to fetch featured vendors")
+  }
+})
 
-  return (
-    <section className="lg:bg-white lg:mx-16 lg:mt-2 lg:rounded-md lg:px-4 lg:py-0]">
-      <div className="flex flex-col items-center justify-center">
-        <Link href={"/vendors"}>
-          <div className="bg-black text-white lg:flex rounded-md flex-row justify-between px-3 h-14 lg:w-[950px] xl:w-[1200px] py-2 hidden">
-            <div>
-              <h1 className="text-base lg:mt-1.5 font-semibold lg:text-lg">Top Vendors</h1>
-            </div>
+// Fetch vendor by slug
+export const fetchVendorBySlug = createAsyncThunk("vendors/fetchVendorBySlug", async (slug: string, { rejectWithValue }) => {
+  try {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+    const vendor = mockVendors.find((v) => v.slug === slug)
+    if (!vendor) {
+      return rejectWithValue("Vendor not found")
+    }
+    return vendor
+  } catch (error) {
+    return rejectWithValue("Failed to fetch vendor")
+  }
+})
 
-            <div className="flex flex-row items-center text-white text-xs lg:text-base lg:mt-1.5">
-              <p>See All</p>
-              <ChevronRight className="h-4 w-4 ml-2" /> {/* Add Chevron icon here */}
-            </div>
-          </div>
-        </Link>
+const vendorSlice = createSlice({
+  name: "vendors",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    // All vendors
+    builder.addCase(fetchVendors.pending, (state) => {
+      state.loading = true
+      state.error = null
+    })
+    builder.addCase(fetchVendors.fulfilled, (state, action: PayloadAction<Vendor[]>) => {
+      state.loading = false
+      state.vendors = action.payload
+    })
+    builder.addCase(fetchVendors.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.payload as string
+    })
 
-        {/* Scroll area with chevrons */}
-        <div className="relative w-full group">
-          <div
-            ref={scrollRef}
-            className="overflow-x-auto max-w-full mt-0 snap-x snap-mandatory flex gap-4 py-2 scrollbar-hide"
-          >
-            {featuredVendors.map((vendor) => (
-              <div key={vendor.id} className="flex-shrink-0 snap-start">
-                <VendorCard vendor={vendor} />
-              </div>
-            ))}
-          </div>
+    // Featured vendors
+    builder.addCase(fetchFeaturedVendors.pending, (state) => {
+      state.loading = true
+      state.error = null
+    })
+    builder.addCase(fetchFeaturedVendors.fulfilled, (state, action: PayloadAction<Vendor[]>) => {
+      state.loading = false
+      state.featuredVendors = action.payload
+    })
+    builder.addCase(fetchFeaturedVendors.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.payload as string
+    })
 
-          {/* Scroll buttons (only on lg and on hover) */}
-          <button
-            onClick={scrollLeft}
-            className="hidden lg:group-hover:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-800 text-white rounded-full w-10 h-10 z-10 transition"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <button
-            onClick={scrollRight}
-            className="hidden lg:group-hover:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-800 text-white rounded-full w-10 h-10 z-10 transition"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-}
+    // Vendor by slug
+    builder.addCase(fetchVendorBySlug.pending, (state) => {
+      state.loading = true
+      state.error = null
+    })
+    builder.addCase(fetchVendorBySlug.fulfilled, (state, action: PayloadAction<Vendor>) => {
+      state.loading = false
+      state.vendor = action.payload
+    })
+    builder.addCase(fetchVendorBySlug.rejected, (state, action) => {
+      state.loading = false
+      state.error = action.payload as string
+    })
+  },
+})
+
+export default vendorSlice.reducer

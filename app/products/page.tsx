@@ -105,9 +105,12 @@ export default function ProductsPage() {
 
   return (
     <MainLayout>
-      <div className="py-2 px-3 lg:px-5">
-        <div className="mb-8 flex flex-col space-y-4">
-          <h1 className="text-3xl font-bold">Products</h1>
+      <div className="py-2 px-3 lg:px-20">
+        <div className="mb-8 flex flex-col space-y-4 lg:mt-4">
+          <h1 className="text-lg font-bold md:text-2xl">Products</h1>
+          <p className="max-w-3xl text-muted-foreground text-sm md:text-base">
+            All the stuff you actually need—tech, fashion, school gear, and everyday essentials. No stress, no overspending.
+          </p>
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="relative flex-1 md:max-w-sm">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -269,7 +272,7 @@ export default function ProductsPage() {
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <SlidersHorizontal className="h-4 w-4" />
-                <span className="text-sm text-muted-foreground">{sortedProducts.length} products found</span>
+                <span className="text-sm text-muted-foreground">{sortedProducts.length} {sortedProducts.length === 1 ? "product" : "products"} found</span>
               </div>
               {(selectedCategory || selectedVendors.length > 0 || priceRange[0] > 0 || priceRange[1] < 500) && (
                 <Button variant="ghost" size="sm" onClick={clearFilters} className="h-8 gap-1 text-xs">

@@ -24,7 +24,25 @@ export function MainPageLayout({ children }: MainLayoutProps) {
   return (
     <div className={`${isDarkMode ? 'dark' : 'light'} flex min-h-screen flex-col bg-gray-50 lg:bg-orange-500`}>
       <div
-        className="w-full bg-no-repeat bg-contain"
+        className="w-full bg-no-repeat bg-contain hidden lg:block"
+        style={{
+          backgroundImage: `
+            url(''),
+            url('')
+          `,
+          backgroundRepeat: 'no-repeat, no-repeat',
+          backgroundPosition: 'top left, bottom right',
+          backgroundSize: 'contain, contain',
+          height: "auto",
+        }}
+      >
+        <MainNav />
+        <main className="flex-1">{children}</main>
+        <MainFooter />
+      </div>
+
+      <div
+        className="w-full bg-no-repeat bg-contain lg:hidden"
         style={{
           backgroundImage: `
             url(''),

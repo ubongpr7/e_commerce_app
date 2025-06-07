@@ -77,8 +77,11 @@ export default function ServicesPage() {
   return (
     <MainLayout>
       <div className="py-2 px-3 lg:px-5">
-        <div className="mb-8 flex flex-col space-y-4">
-          <h1 className="text-3xl font-bold">Services</h1>
+        <div className="mb-8 flex flex-col space-y-4 lg:mt-4">
+          <h1 className="text-lg font-bold md:text-2xl">Services</h1>
+          <p className="max-w-3xl text-muted-foreground text-sm md:text-base">
+            From laundry and tutoring to repairs and more. Real-life help, right when you need it. You chill, we handle it.
+          </p>
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="relative flex-1 md:max-w-sm">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -166,7 +169,7 @@ export default function ServicesPage() {
               <Separator />
 
               <div>
-                <h3 className="mb-4 font-medium">Vendors</h3>
+                <h3 className="mb-4 font-medium">Pros</h3>
                 <div className="space-y-2">
                   {vendors.map((vendor) => (
                     <div key={vendor.id} className="flex items-center space-x-2">
@@ -202,7 +205,7 @@ export default function ServicesPage() {
             <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <SlidersHorizontal className="h-4 w-4" />
-                <span className="text-sm text-muted-foreground">{sortedServices.length} services found</span>
+                <span className="text-sm text-muted-foreground">{sortedServices.length} {sortedServices.length === 1 ? "service" : "services"} found</span>
               </div>
               {(selectedCategory || selectedVendors.length > 0 || priceRange[0] > 0 || priceRange[1] < 500) && (
                 <Button variant="ghost" size="sm" onClick={clearFilters} className="h-8 gap-1 text-xs">

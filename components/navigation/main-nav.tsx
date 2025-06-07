@@ -18,6 +18,12 @@ import { Input } from "@/components/ui/input";
 import NotificationBell from "../user/notification-bell";
 import {
   UserRound,
+  PartyPopper,
+  PlaneTakeoff,
+  Castle,
+  TreePalm,
+  Bed,
+  GraduationCap,
   Home,
   BookTextIcon,
   TabletSmartphone,
@@ -58,6 +64,8 @@ import {
   Briefcase,
   BedDouble,
   Shirt,
+  Frame,
+  Activity,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
@@ -69,6 +77,8 @@ import { urlForImage } from "@/lib/sanityImage";
 import SchoolDropdown from "../store/school-dropdown";
 import LogoutButton from "../user/logout-button";
 import Image from "next/image";
+import DesktopNavSearch from "./desktop-nav-search";
+import MobileNavSearch from "./mobile-nav-search";
 
 
 
@@ -137,7 +147,13 @@ export function MainNav() {
         </>
       )}
 
-      <div className="bg-gray-100 hidden lg:block text-center text-white w-full p-2">
+      <div className="bg-gray-100 hidden text-center text-white w-full lg:flex flex-row justify-start gap-80 px-[86px]">
+        <Link href="/vendor/register/start">
+          <Button className="w-full bg-gray-100 hover:bg-gray-100 rounded-md shadow-sm px-4 py-2 text-center tracking-widest text-xs lg:text-xs font-medium text-orange-600">
+            Sell on Jemfave
+          </Button>
+        </Link>
+
         <SchoolDropdown />
       </div>
 
@@ -147,7 +163,7 @@ export function MainNav() {
 
       <header className="sticky right-0 left-0 top-0 z-30 w-full mb-2 lg:mb-0 shadow-md bg-white">
 
-        <div className="container flex h-20 pl-6 pr-6 items-center justify-between lg:px-8">
+        <div className="container flex h-20 pl-6 pr-6 items-center justify-between lg:px-[86px]">
           {/* Mobile Menu and Logo */}
           <div className="flex items-center lg:hidden gap-1 ml-2">
             <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(true)}>
@@ -174,23 +190,9 @@ export function MainNav() {
             <div className="text-gray-900 font-bold text-4xl -ml-6">emfave</div>
           </Link>
 
-          {/* Desktop Search */}
-          <div className="hidden lg:block">
-            <form className="relative w-full lg:w-auto flex flex-row gap-1">
-              <Input
-                type="text"
-                placeholder="Search products, brands and categories..."
-                className="w-full rounded-lg bg-gray-100 pl-4 xl:w-[500px] text-gray-700"
-              />
-              <Button
-                type="submit"
-                size="icon"
-                className="bg-orange-600 hover:bg-orange-700 rounded-lg"
-              >
-                <Search className="h-5 w-5 text-white" />
-              </Button>
-            </form>
-          </div>
+
+          {/* Desktop Header Search */}
+          <DesktopNavSearch />
 
           {/* Desktop Navigation */}
           <NavigationMenu className="hidden lg:flex">
@@ -215,9 +217,9 @@ export function MainNav() {
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-orange-600 text-black p-6 no-underline outline-none focus:shadow-md"
                           href="/products"
                         >
-                          <div className="mb-2 mt-4 text-lg font-bold">Jemfave Products</div>
-                          <p className="text-sm text-white">
-                            Browse all products from our trusted vendors
+                          <div className="mb-2 mt-4 text-lg font-bold">Products</div>
+                          <p className="text-xs text-white">
+                            All the stuff you actually need—tech, fashion, school gear, and everyday essentials. No stress, no overspending.
                           </p>
                         </Link>
                       </NavigationMenuLink>
@@ -227,7 +229,7 @@ export function MainNav() {
                       {
                         label: "Study Materials",
                         value: "study-materials",
-                        icon: BookOpen,
+                        icon: GraduationCap,
                         subcategory: "Textbooks · Past Questions · Notes",
                       },
                       {
@@ -304,9 +306,9 @@ export function MainNav() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
-              <NavigationMenuItem>
+              <NavigationMenuItem className="hidden">
                 <NavigationMenuTrigger>
-                  <p className="text-base">Services</p>
+                  <p className="text-base hidden">Services</p>
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
                   <ul className="grid w-[500px] h-[500px] gap-3 p-4 lg:grid-cols-2 overflow-auto scrollbar-hide">
@@ -316,9 +318,9 @@ export function MainNav() {
                           className="flex h-full w-full select-none flex-col justify-end rounded-md bg-orange-600 text-black p-6 no-underline outline-none focus:shadow-md"
                           href="/services"
                         >
-                          <div className="mb-2 mt-4 text-lg font-bold">Jemfave Services</div>
-                          <p className="text-sm text-white">
-                            Browse all services from our trusted vendors
+                          <div className="mb-2 mt-4 text-lg font-bold">Services</div>
+                          <p className="text-xs text-white">
+                            From laundry and tutoring to repairs and more. Real-life help, right when you need it. You chill, we handle it.
                           </p>
                         </Link>
                       </NavigationMenuLink>
@@ -356,8 +358,8 @@ export function MainNav() {
                         subcategory: "Groceries · Meals · Snacks",
                       },
                       {
-                        label: "Transportation & Bolts",
-                        value: "transport-services",
+                        label: "Rides & Bolts",
+                        value: "rides-bolts",
                         icon: Car,
                         subcategory: "Campus Rides · Bolt",
                       },
@@ -386,10 +388,16 @@ export function MainNav() {
                         subcategory: "Fan · Chair · Bedding",
                       },
                       {
-                        label: "Fashion & Beauty",
+                        label: "Beauty & Fashion",
                         value: "beauty-fashion",
                         icon: Shirt,
                         subcategory: "Clothing · Makeup · Accessories",
+                      },
+                      {
+                        label: "Artistry & Creative Services",
+                        value: "artistry-services",
+                        icon: Shirt,
+                        subcategory: "Paintings · Designs · Portraits",
                       },
                     ].map(({ label, value, icon: Icon, subcategory }) => (
                       <li key={value}>
@@ -411,6 +419,78 @@ export function MainNav() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
 
+              <NavigationMenuItem className="hidden">
+                <NavigationMenuTrigger>
+                  <p className="text-base hidden">Specials</p>
+                </NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid w-[500px] h-[500px] gap-3 p-4 lg:grid-cols-2 overflow-auto scrollbar-hide">
+                    <li className="row-span-3">
+                      <NavigationMenuLink asChild>
+                        <Link
+                          className="flex h-full w-full select-none flex-col justify-end rounded-md bg-orange-600 text-black p-6 no-underline outline-none focus:shadow-md"
+                          href="/specials"
+                        >
+                          <div className="mb-2 mt-4 text-lg font-bold">Specials</div>
+                          <p className="text-xs text-white">
+                            Flights, hostels, fun stuff, and exclusive perks. The kind of deals you don’t find just anywhere. Only for you.
+                          </p>
+                        </Link>
+                      </NavigationMenuLink>
+                    </li>
+
+                    {[
+                      {
+                        label: 'Flights & Travels',
+                        value: 'flights-travels',
+                        icon: PlaneTakeoff,
+                        subcategory: 'Campus Flights · Student Trips · Travels',
+                      },
+                      {
+                        label: 'Hostels & Lodges',
+                        value: 'hostels-lodges',
+                        icon: Castle,
+                        subcategory: 'Student Hostels · Short Stays · Lodging',
+                      },
+                      {
+                        label: 'Recreation & Leisure',
+                        value: 'recreation-leisure',
+                        icon: TreePalm,
+                        subcategory: 'Hangouts · Picnics · Events · Games',
+                      },
+                      {
+                        label: 'Hotels & Suites',
+                        value: 'hotels-suites',
+                        icon: Bed,
+                        subcategory: 'Hotels · Suites · Overnight Packages',
+                      },
+                      {
+                        label: 'Fitness Centers',
+                        value: 'fitness-centers',
+                        icon: Activity,
+                        subcategory: 'Gym · Workout · Training',
+                      },
+                    ].map(({ label, value, icon: Icon, subcategory }) => (
+                      <li key={value}>
+                        <NavigationMenuLink asChild>
+                          <Link
+                            href={`/specials?category=${value}`}
+                            className="flex items-start gap-3 rounded-md p-3 hover:bg-gray-100 transition-colors"
+                          >
+                            <Icon className="w-6 h-6 mt-1 text-orange-600" />
+                            <div>
+                              <div className="text-sm font-medium text-gray-900">{label}</div>
+                              <p className="text-xs text-gray-600">{subcategory}</p>
+                            </div>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    ))}
+                  </ul>
+                </NavigationMenuContent>
+              </NavigationMenuItem>
+
+
 
             </NavigationMenuList>
           </NavigationMenu>
@@ -429,10 +509,10 @@ export function MainNav() {
             {/* Cart */}
             <Link href="/cart">
               <Button variant="ghost" size="default" className="relative">
-                <div className="hidden lg:hidden md:block mr-0">Cart</div>
                 <ShoppingCart className="h-7 w-7" />
+                <div className="hidden md:block mr-0 text-base">Cart</div>
                 {cartItemCount > 0 && (
-                  <Badge className="absolute -right-1 -top-1 h-5 w-5 rounded-full text-xs flex items-center justify-center p-0">
+                  <Badge className="absolute -right-1 md:left-1 md:top-0 -top-1 h-5 w-5 rounded-full text-xs flex items-center justify-center p-0">
                     {cartItemCount}
                   </Badge>
                 )}
@@ -447,8 +527,8 @@ export function MainNav() {
 
             {/* User Button (for mobile) */}
             <Button variant="ghost" size="default" className="lg:hidden" onClick={() => setIsUserOpen(true)}>
-              <div className="hidden lg:hidden md:block mr-0">Account</div>
-              <UserRound className="h-7 w-7" />
+              <UserRound className="h-7 w-7 -ml-5 md:ml-0" />
+              <span className="hidden lg:hidden md:block mr-0 text-base">Account</span>
             </Button>
 
             {/* Desktop Login/Register */}
@@ -466,8 +546,8 @@ export function MainNav() {
                   </Button>
                 </Link>
                 <Link href="/vendor/register/start">
-                  <Button size="sm" className="bg-orange-600 hover:bg-orange-700 hidden">
-                    Become a Vendor
+                  <Button variant="ghost" size="sm" className="bg-gray-50 hidden text-base">
+                    Becomme a Vendor
                   </Button>
                 </Link>
               </div>
@@ -475,23 +555,8 @@ export function MainNav() {
           </div>
         </div>
 
-        {/* Mobile Search Form */}
-        <div className="lg:hidden px-4 -mt-3 mb-2.5">
-          <form className="flex items-center gap-2">
-            <Input
-              type="text"
-              placeholder="Search products, brands and categories..."
-              className="flex-1 h-8 text-sm text-gray-700 bg-gray-100 rounded-full"
-            />
-            <Button
-              type="submit"
-              size="icon"
-              className="bg-orange-600 hover:bg-orange-700 rounded-full h-8 w-8"
-            >
-              <Search className="h-2 w-2 text-white" />
-            </Button>
-          </form>
-        </div>
+        {/* Mobile Header Search */}
+        <MobileNavSearch />
 
         {/* Sheets for Menu/User */}
         {isMenuOpen && (
@@ -535,14 +600,14 @@ export function MainNav() {
                   </Link>
                 </div>
 
-                <hr className="border-t-8 border-gray-300 w-full" />
+                <hr className="border-t-8 -mt-6 border-gray-300 w-full" />
 
                 <div className="">
-                  <div className="text-lg font-semibold mb-5 px-3">Our Categories</div>
+                  <div className="text-lg font-semibold mb-5 px-3">Categories</div>
 
                   <Link href={`/products?category=study-materials`} onClick={() => setIsMenuOpen(false)}>
                     <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
-                      <BookTextIcon className="h-5 w-5" />
+                      <GraduationCap className="h-5 w-5" />
                       <div className="text-base">Study Materials</div>
                     </div>
                   </Link>
@@ -611,20 +676,149 @@ export function MainNav() {
                   </Link>
 
                   <Link href="/services" onClick={() => setIsMenuOpen(false)}>
-                    <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
+                    <div className="flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3 hidden">
                       <HandPlatter className="h-5 w-5" />
                       <div className="text-base">Services</div>
                     </div>
                   </Link>
 
                   <Link href="/" onClick={() => setIsMenuOpen(false)}>
-                    <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3">
+                    <div className="flex-row justify-start gap-4 hover:bg-gray-100 py-2 px-3 hidden">
                       <Sparkles className="h-5 w-5" />
-                      <div className="text-base">Specials</div>
+                      <div className="text-base">Extras</div>
                     </div>
                   </Link>
 
-                  <hr className="border-t-8 border-gray-300 w-full mt-5" />
+                  <hr className="border-t-8 mb-3 border-gray-300 w-full" />
+
+                  <div className="hidden">
+                    <div className="text-lg font-semibold mb-5 px-3">Services</div>
+
+                    <Link href={`/services?category=beauty-fashion`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                        <Shirt className="h-5 w-5" />
+                        <div className="text-base">Beauty & Fashion</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=home-services`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 mb-2 px-3">
+                        <Home className="h-5 w-5" />
+                        <div className="text-base">Home Services</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=event-ushering`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                        <Users className="h-5 w-5" />
+                        <div className="text-base">Event & Ushering</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=laundry-cleaning`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                        <Sparkles className="h-5 w-5" />
+                        <div className="text-base">Laundry & Cleaning</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=academic-tutoring`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                        <BookOpen className="h-5 w-5" />
+                        <div className="text-base">Academic Tutoring</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=food-delivery`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
+                        <ShoppingBasket className="h-5 w-5" />
+                        <div className="text-base">Food Delivery</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=rides-bolts`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
+                        <Car className="h-5 w-5" />
+                        <div className="text-base">Rides & Bolts</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=health-wellness`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
+                        <HeartPulse className="h-5 w-5" />
+                        <div className="text-base">Health & Wellness</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=tech-repair`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
+                        <MonitorSmartphone className="h-5 w-5" />
+                        <div className="text-base">Tech Repair</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=career-support`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
+                        <Briefcase className="h-5 w-5" />
+                        <div className="text-base">Career Support</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=essential-rentals`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
+                        <BedDouble className="h-5 w-5" />
+                        <div className="text-base">Rental Services</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/services?category=artistry-services`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 mb-2 hover:bg-gray-100 py-2 px-3">
+                        <Frame className="h-5 w-5" />
+                        <div className="text-base">Artistry Services</div>
+                      </div>
+                    </Link>
+
+                    <hr className="border-t-8 mb-3 border-gray-300 w-full" />
+
+                    <div className="text-lg font-semibold mb-5 px-3">Specials</div>
+
+                    <Link href={`/specials?category=flights-travels`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                        <PlaneTakeoff className="h-5 w-5" />
+                        <div className="text-base">Flights & Travels</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/specials?category=hostels-lodges`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 py-2 mb-2 px-3">
+                        <Castle className="h-5 w-5" />
+                        <div className="text-base">Hostels & Lodges</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/specials?category=recreation-leisure`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                        <TreePalm className="h-5 w-5" />
+                        <div className="text-base">Recreation & Leisure</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/specials?category=hotels-suites`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                        <Bed className="h-5 w-5" />
+                        <div className="text-base">Hotels & Suites</div>
+                      </div>
+                    </Link>
+
+                    <Link href={`/specials?category=fitness-centers`} onClick={() => setIsMenuOpen(false)}>
+                      <div className="flex flex-row justify-start gap-4 hover:bg-gray-100 mb-2 py-2 px-3">
+                        <Activity className="h-5 w-5" />
+                        <div className="text-base">Fitness Centers</div>
+                      </div>
+                    </Link>
+
+                    <hr className="border-t-8 border-gray-300 w-full mt-5" />
+                  </div>
 
                   <Link href="/vendors" onClick={() => setIsMenuOpen(false)}>
                     <div className="hover:bg-gray-100 mt-2 py-2 px-3">
@@ -762,7 +956,7 @@ export function MainNav() {
           SHOP YOUR STYLE
         </div>
 
-        <div className="bg-main-red text-white tracking-widest text-center w-full p-2 font-semibold text-base hidden lg:block animate-blink">
+        <div className="bg-black text-white tracking-widest text-center w-full p-2 font-semibold text-base hidden lg:block animate-blink">
           SHOP YOUR STYLE WITH BEST AFFORDABLE PRICES
         </div>
       </header>

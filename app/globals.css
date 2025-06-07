@@ -5,6 +5,10 @@
 /* FIXED */
 *, *::before, *::after {
   box-sizing: border-box;
+   user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none; /* Disable long-press callout (copy/paste) on iOS */
 }
 
 html {
@@ -14,6 +18,12 @@ html {
   width: 100%;
   height: 100%;
   font-family:sans-serif;
+  touch-action: manipulation; /* Allows basic tap, but not double-tap zoom */
+  overscroll-behavior: none;
+   user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none; /* Disable long-press callout (copy/paste) on iOS */
 }
 
 body {
@@ -23,6 +33,12 @@ body {
   width: 100%;
   height: 100%;
   font-family:sans-serif;
+  touch-action: manipulation; /* Allows basic tap, but not double-tap zoom */
+  overscroll-behavior: none;
+   user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -webkit-touch-callout: none; /* Disable long-press callout (copy/paste) on iOS */
 }
 
 /* Reset the next.js container to take full width and height */

@@ -11,6 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { updateQuantity, removeFromCart, clearCart } from "@/redux/cart/cartSlice"
 import { useToast } from "@/components/ui/use-toast"
 import { Trash, ShoppingCart, CreditCard } from "lucide-react"
+import { cn, formatCurrency } from "@/lib/utils";
 
 export default function CartPage() {
   const dispatch = useAppDispatch()
@@ -61,7 +62,7 @@ export default function CartPage() {
         <div className="text-gray-900 text-xs p-4 font-medium">YOUR CART</div>
 
         {items.length === 0 ? (
-          <div className="flex flex-col items-center justify-center rounded-lg border border-dashed py-16 bg-white border-gray-200">
+          <div className="flex flex-col items-center justify-center rounded-lg border border-dashed px-3 lg:px-5 py-16 bg-white border-gray-200">
             <ShoppingCart className="mb-4 h-16 w-16 text-gray-500" />
             <h2 className="mb-2 text-xl font-semibold">Your cart is empty</h2>
             <p className="mb-6 text-center text-gray-500">
@@ -72,11 +73,11 @@ export default function CartPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid gap-8 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-3">
             {/* Cart Items */}
-            <div className="lg:col-span-2">
+            <div className="md:col-span-2">
               <div className="rounded-lg border bg-white border-gray-200">
-                <div className="hidden lg:grid grid-cols-12 gap-4 p-4 text-sm font-medium text-gray-500">
+                <div className="hidden md:grid grid-cols-12 gap-4 p-4 text-sm font-medium text-gray-500">
                   <div className="col-span-6">Product</div>
                   <div className="col-span-2 text-center">Price</div>
                   <div className="col-span-2 text-center">Quantity</div>
@@ -86,9 +87,9 @@ export default function CartPage() {
 
                 {items.map((item) => (
                   <div key={item.id}>
-                    <div className="flex flex-col lg:grid lg:grid-cols-12 gap-4 p-4">
+                    <div className="flex flex-col md:grid md:grid-cols-12 gap-4 p-4">
                       {/* Product Info */}
-                      <div className="lg:col-span-6 flex gap-4">
+                      <div className="md:col-span-6 flex gap-4">
                         <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                           <Image
                             src={item.image || "/placeholder.svg"}
@@ -108,7 +109,7 @@ export default function CartPage() {
                           )}
                           <button
                             onClick={() => handleRemoveItem(item.id)}
-                            className="mt-1 flex items-center gap-1 text-xs lg:text-gray-500 text-red-500 hover:text-red-500"
+                            className="mt-1 flex items-center gap-1 text-xs md:text-gray-500 text-red-500 hover:text-red-500"
                           >
                             <Trash className="h-3 w-3" />
                             Remove
@@ -117,15 +118,15 @@ export default function CartPage() {
                       </div>
 
                       {/* Price */}
-                      <div className="lg:col-span-2 flex justify-between lg:justify-center text-gray-900">
-                        <span className="lg:hidden text-xs font-medium text-gray-900">Price:</span>
-                        ${item.price.toFixed(2)}
+                      <div className="md:col-span-2 flex justify-between md:justify-center text-gray-900">
+                        <span className="md:hidden text-xs font-medium text-gray-900">Price:</span>
+                        {formatCurrency(item.price)}
                       </div>
 
                       {/* Quantity */}
-                      <div className="lg:col-span-2 flex justify-between lg:justify-center">
-                        <span className="lg:hidden font-medium text-gray-900 text-xs">Quantity:</span>
-                        <div className="flex w-24 items-center rounded-md ml-auto lg:ml-0">
+                      <div className="md:col-span-2 flex justify-between md:justify-center">
+                        <span className="md:hidden font-medium text-gray-900 text-xs">Quantity:</span>
+                        <div className="flex w-24 items-center rounded-md ml-auto md:ml-0">
                           <Button
                             variant="outline"
                             size="icon"
@@ -149,9 +150,9 @@ export default function CartPage() {
                       </div>
 
                       {/* Total */}
-                      <div className="lg:col-span-2 flex justify-between lg:justify-end font-medium text-gray-900">
-                        <span className="lg:hidden font-medium text-gray-900 text-xs">Total:</span>
-                        ${(item.price * item.quantity).toFixed(2)}
+                      <div className="md:col-span-2 flex justify-between md:justify-end font-medium text-gray-900">
+                        <span className="md:hidden font-medium text-gray-900 text-xs">Total:</span>
+                        {formatCurrency(item.price * item.quantity)}
                       </div>
                     </div>
                     <Separator className="bg-gray-200" />
@@ -187,20 +188,20 @@ export default function CartPage() {
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span className="text-gray-500">Subtotal</span>
-                    <span className="text-gray-900">${subtotal.toFixed(2)}</span>
+                    <span className="text-gray-900">{formatCurrency(subtotal)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-500">Shipping</span>
-                    <span className="text-gray-900">${shipping.toFixed(2)}</span>
+                    <span className="text-gray-900">{formatCurrency(shipping)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-gray-500">Tax</span>
-                    <span className="text-gray-900">${tax.toFixed(2)}</span>
+                    <span className="text-gray-900">{formatCurrency(tax)}</span>
                   </div>
                   <Separator className="my-2 bg-gray-200" />
                   <div className="flex justify-between font-medium text-gray-900">
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>{formatCurrency(total)}</span>
                   </div>
                 </div>
 

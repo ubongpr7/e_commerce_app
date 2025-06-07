@@ -13,9 +13,9 @@ export interface Vendor {
 }
 
 export interface Product {
-  isNewArrival: any
   id: string
   name: string
+  school: string
   slug: string
   price: number
   compareAtPrice: number

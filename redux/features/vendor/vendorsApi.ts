@@ -7,6 +7,7 @@ interface Vendor {
   logo: string
   coverImage: string
   description: string
+  category?: string
   productCount: number
   rating: number
   address?: string
@@ -15,6 +16,7 @@ interface Vendor {
   website?: string
   joinedDate?: string
   reviewCount?: number
+  school?: string
 }
 
 export const vendorsApi = apiSlice.injectEndpoints({

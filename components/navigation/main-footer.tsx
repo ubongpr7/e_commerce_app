@@ -60,7 +60,7 @@ export function MainFooter() {
               <div className="text-white font-bold text-3xl -ml-5">emfave</div>
             </Link>
             <p className="mt-4 text-white">
-              #1 Global Student Shopping Platform
+              #1 Global Student Shopping App
             </p>
             <div className="mt-6 flex space-x-4">
               <Button variant="ghost" size="icon" asChild>
@@ -89,13 +89,31 @@ export function MainFooter() {
           {/* Quick Links */}
           <div>
             <h3 className="mb-4 text-lg font-medium">Quick Links</h3>
-            <ul className="space-y-2 text-white">
+            <ul className="space-y-2 text-white hidden md:block">
               <li><Link href="/" className="hover:text-orange-600 text-white">Home</Link></li>
               <li><Link href="/products" className="hover:text-orange-600 text-white">Products</Link></li>
+              <li><Link href="/services" className="hover:text-orange-600 text-white">Services</Link></li>
+              <li><Link href="/specials" className="hover:text-orange-600 text-white">Specials</Link></li>
               <li><Link href="/vendors" className="hover:text-orange-600 text-white">Vendors</Link></li>
               <li><Link href="/vendor/register/start" className="hover:text-orange-600 text-white">Become a Vendor</Link></li>
               <li><Link href="/about" className="hover:text-orange-600 text-white">About Us</Link></li>
               <li><Link href="/contact" className="hover:text-orange-600 text-white">Contact</Link></li>
+            </ul>
+
+            <ul className="space-y-2 text-white flex flex-row justify-between md:hidden">
+              <div>
+                <li><Link href="/" className="hover:text-orange-600 text-white">Home</Link></li>
+                <li><Link href="/products" className="hover:text-orange-600 text-white">Products</Link></li>
+                <li><Link href="/services" className="hover:text-orange-600 text-white">Services</Link></li>
+                <li><Link href="/specials" className="hover:text-orange-600 text-white">Specials</Link></li>
+              </div>
+
+              <div>
+                <li><Link href="/vendors" className="hover:text-orange-600 text-white">Vendors</Link></li>
+                <li><Link href="/vendor/register/start" className="hover:text-orange-600 text-white">Become a Vendor</Link></li>
+                <li><Link href="/about" className="hover:text-orange-600 text-white">About Us</Link></li>
+                <li><Link href="/contact" className="hover:text-orange-600 text-white">Contact</Link></li>
+              </div>
             </ul>
           </div>
 
@@ -134,7 +152,7 @@ export function MainFooter() {
 
       {/* Scroll to Top Button (Only show when scrolled 100px or more) */}
       {showScrollTop && (
-        <div className="fixed bottom-6 right-6 z-50 flex justify-center mb-6">
+        <div className="fixed bottom-6 right-6 z-10 flex justify-center mb-6">
           <button
             onClick={scrollToTop}
             aria-label="Scroll to top"

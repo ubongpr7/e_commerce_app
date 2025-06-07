@@ -52,7 +52,7 @@ const Carousel = () => {
   }, [activeIndex]);
 
   return (
-    <div className="relative w-full lg:-mt-20 lg:max-w-lg xl:max-w-2xl lg:border-0 mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
+    <div className="relative bg-cover w-full lg:-mt-20 lg:max-w-lg xl:max-w-2xl lg:border-0 mx-auto overflow-hidden border-0 border-b-8 border-b-gray-300">
       {loading ? (
         <div className="relative w-full h-48 lg:h-72 animate-pulse">
           <div className="w-full h-full bg-gray-300 rounded-lg" />
@@ -61,7 +61,7 @@ const Carousel = () => {
         <>
           {/* Mobile Carousel */}
           <div
-            className="flex lg:hidden md:h-80 overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-0 pb-1.5"
+            className="flex lg:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory gap-0 pb-1.5 h-[185px] md:h-[365px]"
             ref={carouselRef}
           >
             {banners.map((banner, index) => (
@@ -70,7 +70,7 @@ const Carousel = () => {
                 href={banner.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`relative shrink-0 h-48 md:h-80 w-[85%] snap-center rounded-lg transition-transform duration-500 ease-in-out ${index === 0
+                className={`relative shrink-0 h-[180px] md:h-[360px] w-[90%] snap-center rounded-lg transition-transform duration-500 ease-in-out ${index === 0
                     ? "mr-1"
                     : index === banners.length - 1
                       ? "ml-1"
@@ -81,7 +81,7 @@ const Carousel = () => {
                   src={urlForImage(banner.image).url()}
                   alt={`Banner ${index + 1}`}
                   fill
-                  className="object-cover rounded-sm"
+                  className="object-cover bg-contain h-auto w-full"
                   loading="lazy"
                 />
               </a>
@@ -89,7 +89,7 @@ const Carousel = () => {
           </div>
 
           {/* Desktop Fade Carousel */}
-          <div className="relative hidden lg:flex group w-full h-80 mt-24">
+          <div className="relative hidden lg:flex group w-full h-[380px] mt-24">
             {banners.map((banner, index) => (
               <div
                 key={banner._id}
@@ -108,7 +108,7 @@ const Carousel = () => {
                     src={urlForImage(banner.image).url()}
                     alt={`Banner ${index + 1}`}
                     fill
-                    className="object-cover rounded-lg"
+                    className="object-cover rounded-sm bg-contain h-auto w-full"
                     loading="lazy"
                   />
                 </a>

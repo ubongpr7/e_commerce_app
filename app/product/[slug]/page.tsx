@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { useParams } from "next/navigation"
@@ -15,8 +15,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks"
 import { fetchProductBySlug } from "@/redux/features/product/productsSlice"
 import { addToCart } from "@/redux/cart/cartSlice"
 import { useToast } from "@/components/ui/use-toast"
-import { Heart, Share2, ShoppingCart, Star, Truck, Shield, RotateCcw, ChevronRight } from "lucide-react"
-import { formatCurrency } from "@/lib/utils";
+import { Heart, Share2, ShoppingCart, Star, Truck, Shield, RotateCcw, ChevronRight, ChevronLeft } from "lucide-react"
+import { cn, formatCurrency } from "@/lib/utils";
 
 export default function ProductPage() {
   const { slug } = useParams()
@@ -26,6 +26,18 @@ export default function ProductPage() {
   const [selectedVariant, setSelectedVariant] = useState("")
   const [quantity, setQuantity] = useState(1)
   const [activeImage, setActiveImage] = useState(0)
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scrollLeft = () => {
+    scrollRef.current?.scrollBy({ left: -300, behavior: "smooth" });
+  };
+
+  const scrollRight = () => {
+    scrollRef.current?.scrollBy({ left: 300, behavior: "smooth" });
+  };
+
+  const [liked, setLiked] = useState(false);
 
   useEffect(() => {
     if (slug) {
@@ -70,7 +82,7 @@ export default function ProductPage() {
   if (error || !product) {
     return (
       <MainLayout>
-        <div className="container py-8">
+        <div className="py-8 px-3 lg:px-5">
           <div className="flex h-96 flex-col items-center justify-center">
             <h1 className="mb-4 text-2xl font-bold">Product Not Found</h1>
             <p className="mb-6 text-gray-500">
@@ -93,7 +105,7 @@ export default function ProductPage() {
     : 0
 
   // Mock related products
-  const relatedProducts = Array(4)
+  const relatedProducts = Array(8)
     .fill(null)
     .map((_, i) => ({
       id: `related-${i}`,
@@ -109,32 +121,52 @@ export default function ProductPage() {
       isNew: i === 0,
       onSale: i % 2 === 0,
       vendor: product.vendor,
+      school: product.school,
     }))
 
   return (
     <MainLayout>
-      <div className="container py-8">
-        {/* Breadcrumbs */}
-        <div className="mb-6 flex items-center text-sm p-3 text-gray-500">
+
+      {/* Desktop Breadcrumbs */}
+      <div className="hidden lg:flex items-center text-xs lg:mx-16 lg:pl-4 p-3 text-gray-500">
+        <Link href="/" className="hover:text-gray-900">
+          Home
+        </Link>
+        <ChevronRight className="mx-1 h-3 w-3" />
+        <Link href="/products" className="hover:text-gray-900">
+          Products
+        </Link>
+        <ChevronRight className="mx-1 h-3 w-3" />
+        <Link href={`/products?category=${product.category}`} className="capitalize truncate hover:text-gray-900">
+          {product.category}
+        </Link>
+        <ChevronRight className="mx-1 h-3 w-3" />
+        <span className="truncate text-gray-900">{product.name}</span>
+      </div>
+
+      <div className="py-0 mx-0 lg:py-3 lg:px-3 lg:mx-20 lg:shadow-xl lg:rounded-lg lg:bg-white">
+
+        {/* Mobile Breadcrumbs */}
+        <div className="-mb-2 flex items-center text-xs lg:hidden p-3 text-gray-500">
           <Link href="/" className="hover:text-gray-900">
             Home
           </Link>
-          <ChevronRight className="mx-1 h-4 w-4" />
+          <ChevronRight className="mx-1 h-3 w-3" />
           <Link href="/products" className="hover:text-gray-900">
             Products
           </Link>
-          <ChevronRight className="mx-1 h-4 w-4" />
-          <Link href={`/products?category=${product.category}`} className="capitalize hover:text-gray-900 line-clamp-1">
+          <ChevronRight className="mx-1 h-3 w-3" />
+          <Link href={`/products?category=${product.category}`} className="capitalize truncate hover:text-gray-900">
             {product.category}
           </Link>
-          <ChevronRight className="mx-1 h-4 w-4" />
+          <ChevronRight className="mx-1 h-3 w-3" />
           <span className="truncate text-gray-900">{product.name}</span>
         </div>
 
         <div className="gap-8 md:grid md:grid-cols-2 p-3">
           {/* Product Images */}
           <div className="space-y-4">
-            <div className="relative aspect-square overflow-hidden rounded-lg border">
+            <div className="relative aspect-square lg:h-[300px] lg:w-[300px] w-full overflow-hidden rounded-lg border">
               <Image
                 src={product.images[activeImage] || "/placeholder.svg"}
                 alt={product.name}
@@ -151,11 +183,11 @@ export default function ProductPage() {
                 </Badge>
               )}
             </div>
-            <div className="flex gap-2 overflow-auto pb-2">
-              {product.images.map((image, index) => (
+            <div className="flex gap-2 overflow-auto pb-2 scrollbar-hide">
+              {product.images.slice(0, 7).map((image, index) => (
                 <button
                   key={index}
-                  className={`relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border ${activeImage === index ? "ring-2 ring-gray-900" : ""
+                  className={`relative lg:h-10 lg:w-10 h-20 w-20 flex-shrink-0 overflow-hidden rounded-md border ${activeImage === index ? "ring-2 ring-gray-900" : ""
                     }`}
                   onClick={() => setActiveImage(index)}
                 >
@@ -168,7 +200,7 @@ export default function ProductPage() {
                 </button>
               ))}
               {/* Add placeholder thumbnails if less than 4 images */}
-              {Array(Math.max(0, 4 - product.images.length))
+              {Array(Math.max(0, 7 - product.images.length))
                 .fill(null)
                 .map((_, index) => (
                   <div
@@ -196,7 +228,7 @@ export default function ProductPage() {
                     .map((_, i) => (
                       <Star
                         key={i}
-                        className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-gray-900 text-gray-900" : "fill-gray-200 text-gray-200"}`}
+                        className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-yellow-500 text-yellow-500" : "fill-gray-200 text-gray-200"}`}
                       />
                     ))}
                 </div>
@@ -228,7 +260,7 @@ export default function ProductPage() {
 
             <div className="space-y-4">
               <div>
-                <h3 className="mb-2 font-medium">Description</h3>
+                <h3 className="mb-2 font-medium -mt-10">Description</h3>
                 <p className="text-gray-500">{product.description}</p>
               </div>
 
@@ -273,9 +305,27 @@ export default function ProductPage() {
                   </Button>
                 </div>
               </div>
+
+              <div className="hidden flex-wrap gap-2 lg:flex bottom-0 bg-white p-4">
+                <Button className="flex-1 gap-2" size="lg" onClick={handleAddToCart} disabled={!product.inStock}>
+                  <ShoppingCart className="h-5 w-5" />
+                  Add to Cart
+                </Button>
+                <Button variant="outline" size="icon" className="h-11 w-11" onClick={() => setLiked(!liked)}>
+                  <Heart className={cn(
+                    "h-5 w-5 transition-colors",
+                    liked ? "fill-orange-600 stroke-orange-600" : "text-gray-700 group-hover:text-orange-600"
+                  )} />
+                  <span className="sr-only">Add to Wishlist</span>
+                </Button>
+                <Button variant="outline" size="icon" className="h-11 w-11">
+                  <Share2 className="h-5 w-5" />
+                  <span className="sr-only">Share Product</span>
+                </Button>
+              </div>
             </div>
 
-            <div className="grid gap-2 pt-4 text-sm">
+            <div className="grid gap-2 text-sm -mt-10">
               <div className="flex items-center gap-2">
                 <Truck className="h-4 w-4 text-gray-500" />
                 <span>Free shipping on orders over $50</span>
@@ -293,28 +343,31 @@ export default function ProductPage() {
         </div>
 
         {/* Product Tabs */}
-        <div className="mt-12">
+        <div className="mt-5">
           <Tabs defaultValue="details">
-            <TabsList className="w-full justify-start lg:px-5">
+            <TabsList className="w-full justify-start">
               <TabsTrigger value="details">Details</TabsTrigger>
               <TabsTrigger value="specifications">Specifications</TabsTrigger>
               <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
             <TabsContent value="details" className="mt-6 px-3 lg:px-5">
-              <div className="prose max-w-none">
-                <p>{product.description}</p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl
-                  nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl
-                  nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.
-                </p>
-                <ul>
-                  <li>High-quality materials for durability</li>
-                  <li>Designed for comfort and ease of use</li>
-                  <li>Versatile functionality for various needs</li>
-                  <li>Modern aesthetic that complements any setting</li>
-                </ul>
-              </div>
+              <Card className="p-4">
+                <h3 className="mb-2 font-semibold">Product Details</h3>
+                <div className="prose max-w-none text-gray-500 text-sm lg:text-base leading-normal">
+                  <p>{product.description}</p>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl vel ultricies lacinia, nisl
+                    nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl. Sed euismod, nisl vel ultricies lacinia, nisl
+                    nisl aliquam nisl, eu aliquam nisl nisl sit amet nisl.
+                  </p>
+                  <ul>
+                    <li>High-quality materials for durability</li>
+                    <li>Designed for comfort and ease of use</li>
+                    <li>Versatile functionality for various needs</li>
+                    <li>Modern aesthetic that complements any setting</li>
+                  </ul>
+                </div>
+              </Card>
             </TabsContent>
             <TabsContent value="specifications" className="mt-6 px-3 lg:px-5">
               <div className="grid gap-4 sm:grid-cols-2">
@@ -408,7 +461,7 @@ export default function ProductPage() {
                           .map((_, i) => (
                             <Star
                               key={i}
-                              className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-gray-900 text-gray-900" : "fill-gray-200 text-gray-200"}`}
+                              className={`h-4 w-4 ${i < Math.floor(product.rating) ? "fill-yellow-500 text-yellow-500" : "fill-gray-200 text-gray-200"}`}
                             />
                           ))}
                       </div>
@@ -434,7 +487,7 @@ export default function ProductPage() {
                                   .map((_, j) => (
                                     <Star
                                       key={j}
-                                      className={`h-3 w-3 ${j < 5 - i ? "fill-gray-900 text-gray-900" : "fill-gray-200 text-gray-200"}`}
+                                      className={`h-3 w-3 ${j < 5 - i ? "fill-yellow-500 text-yellow-500" : "fill-gray-200 text-gray-200"}`}
                                     />
                                   ))}
                               </div>
@@ -463,13 +516,16 @@ export default function ProductPage() {
           </Tabs>
         </div>
 
-        <div className="flex flex-wrap gap-2 sticky bottom-0 bg-gray-50 p-4">
+        <div className="flex flex-wrap gap-2 sticky lg:hidden bg-gray-50 bottom-0 p-4">
           <Button className="flex-1 gap-2" size="lg" onClick={handleAddToCart} disabled={!product.inStock}>
             <ShoppingCart className="h-5 w-5" />
             Add to Cart
           </Button>
-          <Button variant="outline" size="icon" className="h-11 w-11">
-            <Heart className="h-5 w-5" />
+          <Button variant="outline" size="icon" className="h-11 w-11" onClick={() => setLiked(!liked)}>
+            <Heart className={cn(
+              "h-5 w-5 transition-colors",
+              liked ? "fill-orange-600 stroke-orange-600" : "text-gray-700 group-hover:text-orange-600"
+            )} />
             <span className="sr-only">Add to Wishlist</span>
           </Button>
           <Button variant="outline" size="icon" className="h-11 w-11">
@@ -479,13 +535,34 @@ export default function ProductPage() {
         </div>
 
         {/* Related Products */}
-        <div className="mt-16 px-3 lg:px-5">
-          <h2 className="mb-6 text-2xl font-bold">You May Also Like</h2>
-          <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-            {relatedProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+        <div className="mt-16 px-3 lg:px-5 relative w-full group">
+          <h2 className="-mb-14 lg:mb-2 text-lg lg:text-2xl font-bold">You May Also Like</h2>
+          <>
+            <div
+              ref={scrollRef}
+              className="overflow-x-auto max-w-full mt-0 snap-x snap-mandatory flex gap-4 py-2 scrollbar-hide"
+            >
+              {relatedProducts.slice(0, 20).map((product) => (
+                <div key={product.id} className="flex-shrink-0 snap-start lg:mt-0 mt-16">
+                  <ProductCard key={product.id} product={product} />
+                </div>
+              ))}
+            </div>
+
+            {/* Scroll buttons (only on lg and on hover) */}
+            <button
+              onClick={scrollLeft}
+              className="hidden lg:group-hover:flex items-center justify-center absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-800 text-white rounded-full w-10 h-10 z-10 transition"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={scrollRight}
+              className="hidden lg:group-hover:flex items-center justify-center absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800/70 hover:bg-gray-800 text-white rounded-full w-10 h-10 z-10 transition"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </>
         </div>
       </div>
     </MainLayout>

@@ -11,11 +11,20 @@ import ProductCard from "@/components/products/product-card"
 import { useAppSelector } from "@/redux/hooks"
 import { MapPin, Mail, Phone, Globe, Star, Package, Calendar, ChevronRight } from "lucide-react"
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 export default function VendorPage() {
   const { slug } = useParams()
   const { products } = useAppSelector((state) => state.products)
   const [vendor, setVendor] = useState<any>(null)
   const [loading, setLoading] = useState(true)
+  const [sortBy, setSortBy] = useState("featured")
 
   useEffect(() => {
     // In a real app, this would fetch vendor data from an API
@@ -29,8 +38,8 @@ export default function VendorPage() {
       if (foundVendor) {
         setVendor({
           ...foundVendor,
-          coverImage: "/placeholder.svg?height=300&width=1200",
-          logo: "/placeholder.svg?height=120&width=120",
+          coverImage: "https://images.pexels.com/photos/443378/pexels-photo-443378.jpeg?auto=compress&cs=tinysrgb&w=600",
+          logo: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=600",
           description:
             "A trusted vendor providing high-quality products for our customers. We pride ourselves on excellent customer service and fast shipping.",
           address: "123 Market St, San Francisco, CA 94103",
@@ -48,6 +57,23 @@ export default function VendorPage() {
     }, 1000)
   }, [slug, products])
 
+  const vendorProducts = vendor
+    ? products
+      .filter((product) => product.vendor.id === vendor.id)
+      .slice()
+      .sort((a, b) => {
+        switch (sortBy) {
+          case "priceLow":
+            return a.price - b.price
+          case "priceHigh":
+            return b.price - a.price
+          case "newest":
+            return new Date(b.id).getTime() - new Date(a.id).getTime()
+          default:
+            return 0
+        }
+      })
+    : []
   if (loading) {
     return (
       <MainLayout>
@@ -78,27 +104,26 @@ export default function VendorPage() {
     )
   }
 
-  // Filter products by this vendor
-  const vendorProducts = products.filter((product) => product.vendor.id === vendor.id)
+
 
   return (
     <MainLayout>
-      <div className="container py-8">
+      <div className="mb-8">
         {/* Breadcrumbs */}
-        <div className="mb-6 flex items-center text-sm text-muted-foreground">
+        <div className="mb-6 items-center text-xs text-muted-foreground hidden">
           <Link href="/" className="hover:text-primary">
             Home
           </Link>
-          <ChevronRight className="mx-1 h-4 w-4" />
+          <ChevronRight className="mx-1 h-3 w-3" />
           <Link href="/vendors" className="hover:text-primary">
             Vendors
           </Link>
-          <ChevronRight className="mx-1 h-4 w-4" />
+          <ChevronRight className="mx-1 h-3 w-3" />
           <span className="text-foreground">{vendor.name}</span>
         </div>
 
         {/* Vendor Header */}
-        <div className="relative mb-8">
+        <div className="relative mb-8 -mt-4">
           <div className="relative h-[200px] w-full overflow-hidden rounded-t-lg md:h-[250px]">
             <Image
               src={vendor.coverImage || "/placeholder.svg"}
@@ -116,7 +141,7 @@ export default function VendorPage() {
               <h1 className="text-2xl font-bold md:text-3xl">{vendor.name}</h1>
               <div className="mt-2 flex flex-wrap items-center justify-center gap-4 md:justify-start">
                 <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 fill-primary text-primary" />
+                  <Star className="h-4 w-4 fill-yellow-500 text-yellow-500" />
                   <span className="font-medium">{vendor.rating}</span>
                   <span className="text-muted-foreground">({vendor.reviewCount} reviews)</span>
                 </div>
@@ -145,17 +170,23 @@ export default function VendorPage() {
             <TabsTrigger value="reviews">Reviews</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="products" className="space-y-6">
+          <TabsContent value="products" className="space-y-6 px-3 lg:px-5">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold">All Products</h2>
               <div className="flex gap-2">
-                <Button variant="outline">Filter</Button>
-                <select className="rounded-md border px-3 py-2">
-                  <option>Sort by: Featured</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                  <option>Newest</option>
-                </select>
+                <Button variant="outline" className="hidden">Filter</Button>
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-[200px]">
+                    <SelectValue placeholder="Sort by" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="featured">Featured</SelectItem>
+                    <SelectItem value="price-low">Price: Low to High</SelectItem>
+                    <SelectItem value="price-high">Price: High to Low</SelectItem>
+                    <SelectItem value="newest">Newest</SelectItem>
+                  </SelectContent>
+                </Select>
+
               </div>
             </div>
 
@@ -164,9 +195,9 @@ export default function VendorPage() {
                 <p className="text-muted-foreground">No products found for this vendor.</p>
               </div>
             ) : (
-              <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center">
                 {vendorProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
+                  <ProductCard key={product.id} product={product} page="explore" />
                 ))}
 
                 {/* Add more mock products to fill the grid */}
@@ -188,17 +219,21 @@ export default function VendorPage() {
                       onSale: i % 2 === 0,
                       vendor: vendor,
                     }}
+
+                    page="explore"
                   />
                 ))}
               </div>
             )}
 
-            <div className="flex justify-center">
-              <Button variant="outline">Load More</Button>
-            </div>
+            {vendorProducts.length > 0 && (
+              <div className="flex justify-center mt-20">
+                <Button variant="outline">Load More</Button>
+              </div>
+            )}
           </TabsContent>
 
-          <TabsContent value="about" className="space-y-6">
+          <TabsContent value="about" className="space-y-6 px-3 lg:px-5">
             <div className="grid gap-8 md:grid-cols-3">
               <div className="md:col-span-2 space-y-6">
                 <div>
@@ -274,7 +309,7 @@ export default function VendorPage() {
             </div>
           </TabsContent>
 
-          <TabsContent value="reviews" className="space-y-6">
+          <TabsContent value="reviews" className="space-y-6 px-3 lg:px-5">
             <div className="flex items-center justify-between">
               <h2 className="text-xl font-semibold">Customer Reviews</h2>
               <Button>Write a Review</Button>
@@ -290,7 +325,7 @@ export default function VendorPage() {
                       .map((_, i) => (
                         <Star
                           key={i}
-                          className={`h-5 w-5 ${i < Math.floor(vendor.rating) ? "fill-primary text-primary" : "fill-muted text-muted"}`}
+                          className={`h-5 w-5 ${i < Math.floor(vendor.rating) ? "fill-yellow-500 text-yellow-500" : "fill-gray-200 text-gray-200"}`}
                         />
                       ))}
                   </div>
@@ -327,7 +362,7 @@ export default function VendorPage() {
                                 .map((_, j) => (
                                   <Star
                                     key={j}
-                                    className={`h-3 w-3 ${j < 5 - (i % 2) ? "fill-primary text-primary" : "fill-muted text-muted"}`}
+                                    className={`h-3 w-3 ${j < 5 - (i % 2) ? "fill-yellow-500 text-yellow-500" : "fill-gray-200 text-gray-200"}`}
                                   />
                                 ))}
                             </div>

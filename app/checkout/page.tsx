@@ -14,6 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { useAppSelector } from "@/redux/hooks"
 import { useToast } from "@/components/ui/use-toast"
 import { CreditCard, Truck, ArrowLeft, ShieldCheck } from "lucide-react"
+import { cn, formatCurrency } from "@/lib/utils";
 
 export default function CheckoutPage() {
   const { toast } = useToast()
@@ -125,7 +126,7 @@ export default function CheckoutPage() {
                       </Label>
                     </div>
                     <div className="text-right">
-                      <div className="font-medium">$5.00</div>
+                      <div className="font-medium">₦5.00</div>
                       <div className="text-sm text-muted-foreground">5-7 business days</div>
                     </div>
                   </div>
@@ -137,7 +138,7 @@ export default function CheckoutPage() {
                       </Label>
                     </div>
                     <div className="text-right">
-                      <div className="font-medium">$15.00</div>
+                      <div className="font-medium">₦15.00</div>
                       <div className="text-sm text-muted-foreground">2-3 business days</div>
                     </div>
                   </div>
@@ -217,7 +218,7 @@ export default function CheckoutPage() {
                       {item.variantName && <p className="text-sm text-muted-foreground">Variant: {item.variantName}</p>}
                       <div className="flex justify-between">
                         <span className="text-sm text-muted-foreground">Qty: {item.quantity}</span>
-                        <span className="font-medium">${(item.price * item.quantity).toFixed(2)}</span>
+                        <span className="font-medium">{formatCurrency(item.price * item.quantity)}</span>
                       </div>
                     </div>
                   </div>
@@ -229,20 +230,20 @@ export default function CheckoutPage() {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Subtotal</span>
-                  <span>${subtotal.toFixed(2)}</span>
+                  <span>{formatCurrency(subtotal)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span>${shipping.toFixed(2)}</span>
+                  <span>{formatCurrency(shipping)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Tax</span>
-                  <span>${tax.toFixed(2)}</span>
+                  <span>{formatCurrency(tax)}</span>
                 </div>
                 <Separator className="my-2" />
                 <div className="flex justify-between font-medium">
                   <span>Total</span>
-                  <span>${total.toFixed(2)}</span>
+                  <span>{formatCurrency(total)}</span>
                 </div>
               </div>
 
@@ -275,7 +276,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex items-center gap-2">
                     <Truck className="h-4 w-4 text-primary" />
-                    <span>Free shipping on orders over $50</span>
+                    <span>Free shipping on orders over ₦50</span>
                   </div>
                 </div>
               </div>

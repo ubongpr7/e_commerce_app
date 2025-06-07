@@ -57,12 +57,12 @@ const Category3 = () => {
         >
           <div className="w-full flex flex-col items-center">
             <div
-              className="h-[80px] lg:h-[170px] lg:w-[180px] lg:max-w-[200px] w-full max-w-[150px] bg-cover bg-center rounded-md transition-transform duration-300 transform group-hover:scale-105 shadow-sm"
+              className="h-[80px] md:h-[160px] lg:h-[150px] xl:h-[170px] w-full bg-cover bg-center rounded-md transition-transform duration-300 transform group-hover:scale-105 shadow-sm"
               style={{
                 backgroundImage: `url('${urlForImage(category.image).url()}')`,
               }}
             ></div>
-            <p className="mt-2 text-center lg:text-gray-900 lg:font-normal lg:text-sm text-xs">
+            <p className="mt-2 text-center lg:text-gray-900 lg:font-normal md:text-sm text-xs">
               {category.title}
             </p>
           </div>

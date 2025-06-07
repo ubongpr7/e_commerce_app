@@ -32,7 +32,7 @@ const HoverImage1 = () => {
       href={data.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block relative mt-4 w-56 ml-14 overflow-hidden rounded-lg bg-cover bg-center"
+      className="hidden xl:block relative mt-4 w-56 ml-14 overflow-hidden rounded-sm bg-cover bg-center"
       style={{ backgroundImage: `url(${imageUrl})` }}
     >
       <div className="absolute inset-0 flex items-center justify-center">
